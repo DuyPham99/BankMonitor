@@ -18,14 +18,15 @@ namespace BankMonitor
 
         private void bbtnpnStaff_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.pnStaff.Visible != true) HidePanels(this.Controls);
-            this.pnStaff.Visible = !this.pnStaff.Visible;
+            if (ucStaff.Visible != true) HidePanels(this.Controls);
+            ucStaff.Visible = !ucStaff.Visible;
+       
         }
         public void HidePanels(Control.ControlCollection controls)
         {
             foreach (Control c in controls)
             {
-                if (c is Panel)
+                if (c is UserControl)
                 {
                     c.Visible = false;
                 }
@@ -36,8 +37,9 @@ namespace BankMonitor
         } 
         private void bbtnCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if(this.pnCustomer.Visible != true) HidePanels(this.Controls);
-            this.pnCustomer.Visible = !this.pnCustomer.Visible;
+            if (ucCustomer.Visible != true) HidePanels(this.Controls);
+            ucCustomer.Visible = !ucCustomer.Visible;
+         
         }
 
        
