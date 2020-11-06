@@ -63,6 +63,16 @@ namespace BankMonitor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _48807_7_exchange_png_file_hd {
+            get {
+                object obj = ResourceManager.GetObject("48807-7-exchange-png-file-hd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap App_login_manager_icon {
             get {
                 object obj = ResourceManager.GetObject("App-login-manager-icon", resourceCulture);
