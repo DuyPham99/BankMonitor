@@ -174,7 +174,7 @@
             // 
             // btnCancelCustomer
             // 
-            this.btnCancelCustomer.Location = new System.Drawing.Point(353, 267);
+            this.btnCancelCustomer.Location = new System.Drawing.Point(356, 252);
             this.btnCancelCustomer.Name = "btnCancelCustomer";
             this.btnCancelCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnCancelCustomer.TabIndex = 20;
@@ -183,7 +183,7 @@
             // 
             // btnChangeCustomer
             // 
-            this.btnChangeCustomer.Location = new System.Drawing.Point(252, 267);
+            this.btnChangeCustomer.Location = new System.Drawing.Point(255, 252);
             this.btnChangeCustomer.Name = "btnChangeCustomer";
             this.btnChangeCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnChangeCustomer.TabIndex = 19;
@@ -192,7 +192,7 @@
             // 
             // btnDeleteCustomer
             // 
-            this.btnDeleteCustomer.Location = new System.Drawing.Point(142, 267);
+            this.btnDeleteCustomer.Location = new System.Drawing.Point(145, 252);
             this.btnDeleteCustomer.Name = "btnDeleteCustomer";
             this.btnDeleteCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteCustomer.TabIndex = 18;
@@ -201,7 +201,7 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(28, 268);
+            this.btnAddCustomer.Location = new System.Drawing.Point(31, 253);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnAddCustomer.TabIndex = 17;
@@ -211,7 +211,7 @@
             // rdbtnFemaleCustomer
             // 
             this.rdbtnFemaleCustomer.AutoSize = true;
-            this.rdbtnFemaleCustomer.Location = new System.Drawing.Point(379, 222);
+            this.rdbtnFemaleCustomer.Location = new System.Drawing.Point(384, 205);
             this.rdbtnFemaleCustomer.Name = "rdbtnFemaleCustomer";
             this.rdbtnFemaleCustomer.Size = new System.Drawing.Size(39, 17);
             this.rdbtnFemaleCustomer.TabIndex = 16;
@@ -222,7 +222,7 @@
             // rdbtnMaleCustomer
             // 
             this.rdbtnMaleCustomer.AutoSize = true;
-            this.rdbtnMaleCustomer.Location = new System.Drawing.Point(308, 222);
+            this.rdbtnMaleCustomer.Location = new System.Drawing.Point(313, 205);
             this.rdbtnMaleCustomer.Name = "rdbtnMaleCustomer";
             this.rdbtnMaleCustomer.Size = new System.Drawing.Size(47, 17);
             this.rdbtnMaleCustomer.TabIndex = 15;
@@ -234,7 +234,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(250, 222);
+            this.label17.Location = new System.Drawing.Point(255, 205);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(35, 19);
             this.label17.TabIndex = 14;
@@ -242,7 +242,7 @@
             // 
             // tbPhoneNumberCustomer
             // 
-            this.tbPhoneNumberCustomer.Location = new System.Drawing.Point(91, 186);
+            this.tbPhoneNumberCustomer.Location = new System.Drawing.Point(96, 162);
             this.tbPhoneNumberCustomer.Name = "tbPhoneNumberCustomer";
             this.tbPhoneNumberCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbPhoneNumberCustomer.TabIndex = 13;
@@ -251,7 +251,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(29, 186);
+            this.label16.Location = new System.Drawing.Point(34, 162);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(38, 19);
             this.label16.TabIndex = 12;
@@ -261,7 +261,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(250, 149);
+            this.label15.Location = new System.Drawing.Point(253, 122);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(68, 19);
             this.label15.TabIndex = 11;
@@ -271,14 +271,14 @@
             // 
             this.dtpDateIdCustomer.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.dtpDateIdCustomer.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateIdCustomer.Location = new System.Drawing.Point(318, 149);
+            this.dtpDateIdCustomer.Location = new System.Drawing.Point(321, 122);
             this.dtpDateIdCustomer.Name = "dtpDateIdCustomer";
             this.dtpDateIdCustomer.Size = new System.Drawing.Size(98, 20);
             this.dtpDateIdCustomer.TabIndex = 10;
             // 
             // tbAddressCustomer
             // 
-            this.tbAddressCustomer.Location = new System.Drawing.Point(91, 97);
+            this.tbAddressCustomer.Location = new System.Drawing.Point(96, 81);
             this.tbAddressCustomer.Name = "tbAddressCustomer";
             this.tbAddressCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbAddressCustomer.TabIndex = 9;
@@ -287,7 +287,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(28, 98);
+            this.label14.Location = new System.Drawing.Point(33, 82);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 19);
             this.label14.TabIndex = 8;
@@ -295,7 +295,7 @@
             // 
             // tbLastNameCustomer
             // 
-            this.tbLastNameCustomer.Location = new System.Drawing.Point(316, 49);
+            this.tbLastNameCustomer.Location = new System.Drawing.Point(319, 43);
             this.tbLastNameCustomer.Name = "tbLastNameCustomer";
             this.tbLastNameCustomer.Size = new System.Drawing.Size(100, 20);
             this.tbLastNameCustomer.TabIndex = 7;
@@ -304,7 +304,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(253, 48);
+            this.label13.Location = new System.Drawing.Point(256, 42);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 19);
             this.label13.TabIndex = 6;
@@ -312,7 +312,7 @@
             // 
             // tbFirstNameCustomer
             // 
-            this.tbFirstNameCustomer.Location = new System.Drawing.Point(91, 48);
+            this.tbFirstNameCustomer.Location = new System.Drawing.Point(94, 42);
             this.tbFirstNameCustomer.Name = "tbFirstNameCustomer";
             this.tbFirstNameCustomer.Size = new System.Drawing.Size(155, 20);
             this.tbFirstNameCustomer.TabIndex = 5;
@@ -321,7 +321,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(28, 47);
+            this.label12.Location = new System.Drawing.Point(38, 41);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(28, 19);
             this.label12.TabIndex = 4;
@@ -329,7 +329,7 @@
             // 
             // tbIdDistributeCustomer
             // 
-            this.tbIdDistributeCustomer.Location = new System.Drawing.Point(91, 221);
+            this.tbIdDistributeCustomer.Location = new System.Drawing.Point(96, 204);
             this.tbIdDistributeCustomer.Name = "tbIdDistributeCustomer";
             this.tbIdDistributeCustomer.Size = new System.Drawing.Size(98, 20);
             this.tbIdDistributeCustomer.TabIndex = 3;
@@ -338,7 +338,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(28, 220);
+            this.label11.Location = new System.Drawing.Point(33, 203);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(57, 19);
             this.label11.TabIndex = 2;
@@ -346,7 +346,7 @@
             // 
             // tbIdCustomer
             // 
-            this.tbIdCustomer.Location = new System.Drawing.Point(91, 149);
+            this.tbIdCustomer.Location = new System.Drawing.Point(94, 122);
             this.tbIdCustomer.Name = "tbIdCustomer";
             this.tbIdCustomer.Size = new System.Drawing.Size(151, 20);
             this.tbIdCustomer.TabIndex = 1;
@@ -355,7 +355,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(30, 150);
+            this.label10.Location = new System.Drawing.Point(33, 123);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(57, 19);
             this.label10.TabIndex = 0;

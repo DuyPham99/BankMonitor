@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="views\UCTransfer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\UCTransfer.Designer.cs">
+      <DependentUpon>UCTransfer.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\UCExchange.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <Compile Include="views\UCStaff.Designer.cs">
       <DependentUpon>UCStaff.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="views\UCTransfer.resx">
+      <DependentUpon>UCTransfer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\UCExchange.resx">
       <DependentUpon>UCExchange.cs</DependentUpon>
     </EmbeddedResource>

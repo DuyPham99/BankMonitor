@@ -59,6 +59,7 @@
             this.ucStaff = new BankMonitor.views.UCStaff();
             this.ucCustomer = new BankMonitor.views.UCCustomer();
             this.ucExchange = new BankMonitor.views.UCExchange();
+            this.ucTransfer = new BankMonitor.views.UCTransfer();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -210,6 +211,7 @@
             this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
             this.barButtonItem4.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
             this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -313,11 +315,20 @@
             this.ucExchange.TabIndex = 7;
             this.ucExchange.Visible = false;
             // 
+            // ucTransfer
+            // 
+            this.ucTransfer.Location = new System.Drawing.Point(0, 175);
+            this.ucTransfer.Name = "ucTransfer";
+            this.ucTransfer.Size = new System.Drawing.Size(1217, 437);
+            this.ucTransfer.TabIndex = 9;
+            this.ucTransfer.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1220, 633);
+            this.Controls.Add(this.ucTransfer);
             this.Controls.Add(this.ucExchange);
             this.Controls.Add(this.ucCustomer);
             this.Controls.Add(this.ucStaff);
@@ -363,6 +374,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private views.UCExchange ucExchange;
+        private views.UCTransfer ucTransfer;
     }
 }
 

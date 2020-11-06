@@ -25,7 +25,6 @@ namespace BankMonitor
                 {
                     c.Visible = false;
                 }
-
                 // hide any panels this control may have
                 HidePanels(c.Controls);
             }
@@ -53,6 +52,12 @@ namespace BankMonitor
         {
             if (ucExchange.Visible != true) HidePanels(this.Controls);
             ucExchange.Visible = !ucExchange.Visible;
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (ucTransfer.Visible != true) HidePanels(this.Controls);
+            ucTransfer.Visible = !ucTransfer.Visible;
         }
     }
 }
