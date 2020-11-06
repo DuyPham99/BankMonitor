@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="views\UCExchange.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\UCExchange.Designer.cs">
+      <DependentUpon>UCExchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="views\UCStaff.Designer.cs">
       <DependentUpon>UCStaff.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="views\UCExchange.resx">
+      <DependentUpon>UCExchange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

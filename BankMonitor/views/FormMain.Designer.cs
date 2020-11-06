@@ -58,6 +58,7 @@
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ucStaff = new BankMonitor.views.UCStaff();
             this.ucCustomer = new BankMonitor.views.UCCustomer();
+            this.ucExchange = new BankMonitor.views.UCExchange();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,6 +189,7 @@
             this.barButtonItem1.Id = 13;
             this.barButtonItem1.ImageOptions.LargeImage = global::BankMonitor.Properties.Resources._48807_7_exchange_png_file_hd;
             this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonItem2
             // 
@@ -301,12 +303,22 @@
             this.ucCustomer.Size = new System.Drawing.Size(1220, 475);
             this.ucCustomer.TabIndex = 5;
             this.ucCustomer.Visible = false;
+            this.ucCustomer.Load += new System.EventHandler(this.ucCustomer_Load);
+            // 
+            // ucExchange
+            // 
+            this.ucExchange.Location = new System.Drawing.Point(-13, 175);
+            this.ucExchange.Name = "ucExchange";
+            this.ucExchange.Size = new System.Drawing.Size(1233, 374);
+            this.ucExchange.TabIndex = 7;
+            this.ucExchange.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1220, 633);
+            this.Controls.Add(this.ucExchange);
             this.Controls.Add(this.ucCustomer);
             this.Controls.Add(this.ucStaff);
             this.Controls.Add(this.ribbonControl1);
@@ -350,6 +362,7 @@
         private views.UCCustomer ucCustomer;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private views.UCExchange ucExchange;
     }
 }
 
