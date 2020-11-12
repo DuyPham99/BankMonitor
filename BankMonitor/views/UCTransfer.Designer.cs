@@ -43,7 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTransfer = new System.Windows.Forms.DataGridView();
             this.DateTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountSendTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +53,7 @@
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransfer)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -168,6 +168,7 @@
             // 
             this.tb_idTransfer.Location = new System.Drawing.Point(115, 77);
             this.tb_idTransfer.Name = "tb_idTransfer";
+            this.tb_idTransfer.ReadOnly = true;
             this.tb_idTransfer.Size = new System.Drawing.Size(100, 20);
             this.tb_idTransfer.TabIndex = 1;
             // 
@@ -193,27 +194,27 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridViewTransfer);
             this.groupBox2.Location = new System.Drawing.Point(630, 53);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(537, 301);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // dataGridView1
+            // dataGridViewTransfer
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTransfer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTransfer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DateTransfer,
             this.IdTransfer,
             this.AccountSendTransfer,
             this.AccountReceiveTransfer,
             this.Money});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(531, 282);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewTransfer.Location = new System.Drawing.Point(3, 16);
+            this.dataGridViewTransfer.Name = "dataGridViewTransfer";
+            this.dataGridViewTransfer.Size = new System.Drawing.Size(531, 282);
+            this.dataGridViewTransfer.TabIndex = 0;
             // 
             // DateTransfer
             // 
@@ -240,18 +241,18 @@
             this.Money.HeaderText = "Số tiền";
             this.Money.Name = "Money";
             // 
-            // Transfer
+            // UCTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Transfer";
+            this.Name = "UCTransfer";
             this.Size = new System.Drawing.Size(1217, 437);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransfer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -273,7 +274,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewTransfer;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateTransfer;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdTransfer;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountSendTransfer;

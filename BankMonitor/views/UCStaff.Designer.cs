@@ -30,26 +30,25 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnChange = new System.Windows.Forms.Button();
+            this.btnCancelStaff = new System.Windows.Forms.Button();
+            this.btnChangeStaff = new System.Windows.Forms.Button();
             this.btnDeletepnStaff = new System.Windows.Forms.Button();
             this.btnAddpnStaff = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbPhoneNumberStaff = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.rdbtnFemale = new System.Windows.Forms.RadioButton();
             this.rdbtnMale = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbAddress = new System.Windows.Forms.TextBox();
+            this.tbAddressStaff = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbLastNameStaff = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbFirstNameStaff = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbIdpnStaff = new System.Windows.Forms.TextBox();
+            this.tbIdStaff = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewStaff = new System.Windows.Forms.DataGridView();
             this.IdpnStaff = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdDistribute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,8 +57,9 @@
             this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,24 +75,24 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnChange);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.btnCancelStaff);
+            this.groupBox1.Controls.Add(this.btnChangeStaff);
             this.groupBox1.Controls.Add(this.btnDeletepnStaff);
             this.groupBox1.Controls.Add(this.btnAddpnStaff);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.tbPhoneNumberStaff);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.rdbtnFemale);
             this.groupBox1.Controls.Add(this.rdbtnMale);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.tbAddress);
+            this.groupBox1.Controls.Add(this.tbAddressStaff);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.tbLastNameStaff);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.tbFirstNameStaff);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbIdpnStaff);
+            this.groupBox1.Controls.Add(this.tbIdStaff);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(64, 125);
             this.groupBox1.Name = "groupBox1";
@@ -100,23 +100,23 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
-            // btnCancel
+            // btnCancelStaff
             // 
-            this.btnCancel.Location = new System.Drawing.Point(336, 227);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 19;
-            this.btnCancel.Text = "Hủy bỏ";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancelStaff.Location = new System.Drawing.Point(336, 227);
+            this.btnCancelStaff.Name = "btnCancelStaff";
+            this.btnCancelStaff.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelStaff.TabIndex = 19;
+            this.btnCancelStaff.Text = "Hủy bỏ";
+            this.btnCancelStaff.UseVisualStyleBackColor = true;
             // 
-            // btnChange
+            // btnChangeStaff
             // 
-            this.btnChange.Location = new System.Drawing.Point(240, 227);
-            this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(75, 23);
-            this.btnChange.TabIndex = 18;
-            this.btnChange.Text = "Sửa";
-            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChangeStaff.Location = new System.Drawing.Point(240, 227);
+            this.btnChangeStaff.Name = "btnChangeStaff";
+            this.btnChangeStaff.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeStaff.TabIndex = 18;
+            this.btnChangeStaff.Text = "Sửa";
+            this.btnChangeStaff.UseVisualStyleBackColor = true;
             // 
             // btnDeletepnStaff
             // 
@@ -136,12 +136,12 @@
             this.btnAddpnStaff.Text = "Thêm";
             this.btnAddpnStaff.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // tbPhoneNumberStaff
             // 
-            this.textBox4.Location = new System.Drawing.Point(87, 181);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(320, 20);
-            this.textBox4.TabIndex = 14;
+            this.tbPhoneNumberStaff.Location = new System.Drawing.Point(87, 181);
+            this.tbPhoneNumberStaff.Name = "tbPhoneNumberStaff";
+            this.tbPhoneNumberStaff.Size = new System.Drawing.Size(320, 20);
+            this.tbPhoneNumberStaff.TabIndex = 14;
             // 
             // label8
             // 
@@ -185,12 +185,12 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Phái";
             // 
-            // tbAddress
+            // tbAddressStaff
             // 
-            this.tbAddress.Location = new System.Drawing.Point(86, 105);
-            this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(320, 20);
-            this.tbAddress.TabIndex = 9;
+            this.tbAddressStaff.Location = new System.Drawing.Point(86, 105);
+            this.tbAddressStaff.Name = "tbAddressStaff";
+            this.tbAddressStaff.Size = new System.Drawing.Size(320, 20);
+            this.tbAddressStaff.TabIndex = 9;
             // 
             // label6
             // 
@@ -202,12 +202,12 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Địa chỉ";
             // 
-            // textBox3
+            // tbLastNameStaff
             // 
-            this.textBox3.Location = new System.Drawing.Point(306, 64);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 7;
+            this.tbLastNameStaff.Location = new System.Drawing.Point(306, 64);
+            this.tbLastNameStaff.Name = "tbLastNameStaff";
+            this.tbLastNameStaff.Size = new System.Drawing.Size(100, 20);
+            this.tbLastNameStaff.TabIndex = 7;
             // 
             // label5
             // 
@@ -219,12 +219,12 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Tên";
             // 
-            // textBox2
+            // tbFirstNameStaff
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 63);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 20);
-            this.textBox2.TabIndex = 5;
+            this.tbFirstNameStaff.Location = new System.Drawing.Point(86, 63);
+            this.tbFirstNameStaff.Name = "tbFirstNameStaff";
+            this.tbFirstNameStaff.Size = new System.Drawing.Size(150, 20);
+            this.tbFirstNameStaff.TabIndex = 5;
             // 
             // label4
             // 
@@ -236,13 +236,6 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Họ";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(306, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -251,14 +244,14 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 19);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Mã NV";
+            this.label3.Text = "Mã CN";
             // 
-            // tbIdpnStaff
+            // tbIdStaff
             // 
-            this.tbIdpnStaff.Location = new System.Drawing.Point(86, 21);
-            this.tbIdpnStaff.Name = "tbIdpnStaff";
-            this.tbIdpnStaff.Size = new System.Drawing.Size(100, 20);
-            this.tbIdpnStaff.TabIndex = 1;
+            this.tbIdStaff.Location = new System.Drawing.Point(86, 21);
+            this.tbIdStaff.Name = "tbIdStaff";
+            this.tbIdStaff.Size = new System.Drawing.Size(100, 20);
+            this.tbIdStaff.TabIndex = 1;
             // 
             // label1
             // 
@@ -270,10 +263,10 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã NV";
             // 
-            // dataGridView1
+            // dataGridViewStaff
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStaff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdpnStaff,
             this.IdDistribute,
             this.firstName,
@@ -281,11 +274,11 @@
             this.address,
             this.sex,
             this.phoneNumber});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(589, 295);
-            this.dataGridView1.TabIndex = 5;
+            this.dataGridViewStaff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewStaff.Location = new System.Drawing.Point(3, 16);
+            this.dataGridViewStaff.Name = "dataGridViewStaff";
+            this.dataGridViewStaff.Size = new System.Drawing.Size(589, 295);
+            this.dataGridViewStaff.TabIndex = 5;
             // 
             // IdpnStaff
             // 
@@ -324,12 +317,23 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridViewStaff);
             this.groupBox2.Location = new System.Drawing.Point(599, 115);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(595, 314);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "BẾN THÀNH",
+            "TÂN ĐỊNH"});
+            this.comboBox1.Location = new System.Drawing.Point(306, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(101, 21);
+            this.comboBox1.TabIndex = 20;
             // 
             // UCStaff
             // 
@@ -343,7 +347,7 @@
             this.Load += new System.EventHandler(this.UCStaff_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -354,26 +358,25 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnChange;
+        private System.Windows.Forms.Button btnCancelStaff;
+        private System.Windows.Forms.Button btnChangeStaff;
         private System.Windows.Forms.Button btnDeletepnStaff;
         private System.Windows.Forms.Button btnAddpnStaff;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbPhoneNumberStaff;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton rdbtnFemale;
         private System.Windows.Forms.RadioButton rdbtnMale;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbAddress;
+        private System.Windows.Forms.TextBox tbAddressStaff;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbLastNameStaff;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbFirstNameStaff;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbIdpnStaff;
+        private System.Windows.Forms.TextBox tbIdStaff;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewStaff;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdpnStaff;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdDistribute;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
@@ -382,5 +385,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sex;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

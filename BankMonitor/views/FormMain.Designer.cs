@@ -46,6 +46,11 @@
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -60,6 +65,7 @@
             this.ucCustomer = new BankMonitor.views.UCCustomer();
             this.ucExchange = new BankMonitor.views.UCExchange();
             this.ucTransfer = new BankMonitor.views.UCTransfer();
+            this.ucAccount = new BankMonitor.views.UCAccount();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,9 +90,14 @@
             this.barButtonItem1,
             this.barButtonItem2,
             this.barButtonItem3,
-            this.barButtonItem4});
+            this.barButtonItem4,
+            this.barButtonItem5,
+            this.barButtonItem6,
+            this.barButtonItem7,
+            this.barButtonItem8,
+            this.barButtonItem9});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 17;
+            this.ribbonControl1.MaxItemId = 22;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -213,6 +224,44 @@
             this.barButtonItem4.Name = "barButtonItem4";
             this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "Tài khoản";
+            this.barButtonItem5.Id = 17;
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText;
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "Tài khoản";
+            this.barButtonItem6.Id = 18;
+            this.barButtonItem6.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.Image")));
+            this.barButtonItem6.ImageOptions.ImageUri.Uri = "outlook%20inspired/mr";
+            this.barButtonItem6.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.LargeImage")));
+            this.barButtonItem6.Name = "barButtonItem6";
+            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "barButtonItem7";
+            this.barButtonItem7.Id = 19;
+            this.barButtonItem7.Name = "barButtonItem7";
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "barButtonItem8";
+            this.barButtonItem8.Id = 20;
+            this.barButtonItem8.Name = "barButtonItem8";
+            // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "Tài khoản";
+            this.barButtonItem9.Id = 21;
+            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
+            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.barButtonItem9.Name = "barButtonItem9";
+            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -264,6 +313,7 @@
             // 
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnpnStaff);
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnCustomer);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem9);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "Quản lý";
             // 
@@ -309,7 +359,7 @@
             // 
             // ucExchange
             // 
-            this.ucExchange.Location = new System.Drawing.Point(-13, 175);
+            this.ucExchange.Location = new System.Drawing.Point(-13, 141);
             this.ucExchange.Name = "ucExchange";
             this.ucExchange.Size = new System.Drawing.Size(1233, 374);
             this.ucExchange.TabIndex = 7;
@@ -317,17 +367,26 @@
             // 
             // ucTransfer
             // 
-            this.ucTransfer.Location = new System.Drawing.Point(0, 175);
+            this.ucTransfer.Location = new System.Drawing.Point(-9, 173);
             this.ucTransfer.Name = "ucTransfer";
             this.ucTransfer.Size = new System.Drawing.Size(1217, 437);
             this.ucTransfer.TabIndex = 9;
             this.ucTransfer.Visible = false;
+            // 
+            // ucAccount
+            // 
+            this.ucAccount.Location = new System.Drawing.Point(0, 190);
+            this.ucAccount.Name = "ucAccount";
+            this.ucAccount.Size = new System.Drawing.Size(1220, 475);
+            this.ucAccount.TabIndex = 11;
+            this.ucAccount.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1220, 633);
+            this.Controls.Add(this.ucAccount);
             this.Controls.Add(this.ucTransfer);
             this.Controls.Add(this.ucExchange);
             this.Controls.Add(this.ucCustomer);
@@ -375,6 +434,12 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private views.UCExchange ucExchange;
         private views.UCTransfer ucTransfer;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private views.UCAccount ucAccount;
     }
 }
 

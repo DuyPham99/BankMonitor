@@ -59,5 +59,16 @@ namespace BankMonitor
             if (ucTransfer.Visible != true) HidePanels(this.Controls);
             ucTransfer.Visible = !ucTransfer.Visible;
         }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (ucAccount.Visible != true) HidePanels(this.Controls);
+            ucAccount.Visible = !ucAccount.Visible;
+        }
     }
 }

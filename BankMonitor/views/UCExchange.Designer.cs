@@ -46,17 +46,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewExchange = new System.Windows.Forms.DataGridView();
             this.dateExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idStaff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExchange)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,6 +73,7 @@
             // 
             this.tb_IDExchange.Location = new System.Drawing.Point(139, 63);
             this.tb_IDExchange.Name = "tb_IDExchange";
+            this.tb_IDExchange.ReadOnly = true;
             this.tb_IDExchange.Size = new System.Drawing.Size(100, 20);
             this.tb_IDExchange.TabIndex = 1;
             this.tb_IDExchange.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -80,20 +81,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(32, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 18);
+            this.label2.Size = new System.Drawing.Size(89, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã giao dịch";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.label3.Location = new System.Drawing.Point(32, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 18);
+            this.label3.Size = new System.Drawing.Size(48, 18);
             this.label3.TabIndex = 0;
             this.label3.Text = "Số TK";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -101,20 +102,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.label4.Location = new System.Drawing.Point(32, 138);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 18);
+            this.label4.Size = new System.Drawing.Size(33, 18);
             this.label4.TabIndex = 0;
             this.label4.Text = "Loại";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.label5.Location = new System.Drawing.Point(285, 64);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 18);
+            this.label5.Size = new System.Drawing.Size(96, 18);
             this.label5.TabIndex = 0;
             this.label5.Text = "Mã nhân viên";
             // 
@@ -148,10 +149,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(273, 137);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(118, 18);
+            this.label6.Size = new System.Drawing.Size(103, 18);
             this.label6.TabIndex = 0;
             this.label6.Text = "Ngày giao dịch";
             // 
@@ -174,10 +175,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.label7.Location = new System.Drawing.Point(32, 181);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 18);
+            this.label7.Size = new System.Drawing.Size(52, 18);
             this.label7.TabIndex = 0;
             this.label7.Text = "Số tiền";
             this.label7.Click += new System.EventHandler(this.label3_Click);
@@ -225,59 +226,65 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridViewExchange);
             this.groupBox2.Location = new System.Drawing.Point(635, 75);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(595, 287);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
-            // dataGridView1
+            // dataGridViewExchange
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewExchange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewExchange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dateExchange,
             this.idExchange,
             this.idAccount,
             this.typeExchange,
             this.amount,
             this.idStaff});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(589, 268);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewExchange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewExchange.Location = new System.Drawing.Point(3, 16);
+            this.dataGridViewExchange.Name = "dataGridViewExchange";
+            this.dataGridViewExchange.ReadOnly = true;
+            this.dataGridViewExchange.Size = new System.Drawing.Size(589, 268);
+            this.dataGridViewExchange.TabIndex = 0;
             // 
             // dateExchange
             // 
             this.dateExchange.HeaderText = "Ngày GD";
             this.dateExchange.Name = "dateExchange";
+            this.dateExchange.ReadOnly = true;
             // 
             // idExchange
             // 
             this.idExchange.HeaderText = "Mã GD";
             this.idExchange.Name = "idExchange";
+            this.idExchange.ReadOnly = true;
             // 
             // idAccount
             // 
             this.idAccount.HeaderText = "Số tài khoản";
             this.idAccount.Name = "idAccount";
+            this.idAccount.ReadOnly = true;
             // 
             // typeExchange
             // 
             this.typeExchange.HeaderText = "Loại";
             this.typeExchange.Name = "typeExchange";
+            this.typeExchange.ReadOnly = true;
             // 
             // amount
             // 
             this.amount.HeaderText = "Số tiền";
             this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
             // 
             // idStaff
             // 
             this.idStaff.HeaderText = "Mã NV";
             this.idStaff.Name = "idStaff";
+            this.idStaff.ReadOnly = true;
             // 
             // UCExchange
             // 
@@ -290,7 +297,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExchange)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,7 +322,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewExchange;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateExchange;
         private System.Windows.Forms.DataGridViewTextBoxColumn idExchange;
