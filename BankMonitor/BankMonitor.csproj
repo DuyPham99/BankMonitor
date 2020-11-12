@@ -54,6 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="model\ConnectionDatabase.cs" />
+    <Compile Include="views\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\UCAccount.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -92,6 +99,9 @@
     <Compile Include="views\UCStaff.Designer.cs">
       <DependentUpon>UCStaff.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="views\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\UCAccount.resx">
       <DependentUpon>UCAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\48807-7-exchange-png-file-hd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="controller\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

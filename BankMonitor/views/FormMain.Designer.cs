@@ -111,6 +111,7 @@
             this.bbtnSignIn.Id = 1;
             this.bbtnSignIn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbtnSignIn.ImageOptions.LargeImage")));
             this.bbtnSignIn.Name = "bbtnSignIn";
+            this.bbtnSignIn.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnSignIn_ItemClick);
             // 
             // bbtnChangePassword
             // 

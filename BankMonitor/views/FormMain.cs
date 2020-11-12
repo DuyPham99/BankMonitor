@@ -6,9 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using BankMonitor.views;
 
 namespace BankMonitor
 {
+
+
     public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         public Form1()
@@ -69,6 +72,12 @@ namespace BankMonitor
         {
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
+        }
+
+        private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Login login = new Login();
+            login.Visible = true;
         }
     }
 }
