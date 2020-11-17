@@ -1,6 +1,6 @@
 ﻿namespace BankMonitor.views
 {
-    partial class Login
+    partial class FormLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancelLogin = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_IdDistribute = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -104,13 +104,14 @@
             this.btnCancelLogin.UseVisualStyleBackColor = true;
             this.btnCancelLogin.Click += new System.EventHandler(this.btnCancelLogin_Click);
             // 
-            // comboBox1
+            // cb_IdDistribute
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(118, 203);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(289, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cb_IdDistribute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_IdDistribute.FormattingEnabled = true;
+            this.cb_IdDistribute.Location = new System.Drawing.Point(118, 203);
+            this.cb_IdDistribute.Name = "cb_IdDistribute";
+            this.cb_IdDistribute.Size = new System.Drawing.Size(289, 21);
+            this.cb_IdDistribute.TabIndex = 7;
             // 
             // label4
             // 
@@ -122,13 +123,13 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Chi nhánh";
             // 
-            // Login
+            // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 309);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cb_IdDistribute);
             this.Controls.Add(this.btnCancelLogin);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label3);
@@ -136,8 +137,10 @@
             this.Controls.Add(this.tbPasswordLogin);
             this.Controls.Add(this.tbAccountLogin);
             this.Controls.Add(this.label1);
-            this.Name = "Login";
+            this.Name = "FormLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,7 +155,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCancelLogin;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_IdDistribute;
         private System.Windows.Forms.Label label4;
     }
 }

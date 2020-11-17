@@ -19,7 +19,6 @@ namespace BankMonitor
       // [STAThread]
         static void Main(string[] arg)
         {
-            Console.Write("Hello");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

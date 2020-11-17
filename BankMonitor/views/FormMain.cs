@@ -76,7 +76,7 @@ namespace BankMonitor
 
         private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Login login = new Login();
+            FormLogin login = new FormLogin();
             login.Visible = true;
         }
     }

@@ -38,8 +38,9 @@ namespace BankMonitor.model
 
         public static BindingSource bds_dspm = new BindingSource();  // giữ bdsPM khi đăng nhập
 
-        public  int KetNoi(String servername)
+        public int Connect(String servername)
         {
+            servername = @"PC-DOM\MSSQLSERVER" + servername;
             if (ConnectionDatabase.conn != null && ConnectionDatabase.conn.State == ConnectionState.Open)
                 ConnectionDatabase.conn.Close();
             try
