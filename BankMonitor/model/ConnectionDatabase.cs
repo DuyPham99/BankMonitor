@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace BankMonitor.model
 {
@@ -21,10 +22,10 @@ namespace BankMonitor.model
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
         public static SqlDataReader myReader;
-        public static String servername = "";
+       // public static String servername = @"PC-DOM\MSSQLSERVER3";
         public static String username = "";
-        public static String mlogin = "";
-        public static String password = "";
+        public static String mlogin = "sa";
+        public static String password = "123";
 
         public static String database = "NGANHANG";
         public static String remotelogin = "LINKLOGIN";
@@ -37,13 +38,13 @@ namespace BankMonitor.model
 
         public static BindingSource bds_dspm = new BindingSource();  // giữ bdsPM khi đăng nhập
 
-        public static int KetNoi()
+        public  int KetNoi(String servername)
         {
             if (ConnectionDatabase.conn != null && ConnectionDatabase.conn.State == ConnectionState.Open)
                 ConnectionDatabase.conn.Close();
             try
             {
-                ConnectionDatabase.connstr = "Data Source=" + ConnectionDatabase.servername + ";Initial Catalog=" +
+                ConnectionDatabase.connstr = "Data Source=" + servername + ";Initial Catalog=" +
                       ConnectionDatabase.database + ";User ID=" +
                       ConnectionDatabase.mlogin + ";password=" + ConnectionDatabase.password;
                 ConnectionDatabase.conn.ConnectionString = ConnectionDatabase.connstr;
@@ -56,7 +57,7 @@ namespace BankMonitor.model
                 return 0;
             }
         }
-        public static SqlDataReader ExecSqlDataReader(String strLenh)
+        public  SqlDataReader ExecSqlDataReader(String strLenh)
         {
             SqlDataReader myreader;
             SqlCommand sqlcmd = new SqlCommand(strLenh, ConnectionDatabase.conn);
@@ -74,7 +75,7 @@ namespace BankMonitor.model
                 return null;
             }
         }
-        public static DataTable ExecSqlDataTable(String cmd)
+        public  DataTable ExecSqlDataTable(String cmd)
         {
             DataTable dt = new DataTable();
             if (ConnectionDatabase.conn.State == ConnectionState.Closed) ConnectionDatabase.conn.Open();
@@ -84,7 +85,7 @@ namespace BankMonitor.model
             return dt;
         }
 
-        public static int ExecSqlNonQuery(String strlenh)
+        public  int ExecSqlNonQuery(String strlenh)
         {
             SqlCommand Sqlcmd = new SqlCommand(strlenh, conn);
             Sqlcmd.CommandType = CommandType.Text;
@@ -105,7 +106,32 @@ namespace BankMonitor.model
             }
         }
 
+        public SqlDataReader ExecProc(String nameProc)
+        {
+            SqlDataReader rdr = null;
+            if (conn.State == ConnectionState.Closed) conn.Open();
+            SqlCommand cmd = new SqlCommand(nameProc, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            rdr = cmd.ExecuteReader();
+          //  conn.Close();
+            return rdr;
+        }
 
+        public SqlDataReader ExecProcParams(String nameProc, Hashtable listParam)
+        {
+            SqlDataReader rdr = null;
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(nameProc, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            // add params
+            foreach(KeyValuePair<String, String> item in listParam)
+            {
+                cmd.Parameters.Add(new SqlParameter(item.Key, item.Value));
+            }
+            rdr = cmd.ExecuteReader();
+            conn.Close();
+            return rdr;
+        }
 
     }
   
