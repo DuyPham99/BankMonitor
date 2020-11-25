@@ -24,8 +24,8 @@ namespace BankMonitor.model
         public static SqlDataReader myReader;
        // public static String servername = @"PC-DOM\MSSQLSERVER3";
         public static String username = "";
-        public static String mlogin = "sa";
-        public static String password = "123";
+        private static String mlogin = "";
+        private static String password = "";
 
         public static String database = "NGANHANG";
         public static String remotelogin = "LINKLOGIN";
@@ -38,9 +38,35 @@ namespace BankMonitor.model
 
         public static BindingSource bds_dspm = new BindingSource();  // giữ bdsPM khi đăng nhập
 
+        public string Mlogin
+        {
+            get
+            {
+                return mlogin;
+            }
+
+            set
+            {
+                mlogin = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
+        }
+
         public int Connect(String servername)
         {
-            servername = @"PC-DOM\MSSQLSERVER" + servername;
+           // servername = @"PC-DOM\MSSQLSERVER" + servername;
             if (ConnectionDatabase.conn != null && ConnectionDatabase.conn.State == ConnectionState.Open)
                 ConnectionDatabase.conn.Close();
             try
@@ -54,10 +80,11 @@ namespace BankMonitor.model
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
+              // MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
                 return 0;
             }
         }
+
         public  SqlDataReader ExecSqlDataReader(String strLenh)
         {
             SqlDataReader myreader;
@@ -114,10 +141,8 @@ namespace BankMonitor.model
             SqlCommand cmd = new SqlCommand(nameProc, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             rdr = cmd.ExecuteReader();
-          //  conn.Close();
             return rdr;
         }
-
         public SqlDataReader ExecProcParams(String nameProc, Hashtable listParam)
         {
             SqlDataReader rdr = null;
@@ -137,8 +162,12 @@ namespace BankMonitor.model
             }
             Console.Write(nameProc);
             rdr = cmd.ExecuteReader();
-            //conn.Close();
             return rdr;
+        }
+
+        public void Close()
+        {
+            conn.Close();
         }
 
     }

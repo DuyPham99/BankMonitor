@@ -6,17 +6,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using BankMonitor.datasource;
 using BankMonitor.views;
 
 namespace BankMonitor
 {
-
 
     public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         public Form1()
         {
             InitializeComponent();
+            
         }
 
    
@@ -46,11 +47,6 @@ namespace BankMonitor
          
         }
 
-        private void ucCustomer_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (ucExchange.Visible != true) HidePanels(this.Controls);
@@ -68,16 +64,22 @@ namespace BankMonitor
 
         }
 
+
+        FormLogin login = new FormLogin();
+        private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //   FormLogin login = new FormLogin();
+            login.Hide();
+            login.Show();
+           
+        }
+
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
-        }
-
-        private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            FormLogin login = new FormLogin();
-            login.Visible = true;
+            //ucAccount.Visible = true;
+           
         }
     }
 }

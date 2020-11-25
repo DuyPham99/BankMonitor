@@ -12,12 +12,14 @@ using BankMonitor.model;
 using BankMonitor.views;
 using System.Data.SqlClient;
 using System.Collections;
+using BankMonitor.datasource;
 
 namespace BankMonitor.views
 {
     public partial class FormLogin : DevExpress.XtraEditors.XtraForm
     {
         ConnectionDatabase conn = new ConnectionDatabase();
+        User user = new User();
         // FormMessage message = new FormMessage();
        
         public FormLogin()
@@ -25,27 +27,24 @@ namespace BankMonitor.views
             InitializeComponent();
 
         }
-        public void AlertMessage(String message)
-        {
-            new FormMessage(message).Visible = true;
 
-        }
-
-        public int validateAccount(String username, String password)
+        public int validateAccount(String username, String password, String chinhanh)
         {
-            conn.Connect("3");
-            Hashtable listParams = new Hashtable();
-            listParams.Add("@loginName", username);  
-            SqlDataReader rd = conn.ExecProcParams("getLoginInfo", listParams);
-            if (rd.Read()) return 1;
+            MessageBox.Show(chinhanh);
             return 0;
         }
         
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            conn.Mlogin =  tbAccountLogin.Text;
+            conn.Password = tbPasswordLogin.Text;   
+          
+            if (cb_IdDistribute.Text == "BENTHANH")
+            {
+               user.Distribute = @"PC-DOM\MSSQLSERVER1";
+            } else user.Distribute = @"PC-DOM\MSSQLSERVER2";
             if (tbAccountLogin.Text == "")
             {
-                //AlertMessage("Không được để trống tài khoản!");
                 MessageBox.Show("Không được để trống tài khoản!");
                 tbAccountLogin.Focus();
             } else
@@ -56,11 +55,20 @@ namespace BankMonitor.views
             } else if (cb_IdDistribute.Text == "") {
                 MessageBox.Show("Hãy chọn chi nhánh!");
                 cb_IdDistribute.Focus();
-            } else if (validateAccount(tbAccountLogin.Text, tbPasswordLogin.Text) == 0)
+            } else if (conn.Connect(user.Distribute) == 0)
             {
                 MessageBox.Show("Tài khoản không tồn tại!");
-            } else 
-            this.Visible = false;
+            } else
+            {
+                user.Username = tbAccountLogin.Text;
+                user.Password = tbPasswordLogin.Text;
+                var db = new NGANHANG();
+                MessageBox.Show(user.Distribute);
+                db.ChangeDataSource(user.Distribute);
+                
+                this.Visible = false;
+            }
+           
         }
 
         private void btnCancelLogin_Click(object sender, EventArgs e)
@@ -69,20 +77,22 @@ namespace BankMonitor.views
         }
         private void Login_Load(object sender, EventArgs e)
         {
-            conn.Connect("3");
+            conn.Mlogin = "sa";
+            conn.Password = "123";
+            conn.Connect(@"PC-DOM\MSSQLSERVER3");
             try
             {
                 SqlDataReader rd = conn.ExecProc("getAllBranches");
                 while (rd.Read())
                 {
-                    cb_IdDistribute.Items.Add(rd.GetString(2).Remove(0,9));
+                    cb_IdDistribute.Items.Add(rd.GetString(2).Remove(0, 9));
                 }
             }
             finally
             {
                 ConnectionDatabase.conn.Close();
             }
-     
+            conn.Close();
         }
     }
 }

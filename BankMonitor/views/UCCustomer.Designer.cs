@@ -69,7 +69,7 @@
             // gbListCustomer
             // 
             this.gbListCustomer.Controls.Add(this.dataGridView2);
-            this.gbListCustomer.Location = new System.Drawing.Point(599, 115);
+            this.gbListCustomer.Location = new System.Drawing.Point(588, 82);
             this.gbListCustomer.Name = "gbListCustomer";
             this.gbListCustomer.Size = new System.Drawing.Size(595, 314);
             this.gbListCustomer.TabIndex = 5;
@@ -136,10 +136,10 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(213, 95);
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(194, 65);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(230, 22);
+            this.label9.Size = new System.Drawing.Size(256, 24);
             this.label9.TabIndex = 7;
             this.label9.Text = "QUẢN LÝ KHÁCH HÀNG";
             // 
@@ -166,7 +166,7 @@
             this.gbCustomerMonitor.Controls.Add(this.label11);
             this.gbCustomerMonitor.Controls.Add(this.tbIdCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label10);
-            this.gbCustomerMonitor.Location = new System.Drawing.Point(64, 125);
+            this.gbCustomerMonitor.Location = new System.Drawing.Point(53, 92);
             this.gbCustomerMonitor.Name = "gbCustomerMonitor";
             this.gbCustomerMonitor.Size = new System.Drawing.Size(500, 301);
             this.gbCustomerMonitor.TabIndex = 6;

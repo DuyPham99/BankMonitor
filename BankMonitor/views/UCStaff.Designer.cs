@@ -30,6 +30,7 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnCancelStaff = new System.Windows.Forms.Button();
             this.btnChangeStaff = new System.Windows.Forms.Button();
             this.btnDeletepnStaff = new System.Windows.Forms.Button();
@@ -57,7 +58,6 @@
             this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -66,10 +66,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(213, 95);
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(198, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(207, 22);
+            this.label2.Size = new System.Drawing.Size(227, 24);
             this.label2.TabIndex = 4;
             this.label2.Text = "QUẢN LÝ NHÂN VIÊN";
             // 
@@ -94,11 +94,22 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.tbIdStaff);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(64, 125);
+            this.groupBox1.Location = new System.Drawing.Point(53, 92);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(500, 272);
+            this.groupBox1.Size = new System.Drawing.Size(500, 301);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "BẾN THÀNH",
+            "TÂN ĐỊNH"});
+            this.comboBox1.Location = new System.Drawing.Point(306, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(101, 21);
+            this.comboBox1.TabIndex = 20;
             // 
             // btnCancelStaff
             // 
@@ -318,22 +329,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridViewStaff);
-            this.groupBox2.Location = new System.Drawing.Point(599, 115);
+            this.groupBox2.Location = new System.Drawing.Point(588, 82);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(595, 314);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "BẾN THÀNH",
-            "TÂN ĐỊNH"});
-            this.comboBox1.Location = new System.Drawing.Point(306, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(101, 21);
-            this.comboBox1.TabIndex = 20;
             // 
             // UCStaff
             // 

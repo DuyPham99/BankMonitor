@@ -356,19 +356,18 @@
             this.ucCustomer.Size = new System.Drawing.Size(1220, 475);
             this.ucCustomer.TabIndex = 5;
             this.ucCustomer.Visible = false;
-            this.ucCustomer.Load += new System.EventHandler(this.ucCustomer_Load);
             // 
             // ucExchange
             // 
-            this.ucExchange.Location = new System.Drawing.Point(-13, 141);
+            this.ucExchange.Location = new System.Drawing.Point(-13, 158);
             this.ucExchange.Name = "ucExchange";
-            this.ucExchange.Size = new System.Drawing.Size(1233, 374);
+            this.ucExchange.Size = new System.Drawing.Size(1233, 421);
             this.ucExchange.TabIndex = 7;
             this.ucExchange.Visible = false;
             // 
             // ucTransfer
             // 
-            this.ucTransfer.Location = new System.Drawing.Point(-9, 173);
+            this.ucTransfer.Location = new System.Drawing.Point(0, 184);
             this.ucTransfer.Name = "ucTransfer";
             this.ucTransfer.Size = new System.Drawing.Size(1217, 437);
             this.ucTransfer.TabIndex = 9;
@@ -376,7 +375,8 @@
             // 
             // ucAccount
             // 
-            this.ucAccount.Location = new System.Drawing.Point(0, 190);
+            this.ucAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucAccount.Location = new System.Drawing.Point(0, 158);
             this.ucAccount.Name = "ucAccount";
             this.ucAccount.Size = new System.Drawing.Size(1220, 475);
             this.ucAccount.TabIndex = 11;
@@ -441,6 +441,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         private DevExpress.XtraBars.BarButtonItem barButtonItem9;
         private views.UCAccount ucAccount;
+       
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BankMonitor.datasource;
 
 namespace BankMonitor.views
 {
@@ -17,7 +18,32 @@ namespace BankMonitor.views
             InitializeComponent();
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UCAccount_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                NGANHANG db = new NGANHANG();
+                var data = from d in db.TaiKhoans select new { d.NGAYMOTK, d.SOTK, d.CMND, d.SODU, d.MACN };
+
+                foreach (var x in data.ToList())
+                {
+                    if (!x.NGAYMOTK.ToString().Equals(" "))
+                        dgvAccount.Rows.Add(x.NGAYMOTK, x.SOTK, x.CMND, x.SODU, x.MACN);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
+
+        }
+
+        private void dgvAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
