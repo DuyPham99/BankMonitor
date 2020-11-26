@@ -20,20 +20,45 @@ namespace BankMonitor.views
     {
         ConnectionDatabase conn = new ConnectionDatabase();
         User user = new User();
-        // FormMessage message = new FormMessage();
-       
+
+        internal User User
+        {
+            get
+            {
+                return user;
+            }
+
+            set
+            {
+                user = value;
+            }
+        }
+
+        internal ConnectionDatabase Conn
+        {
+            get
+            {
+                return conn;
+            }
+
+            set
+            {
+                conn = value;
+            }
+        }
+
         public FormLogin()
         {
             InitializeComponent();
-
         }
 
-        public int validateAccount(String username, String password, String chinhanh)
+        public void logoutAccount()
         {
-            MessageBox.Show(chinhanh);
-            return 0;
+            this.tbAccountLogin.Text = "";
+            this.tbPasswordLogin.Text = "";
+            this.cb_IdDistribute.Text = "";
         }
-        
+            
         private void btnLogin_Click(object sender, EventArgs e)
         {
             conn.Mlogin =  tbAccountLogin.Text;

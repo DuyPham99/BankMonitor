@@ -8,16 +8,21 @@ using System.Text;
 using System.Windows.Forms;
 using BankMonitor.datasource;
 using BankMonitor.views;
+using BankMonitor.model;
 
 namespace BankMonitor
 {
 
     public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        User user = new User();
+        FormLogin login = new FormLogin();
+        ConnectionDatabase conn;
+
         public Form1()
         {
             InitializeComponent();
-            
+           
         }
 
    
@@ -64,8 +69,7 @@ namespace BankMonitor
 
         }
 
-
-        FormLogin login = new FormLogin();
+       
         private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //   FormLogin login = new FormLogin();
@@ -76,10 +80,21 @@ namespace BankMonitor
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ucAccount.User = login.User;
+            if(ucAccount.checkLoad != 1) ucAccount.LoadData();
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
-            //ucAccount.Visible = true;
            
+        }
+
+        private void bbtnSignOut_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //login.User = new User();
+            //login.Conn.Close();
+            //login.logoutAccount();
+            //var db = new NGANHANG();
+            //db.ChangeDataSource(@"PC-DOM\MSSQLSERVER0");
+         
         }
     }
 }

@@ -50,7 +50,7 @@
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAccountMain = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -95,7 +95,7 @@
             this.barButtonItem6,
             this.barButtonItem7,
             this.barButtonItem8,
-            this.barButtonItem9});
+            this.btnAccountMain});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.MaxItemId = 22;
             this.ribbonControl1.Name = "ribbonControl1";
@@ -126,6 +126,7 @@
             this.bbtnSignOut.Id = 3;
             this.bbtnSignOut.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnSignOut.ImageOptions.Image")));
             this.bbtnSignOut.Name = "bbtnSignOut";
+            this.bbtnSignOut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnSignOut_ItemClick);
             // 
             // bbtnAdmin
             // 
@@ -254,14 +255,14 @@
             this.barButtonItem8.Id = 20;
             this.barButtonItem8.Name = "barButtonItem8";
             // 
-            // barButtonItem9
+            // btnAccountMain
             // 
-            this.barButtonItem9.Caption = "Tài khoản";
-            this.barButtonItem9.Id = 21;
-            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
-            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
-            this.barButtonItem9.Name = "barButtonItem9";
-            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            this.btnAccountMain.Caption = "Tài khoản";
+            this.btnAccountMain.Id = 21;
+            this.btnAccountMain.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
+            this.btnAccountMain.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.btnAccountMain.Name = "btnAccountMain";
+            this.btnAccountMain.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -314,7 +315,7 @@
             // 
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnpnStaff);
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnCustomer);
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem9);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnAccountMain);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "Quản lý";
             // 
@@ -439,7 +440,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem btnAccountMain;
         private views.UCAccount ucAccount;
        
     }
