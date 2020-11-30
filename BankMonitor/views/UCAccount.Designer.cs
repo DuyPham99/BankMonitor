@@ -46,17 +46,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.uCAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NGAYMO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SOTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CMND = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SODU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MACN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.uCAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uCAccountBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,16 +87,17 @@
             // 
             // btnCancelAccount
             // 
-            this.btnCancelAccount.Location = new System.Drawing.Point(365, 232);
+            this.btnCancelAccount.Location = new System.Drawing.Point(358, 232);
             this.btnCancelAccount.Name = "btnCancelAccount";
             this.btnCancelAccount.Size = new System.Drawing.Size(75, 23);
             this.btnCancelAccount.TabIndex = 16;
             this.btnCancelAccount.Text = "Hủy bỏ";
             this.btnCancelAccount.UseVisualStyleBackColor = true;
+            this.btnCancelAccount.Click += new System.EventHandler(this.btnCancelAccount_Click);
             // 
             // btnUpdateAccount
             // 
-            this.btnUpdateAccount.Location = new System.Drawing.Point(273, 232);
+            this.btnUpdateAccount.Location = new System.Drawing.Point(266, 232);
             this.btnUpdateAccount.Name = "btnUpdateAccount";
             this.btnUpdateAccount.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateAccount.TabIndex = 15;
@@ -103,21 +106,23 @@
             // 
             // btnDeleteAccount
             // 
-            this.btnDeleteAccount.Location = new System.Drawing.Point(179, 232);
+            this.btnDeleteAccount.Location = new System.Drawing.Point(172, 232);
             this.btnDeleteAccount.Name = "btnDeleteAccount";
             this.btnDeleteAccount.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteAccount.TabIndex = 14;
             this.btnDeleteAccount.Text = "Xóa";
             this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
             // btAddAccount
             // 
-            this.btAddAccount.Location = new System.Drawing.Point(87, 232);
+            this.btAddAccount.Location = new System.Drawing.Point(80, 232);
             this.btAddAccount.Name = "btAddAccount";
             this.btAddAccount.Size = new System.Drawing.Size(75, 23);
             this.btAddAccount.TabIndex = 13;
             this.btAddAccount.Text = "Thêm";
             this.btAddAccount.UseVisualStyleBackColor = true;
+            this.btAddAccount.Click += new System.EventHandler(this.btAddAccount_Click);
             // 
             // cbDistributeAccount
             // 
@@ -139,10 +144,10 @@
             // 
             // tbDateAccount
             // 
-            this.tbDateAccount.Location = new System.Drawing.Point(137, 180);
+            this.tbDateAccount.Location = new System.Drawing.Point(131, 180);
             this.tbDateAccount.Name = "tbDateAccount";
             this.tbDateAccount.ReadOnly = true;
-            this.tbDateAccount.Size = new System.Drawing.Size(102, 20);
+            this.tbDateAccount.Size = new System.Drawing.Size(131, 20);
             this.tbDateAccount.TabIndex = 10;
             // 
             // tbAmountAccount
@@ -151,6 +156,7 @@
             this.tbAmountAccount.Name = "tbAmountAccount";
             this.tbAmountAccount.Size = new System.Drawing.Size(325, 20);
             this.tbAmountAccount.TabIndex = 9;
+            this.tbAmountAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbAmountAccount_Validating);
             // 
             // tbIdentityAccount
             // 
@@ -158,6 +164,7 @@
             this.tbIdentityAccount.Name = "tbIdentityAccount";
             this.tbIdentityAccount.Size = new System.Drawing.Size(325, 20);
             this.tbIdentityAccount.TabIndex = 8;
+            this.tbIdentityAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbIdentityAccount_Validating);
             // 
             // tbIdAccount
             // 
@@ -165,6 +172,7 @@
             this.tbIdAccount.Name = "tbIdAccount";
             this.tbIdAccount.Size = new System.Drawing.Size(325, 20);
             this.tbIdAccount.TabIndex = 7;
+            this.tbIdAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbIdAccount_Validating);
             // 
             // label5
             // 
@@ -217,6 +225,8 @@
             // 
             // dgvAccount
             // 
+            this.dgvAccount.AllowUserToResizeColumns = false;
+            this.dgvAccount.AllowUserToResizeRows = false;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NGAYMO,
@@ -230,26 +240,8 @@
             this.dgvAccount.ReadOnly = true;
             this.dgvAccount.Size = new System.Drawing.Size(543, 295);
             this.dgvAccount.TabIndex = 0;
+            this.dgvAccount.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellContentClick);
             this.dgvAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellContentClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(199, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 24);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "QUẢN LÝ TÀI KHOẢN";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // uCAccountBindingSource
-            // 
-            this.uCAccountBindingSource.DataSource = typeof(BankMonitor.views.UCAccount);
             // 
             // NGAYMO
             // 
@@ -283,6 +275,30 @@
             this.MACN.Name = "MACN";
             this.MACN.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(199, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(229, 24);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "QUẢN LÝ TÀI KHOẢN";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // uCAccountBindingSource
+            // 
+            this.uCAccountBindingSource.DataSource = typeof(BankMonitor.views.UCAccount);
+            // 
             // UCAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +313,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uCAccountBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -330,5 +347,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CMND;
         private System.Windows.Forms.DataGridViewTextBoxColumn SODU;
         private System.Windows.Forms.DataGridViewTextBoxColumn MACN;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

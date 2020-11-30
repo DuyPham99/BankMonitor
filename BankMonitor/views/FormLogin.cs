@@ -51,12 +51,12 @@ namespace BankMonitor.views
         {
             InitializeComponent();
         }
-
-        public void logoutAccount()
+        //logout
+        public void clearData()
         {
             this.tbAccountLogin.Text = "";
             this.tbPasswordLogin.Text = "";
-            this.cb_IdDistribute.Text = "";
+            this.cb_IdDistribute.SelectedIndex = -1;              
         }
             
         private void btnLogin_Click(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace BankMonitor.views
                 user.Username = tbAccountLogin.Text;
                 user.Password = tbPasswordLogin.Text;
                 var db = new NGANHANG();
-                MessageBox.Show(user.Distribute);
+                MessageBox.Show("Đăng nhập thành công!");
                 db.ChangeDataSource(user.Distribute);
                 
                 this.Visible = false;

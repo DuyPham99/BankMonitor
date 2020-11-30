@@ -16,7 +16,7 @@ namespace BankMonitor.datasource
     using System.Linq;
     using System.Configuration;
     using System.Windows;
-
+    using System.Text.RegularExpressions;
 
     public partial class NGANHANG : DbContext
     {
@@ -25,13 +25,14 @@ namespace BankMonitor.datasource
         {
         }
 
-        public void ChangeDataSource(String serverName)
+        public void ChangeDataSource(string serverName)
         {
             Configuration config;
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
            
             string connectionString = config.ConnectionStrings.ConnectionStrings["NGANHANG"].ConnectionString;
-            connectionString = connectionString.Replace(@"PC-DOM\MSSQLSERVER0", serverName);
+            //connectionString = connectionString.Replace(@"PC-DOM\MSSQLSERVER0", serverName);
+            connectionString = Regex.Replace(connectionString, @"PC-DOM\\MSSQLSERVER.", serverName);
             config.ConnectionStrings.ConnectionStrings["NGANHANG"].ConnectionString = connectionString;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("connectionStrings");

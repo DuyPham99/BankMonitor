@@ -84,17 +84,29 @@ namespace BankMonitor
             if(ucAccount.checkLoad != 1) ucAccount.LoadData();
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
-           
+ 
         }
 
         private void bbtnSignOut_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //login.User = new User();
-            //login.Conn.Close();
-            //login.logoutAccount();
-            //var db = new NGANHANG();
-            //db.ChangeDataSource(@"PC-DOM\MSSQLSERVER0");
-         
+            if (!String.IsNullOrEmpty(login.User.Username))
+            {
+                if(MessageBox.Show("Bạn có muốn thoát?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    login.User = new User();
+                    login.Conn.Close();
+                    login.clearData();
+
+                    // flag check load data to dgv
+                    ucAccount.checkLoad = 0;
+                    // clear dgv accoun
+                    ucAccount.clearData();
+
+                    var db = new NGANHANG();
+                    db.ChangeDataSource(@"PC-DOM\MSSQLSERVER0");
+                }
+            }
+               
         }
     }
 }
