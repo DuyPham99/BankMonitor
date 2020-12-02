@@ -103,6 +103,7 @@
             this.btnUpdateAccount.TabIndex = 15;
             this.btnUpdateAccount.Text = "Sửa";
             this.btnUpdateAccount.UseVisualStyleBackColor = true;
+            this.btnUpdateAccount.Click += new System.EventHandler(this.btnUpdateAccount_Click);
             // 
             // btnDeleteAccount
             // 
@@ -126,6 +127,7 @@
             // 
             // cbDistributeAccount
             // 
+            this.cbDistributeAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDistributeAccount.FormattingEnabled = true;
             this.cbDistributeAccount.Location = new System.Drawing.Point(337, 179);
             this.cbDistributeAccount.Name = "cbDistributeAccount";

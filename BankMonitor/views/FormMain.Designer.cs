@@ -259,8 +259,8 @@
             // 
             this.btnAccountMain.Caption = "Tài khoản";
             this.btnAccountMain.Id = 21;
-            this.btnAccountMain.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
-            this.btnAccountMain.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.btnAccountMain.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountMain.ImageOptions.Image")));
+            this.btnAccountMain.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAccountMain.ImageOptions.LargeImage")));
             this.btnAccountMain.Name = "btnAccountMain";
             this.btnAccountMain.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
             // 
@@ -382,6 +382,7 @@
             this.ucAccount.Size = new System.Drawing.Size(1220, 475);
             this.ucAccount.TabIndex = 11;
             this.ucAccount.Visible = false;
+            this.ucAccount.Load += new System.EventHandler(this.ucAccount_Load);
             // 
             // Form1
             // 

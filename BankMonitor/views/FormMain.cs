@@ -103,10 +103,15 @@ namespace BankMonitor
                     ucAccount.clearData();
 
                     var db = new NGANHANG();
-                    db.ChangeDataSource(@"PC-DOM\MSSQLSERVER0");
+                    db.ChangeDataSource();
                 }
             }
                
+        }
+
+        private void ucAccount_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

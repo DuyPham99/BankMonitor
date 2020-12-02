@@ -24,6 +24,7 @@ namespace BankMonitor.model
         public static SqlDataReader myReader;
        // public static String servername = @"PC-DOM\MSSQLSERVER3";
         public static String username = "";
+        //
         private static String mlogin = "";
         private static String password = "";
 

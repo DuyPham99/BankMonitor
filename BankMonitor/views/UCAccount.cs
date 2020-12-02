@@ -12,6 +12,8 @@ using BankMonitor.views;
 using BankMonitor.model;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace BankMonitor.views
 {
@@ -87,15 +89,24 @@ namespace BankMonitor.views
 
         private void dgvAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            // check unclick and click in header
+            try
             {
-                dgvAccount.CurrentRow.Selected = true;
-                tbIdAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' ');
-                tbIdentityAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[2].FormattedValue.ToString().Trim(' ');
-                tbDateAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[0].FormattedValue.ToString().Trim(' ');
-                tbAmountAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[3].FormattedValue.ToString().Trim(' ');
-                 cbDistributeAccount.SelectedIndex = cbDistributeAccount.FindString(dgvAccount.Rows[e.RowIndex].Cells[4].FormattedValue.ToString().Trim(' '));
+                if (dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    flag = 0;
+                    dgvAccount.CurrentRow.Selected = true;
+                    tbIdAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' ');
+                    tbIdentityAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[2].FormattedValue.ToString().Trim(' ');
+                    tbDateAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[0].FormattedValue.ToString().Trim(' ');
+                    tbAmountAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[3].FormattedValue.ToString().Trim(' ');
+                    cbDistributeAccount.SelectedIndex = cbDistributeAccount.FindString(dgvAccount.Rows[e.RowIndex].Cells[4].FormattedValue.ToString().Trim(' '));
+                }
+            } catch (Exception ex)
+            {
+
             }
+          
         }
 
         private void btnCancelAccount_Click(object sender, EventArgs e)
@@ -111,13 +122,24 @@ namespace BankMonitor.views
         private void btnDeleteAccount_Click(object sender, EventArgs e)
         {          
             if (ValidateChildren(ValidationConstraints.Enabled) &&  flag == 1)
-            {             
-                var account = new TaiKhoan();
-                account.SOTK = tbIdAccount.Text;
-                var db = new NGANHANG();
-                db.Entry(account).State = EntityState.Deleted;
-                db.SaveChanges();
-                MessageBox.Show("Xóa thành công!");
+            {            
+                 if(MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var account = new TaiKhoan();
+                    account.SOTK = tbIdAccount.Text;
+                    var db = new NGANHANG();
+                    db.Entry(account).State = EntityState.Deleted;
+                    db.SaveChanges();
+
+                    // remove select
+                    if (dgvAccount.CurrentRow.Selected == true)
+                    {
+                        dgvAccount.Rows.RemoveAt(dgvAccount.SelectedRows[0].Index);
+                    }
+                    btnCancelAccount.PerformClick();
+                    MessageBox.Show("Xóa thành công!");
+                }
+                
             }
         }
 
@@ -205,18 +227,51 @@ namespace BankMonitor.views
                             MACN = cbDistributeAccount.Text,
                             CMND = tbIdentityAccount.Text,
                             NGAYMOTK = Convert.ToDateTime(time),
-                            SODU = decimal.Parse(tbAmountAccount.Text)
-                        };
+                            SODU = decimal.Parse(tbAmountAccount.Text),
+                            rowguid = Guid.NewGuid()
+                    };
 
                         db.TaiKhoans.Add(account);
                         db.SaveChanges();
-                    } catch (Exception ex)
+                        dgvAccount.Rows.Add(account.NGAYMOTK, account.SOTK, account.CMND, account.SODU.ToString("G29"), account.MACN);
+
+                        MessageBox.Show("Thêm thành công!");
+                    } catch (SqlException ex)
                     {
+                        // MessageBox.Show("Số tài khoản đã tồn tại!");
                         MessageBox.Show(ex.Message);
                     }
                     
                 }
-                MessageBox.Show("Thêm thành công!");
+               
+            }
+        }
+
+        private void btnUpdateAccount_Click(object sender, EventArgs e)
+        {
+            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            {
+                using (var db = new NGANHANG())
+                {
+                    try
+                    {
+                        // choose current
+                        var account = db.TaiKhoans.Find(dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[1].FormattedValue.ToString().Trim(' '));
+                        account.MACN = cbDistributeAccount.Text;
+                        account.CMND = tbIdentityAccount.Text;
+                        account.SODU = decimal.Parse(tbAmountAccount.Text);                 
+                        db.SaveChanges();
+                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
+                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
+                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
+                        MessageBox.Show("Cập nhật thành công!");
+                    }
+                    catch (SqlException ex)
+                    {
+                        // MessageBox.Show("Số tài khoản đã tồn tại!");
+                        MessageBox.Show(ex.Message);
+                    }
+                }               
             }
         }
     }

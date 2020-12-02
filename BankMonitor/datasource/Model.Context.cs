@@ -17,22 +17,26 @@ namespace BankMonitor.datasource
     using System.Configuration;
     using System.Windows;
     using System.Text.RegularExpressions;
+    using model;
 
     public partial class NGANHANG : DbContext
     {
+        User user;
         public NGANHANG()
             : base(GetConnectionString())
         {
         }
 
-        public void ChangeDataSource(string serverName)
+        public void ChangeDataSource()
         {
             Configuration config;
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
            
             string connectionString = config.ConnectionStrings.ConnectionStrings["NGANHANG"].ConnectionString;
-            //connectionString = connectionString.Replace(@"PC-DOM\MSSQLSERVER0", serverName);
-            connectionString = Regex.Replace(connectionString, @"PC-DOM\\MSSQLSERVER.", serverName);
+            connectionString = Regex.Replace(connectionString, @"PC-DOM\\MSSQLSERVER.", user.Distribute);
+            connectionString = Regex.Replace(connectionString, @"user id=\w*;", "user id=" + user.Username + ";"); 
+            connectionString = Regex.Replace(connectionString, @"password=\w*;", "password=" + user.Password + ";");
+         
             config.ConnectionStrings.ConnectionStrings["NGANHANG"].ConnectionString = connectionString;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("connectionStrings");
@@ -63,7 +67,18 @@ namespace BankMonitor.datasource
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
-    
 
+        internal User User
+        {
+            get
+            {
+                return user;
+            }
+
+            set
+            {
+                user = value;
+            }
+        }
     }
 }

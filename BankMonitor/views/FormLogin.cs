@@ -89,7 +89,8 @@ namespace BankMonitor.views
                 user.Password = tbPasswordLogin.Text;
                 var db = new NGANHANG();
                 MessageBox.Show("Đăng nhập thành công!");
-                db.ChangeDataSource(user.Distribute);
+                db.User = user;
+                db.ChangeDataSource();
                 
                 this.Visible = false;
             }
