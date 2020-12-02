@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbListCustomer = new System.Windows.Forms.GroupBox();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.IdCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +62,11 @@
             this.tbIdCustomer = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cbDistributeCustomer = new System.Windows.Forms.ComboBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbListCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.gbCustomerMonitor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // gbListCustomer
@@ -286,6 +289,7 @@
             // dtpDateIdCustomer
             // 
             this.dtpDateIdCustomer.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.dtpDateIdCustomer.CustomFormat = "dd-MM-yyyy";
             this.dtpDateIdCustomer.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDateIdCustomer.Location = new System.Drawing.Point(321, 122);
             this.dtpDateIdCustomer.Name = "dtpDateIdCustomer";
@@ -379,6 +383,10 @@
             this.cbDistributeCustomer.Size = new System.Drawing.Size(121, 21);
             this.cbDistributeCustomer.TabIndex = 21;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // UCCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,6 +401,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.gbCustomerMonitor.ResumeLayout(false);
             this.gbCustomerMonitor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,5 +442,6 @@
         private System.Windows.Forms.TextBox tbIdCustomer;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cbDistributeCustomer;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
