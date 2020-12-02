@@ -41,6 +41,7 @@
             this.IdDistributeCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label9 = new System.Windows.Forms.Label();
             this.gbCustomerMonitor = new System.Windows.Forms.GroupBox();
+            this.cbDistributeCustomer = new System.Windows.Forms.ComboBox();
             this.btnCancelCustomer = new System.Windows.Forms.Button();
             this.btnChangeCustomer = new System.Windows.Forms.Button();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
@@ -61,7 +62,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tbIdCustomer = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.cbDistributeCustomer = new System.Windows.Forms.ComboBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbListCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
@@ -188,6 +188,15 @@
             this.gbCustomerMonitor.TabIndex = 6;
             this.gbCustomerMonitor.TabStop = false;
             // 
+            // cbDistributeCustomer
+            // 
+            this.cbDistributeCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDistributeCustomer.FormattingEnabled = true;
+            this.cbDistributeCustomer.Location = new System.Drawing.Point(109, 203);
+            this.cbDistributeCustomer.Name = "cbDistributeCustomer";
+            this.cbDistributeCustomer.Size = new System.Drawing.Size(121, 21);
+            this.cbDistributeCustomer.TabIndex = 21;
+            // 
             // btnCancelCustomer
             // 
             this.btnCancelCustomer.Location = new System.Drawing.Point(356, 252);
@@ -196,6 +205,7 @@
             this.btnCancelCustomer.TabIndex = 20;
             this.btnCancelCustomer.Text = "Hủy bỏ";
             this.btnCancelCustomer.UseVisualStyleBackColor = true;
+            this.btnCancelCustomer.Click += new System.EventHandler(this.btnCancelCustomer_Click);
             // 
             // btnChangeCustomer
             // 
@@ -205,6 +215,7 @@
             this.btnChangeCustomer.TabIndex = 19;
             this.btnChangeCustomer.Text = "Sửa";
             this.btnChangeCustomer.UseVisualStyleBackColor = true;
+            this.btnChangeCustomer.Click += new System.EventHandler(this.btnChangeCustomer_Click);
             // 
             // btnDeleteCustomer
             // 
@@ -214,6 +225,7 @@
             this.btnDeleteCustomer.TabIndex = 18;
             this.btnDeleteCustomer.Text = "Xóa";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // btnAddCustomer
             // 
@@ -248,6 +260,7 @@
             this.rdbtnMaleCustomer.TabStop = true;
             this.rdbtnMaleCustomer.Text = "Nam";
             this.rdbtnMaleCustomer.UseVisualStyleBackColor = true;
+            this.rdbtnMaleCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.rdbtnMaleCustomer_Validating);
             // 
             // label17
             // 
@@ -265,6 +278,7 @@
             this.tbPhoneNumberCustomer.Name = "tbPhoneNumberCustomer";
             this.tbPhoneNumberCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbPhoneNumberCustomer.TabIndex = 13;
+            this.tbPhoneNumberCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbPhoneNumberCustomer_Validating);
             // 
             // label16
             // 
@@ -302,6 +316,7 @@
             this.tbAddressCustomer.Name = "tbAddressCustomer";
             this.tbAddressCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbAddressCustomer.TabIndex = 9;
+            this.tbAddressCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbAddressCustomer_Validating);
             // 
             // label14
             // 
@@ -319,6 +334,7 @@
             this.tbLastNameCustomer.Name = "tbLastNameCustomer";
             this.tbLastNameCustomer.Size = new System.Drawing.Size(100, 20);
             this.tbLastNameCustomer.TabIndex = 7;
+            this.tbLastNameCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbLastNameCustomer_Validating);
             // 
             // label13
             // 
@@ -336,6 +352,7 @@
             this.tbFirstNameCustomer.Name = "tbFirstNameCustomer";
             this.tbFirstNameCustomer.Size = new System.Drawing.Size(155, 20);
             this.tbFirstNameCustomer.TabIndex = 5;
+            this.tbFirstNameCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstNameCustomer_Validating);
             // 
             // label12
             // 
@@ -363,6 +380,7 @@
             this.tbIdCustomer.Name = "tbIdCustomer";
             this.tbIdCustomer.Size = new System.Drawing.Size(151, 20);
             this.tbIdCustomer.TabIndex = 1;
+            this.tbIdCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbIdCustomer_Validating);
             // 
             // label10
             // 
@@ -374,17 +392,9 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "CMND";
             // 
-            // cbDistributeCustomer
-            // 
-            this.cbDistributeCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDistributeCustomer.FormattingEnabled = true;
-            this.cbDistributeCustomer.Location = new System.Drawing.Point(109, 203);
-            this.cbDistributeCustomer.Name = "cbDistributeCustomer";
-            this.cbDistributeCustomer.Size = new System.Drawing.Size(121, 21);
-            this.cbDistributeCustomer.TabIndex = 21;
-            // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // UCCustomer

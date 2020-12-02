@@ -143,6 +143,13 @@ namespace BankMonitor.views
                     var account = new TaiKhoan();
                     account.SOTK = tbIdAccount.Text;
                     var db = new NGANHANG();
+
+                    var check = db.TaiKhoans.Find(tbIdAccount.Text);
+                    if (check == null)
+                    {
+                        MessageBox.Show("Tài khoản không tồn tại!");
+                        return;
+                    }
                     db.Entry(account).State = EntityState.Deleted;
                     db.SaveChanges();
 
@@ -153,14 +160,12 @@ namespace BankMonitor.views
                     }
                     btnCancelAccount.PerformClick();
                     MessageBox.Show("Xóa thành công!");
-                }
-                
+                }          
             }
         }
 
         private void tbIdAccount_Validating(object sender, CancelEventArgs e)
-        {
-           
+        {       
             Regex regex = new Regex(@"^[0-9]*$");
             if (string.IsNullOrEmpty(tbIdAccount.Text))
             {
@@ -249,7 +254,7 @@ namespace BankMonitor.views
                         //db.TaiKhoans.Add(account);
                         //db.SaveChanges();          
                         // add account
-                        db.Database.ExecuteSqlCommand("themTaiKhoan @p0, @p1, @p2", parameters: new[] {tbIdAccount.Text, tbIdentityAccount.Text, cbDistributeAccount.Text});
+                        db.Database.ExecuteSqlCommand("themTaiKhoan @p0, @p1, @p2, @p3", parameters: new[] {tbIdAccount.Text, tbIdentityAccount.Text, cbDistributeAccount.Text, tbAmountAccount.Text});
                         dgvAccount.Rows.Add(account.NGAYMOTK, account.SOTK, account.CMND, account.SODU.ToString("G29"), account.MACN);
                         MessageBox.Show("Thêm thành công!");
                     } catch (SqlException ex)
@@ -272,16 +277,20 @@ namespace BankMonitor.views
                     try
                     {
                         // choose current
-                        var account = db.TaiKhoans.Find(dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[1].FormattedValue.ToString().Trim(' '));
-                        account.MACN = cbDistributeAccount.Text;
-                        account.CMND = tbIdentityAccount.Text;
-                        account.SODU = decimal.Parse(tbAmountAccount.Text);                 
-                        db.SaveChanges();
+                        var account = db.TaiKhoans.Find(tbIdAccount.Text);
 
-                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
-                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
-                        dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
-                        MessageBox.Show("Cập nhật thành công!");
+                        if (account != null)
+                        {
+                            account.MACN = cbDistributeAccount.Text;
+                            account.CMND = tbIdentityAccount.Text;
+                            account.SODU = decimal.Parse(tbAmountAccount.Text);
+                            db.SaveChanges();
+
+                            dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
+                            dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
+                            dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
+                            MessageBox.Show("Cập nhật thành công!");
+                        } else MessageBox.Show("Số tài khoản đã tồn tại!");
                     }
                     catch (SqlException ex)
                     {
