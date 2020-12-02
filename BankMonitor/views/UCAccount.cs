@@ -24,6 +24,8 @@ namespace BankMonitor.views
         int flag = 0;
         //to prevent load duplicate datagridview
         public int checkLoad = 0;
+        ConnectionDatabase conn;
+
         internal User User
         {
             get
@@ -34,6 +36,19 @@ namespace BankMonitor.views
             set
             {
                 user = value;
+            }
+        }
+
+        internal ConnectionDatabase Conn
+        {
+            get
+            {
+                return conn;
+            }
+
+            set
+            {
+                conn = value;
             }
         }
 
@@ -231,10 +246,11 @@ namespace BankMonitor.views
                             rowguid = Guid.NewGuid()
                     };
 
-                        db.TaiKhoans.Add(account);
-                        db.SaveChanges();
+                        //db.TaiKhoans.Add(account);
+                        //db.SaveChanges();          
+                        // add account
+                        db.Database.ExecuteSqlCommand("themTaiKhoan @p0, @p1, @p2", parameters: new[] {tbIdAccount.Text, tbIdentityAccount.Text, cbDistributeAccount.Text});
                         dgvAccount.Rows.Add(account.NGAYMOTK, account.SOTK, account.CMND, account.SODU.ToString("G29"), account.MACN);
-
                         MessageBox.Show("Thêm thành công!");
                     } catch (SqlException ex)
                     {
@@ -261,6 +277,7 @@ namespace BankMonitor.views
                         account.CMND = tbIdentityAccount.Text;
                         account.SODU = decimal.Parse(tbAmountAccount.Text);                 
                         db.SaveChanges();
+
                         dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
                         dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
                         dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
@@ -273,6 +290,11 @@ namespace BankMonitor.views
                     }
                 }               
             }
+        }
+
+        private void tbIdAccount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

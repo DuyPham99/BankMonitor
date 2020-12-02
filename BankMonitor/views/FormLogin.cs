@@ -51,6 +51,7 @@ namespace BankMonitor.views
         {
             InitializeComponent();
         }
+
         //logout
         public void clearData()
         {
@@ -91,7 +92,7 @@ namespace BankMonitor.views
                 MessageBox.Show("Đăng nhập thành công!");
                 db.User = user;
                 db.ChangeDataSource();
-                
+
                 this.Visible = false;
             }
            
@@ -116,9 +117,14 @@ namespace BankMonitor.views
             }
             finally
             {
-                ConnectionDatabase.conn.Close();
-            }
-            conn.Close();
+              conn.Close();
+            }         
+        }
+
+        private void FormLogin_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visible = false;
+            e.Cancel = true;
         }
     }
 }

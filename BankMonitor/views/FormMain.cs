@@ -25,7 +25,6 @@ namespace BankMonitor
            
         }
 
-   
         public void HidePanels(Control.ControlCollection controls)
         {
             foreach (Control c in controls)
@@ -47,6 +46,8 @@ namespace BankMonitor
         }
         private void bbtnCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ucCustomer.User = login.User;
+            if (ucCustomer.checkLoad != 1) ucCustomer.LoadData();
             if (ucCustomer.Visible != true) HidePanels(this.Controls);
             ucCustomer.Visible = !ucCustomer.Visible;
          
@@ -72,16 +73,16 @@ namespace BankMonitor
        
         private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //   FormLogin login = new FormLogin();
-            login.Hide();
-            login.Show();
-           
+            //FormLogin login = new FormLogin();
+            login.Hide();       
+            login.Show();           
         }
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ucAccount.User = login.User;
-            if(ucAccount.checkLoad != 1) ucAccount.LoadData();
+            ucAccount.Conn = login.Conn;
+            if (ucAccount.checkLoad != 1) ucAccount.LoadData();
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
  
@@ -93,6 +94,10 @@ namespace BankMonitor
             {
                 if(MessageBox.Show("Bạn có muốn thoát?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
+                    var db = new NGANHANG();
+                    db.User = login.User;
+                    db.ChangeDataSource();
+                    
                     login.User = new User();
                     login.Conn.Close();
                     login.clearData();
@@ -102,8 +107,7 @@ namespace BankMonitor
                     // clear dgv accoun
                     ucAccount.clearData();
 
-                    var db = new NGANHANG();
-                    db.ChangeDataSource();
+                    MessageBox.Show("Đã đăng xuất!"); 
                 }
             }
                
@@ -112,6 +116,15 @@ namespace BankMonitor
         private void ucAccount_Load(object sender, EventArgs e)
         {
 
+        }
+
+        FormChangePassword frmChangePassword = new FormChangePassword();
+
+        private void bbtnChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmChangePassword.User = login.User;
+            frmChangePassword.Hide();
+            frmChangePassword.Show();
         }
     }
 }

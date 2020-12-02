@@ -119,6 +119,7 @@
             this.bbtnChangePassword.Id = 2;
             this.bbtnChangePassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnChangePassword.ImageOptions.Image")));
             this.bbtnChangePassword.Name = "bbtnChangePassword";
+            this.bbtnChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnChangePassword_ItemClick);
             // 
             // bbtnSignOut
             // 

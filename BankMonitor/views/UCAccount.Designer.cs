@@ -174,6 +174,7 @@
             this.tbIdAccount.Name = "tbIdAccount";
             this.tbIdAccount.Size = new System.Drawing.Size(325, 20);
             this.tbIdAccount.TabIndex = 7;
+            this.tbIdAccount.TextChanged += new System.EventHandler(this.tbIdAccount_TextChanged);
             this.tbIdAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbIdAccount_Validating);
             // 
             // label5

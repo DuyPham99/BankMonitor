@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.gbListCustomer = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.IdCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateIdCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstNameCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,28 +57,30 @@
             this.label13 = new System.Windows.Forms.Label();
             this.tbFirstNameCustomer = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbIdDistributeCustomer = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbIdCustomer = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.cbDistributeCustomer = new System.Windows.Forms.ComboBox();
             this.gbListCustomer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.gbCustomerMonitor.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbListCustomer
             // 
-            this.gbListCustomer.Controls.Add(this.dataGridView2);
+            this.gbListCustomer.Controls.Add(this.dgvCustomer);
             this.gbListCustomer.Location = new System.Drawing.Point(588, 82);
             this.gbListCustomer.Name = "gbListCustomer";
             this.gbListCustomer.Size = new System.Drawing.Size(595, 314);
             this.gbListCustomer.TabIndex = 5;
             this.gbListCustomer.TabStop = false;
             // 
-            // dataGridView2
+            // dgvCustomer
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCustomer.AllowUserToResizeColumns = false;
+            this.dgvCustomer.AllowUserToResizeRows = false;
+            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCustomer,
             this.DateIdCustomer,
             this.FirstNameCustomer,
@@ -87,51 +89,62 @@
             this.PhoneNumberCustomer,
             this.SexCustomer,
             this.IdDistributeCustomer});
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(589, 295);
-            this.dataGridView2.TabIndex = 0;
+            this.dgvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCustomer.Location = new System.Drawing.Point(3, 16);
+            this.dgvCustomer.Name = "dgvCustomer";
+            this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.Size = new System.Drawing.Size(589, 295);
+            this.dgvCustomer.TabIndex = 0;
+            this.dgvCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_CellContentClick);
+            this.dgvCustomer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_CellContentClick);
             // 
             // IdCustomer
             // 
             this.IdCustomer.HeaderText = "CMND";
             this.IdCustomer.Name = "IdCustomer";
+            this.IdCustomer.ReadOnly = true;
             // 
             // DateIdCustomer
             // 
             this.DateIdCustomer.HeaderText = "Ngày cấp";
             this.DateIdCustomer.Name = "DateIdCustomer";
+            this.DateIdCustomer.ReadOnly = true;
             // 
             // FirstNameCustomer
             // 
             this.FirstNameCustomer.HeaderText = "Họ";
             this.FirstNameCustomer.Name = "FirstNameCustomer";
+            this.FirstNameCustomer.ReadOnly = true;
             // 
             // LastNameCustomer
             // 
             this.LastNameCustomer.HeaderText = "Tên";
             this.LastNameCustomer.Name = "LastNameCustomer";
+            this.LastNameCustomer.ReadOnly = true;
             // 
             // AddressCustomer
             // 
             this.AddressCustomer.HeaderText = "Địa chỉ";
             this.AddressCustomer.Name = "AddressCustomer";
+            this.AddressCustomer.ReadOnly = true;
             // 
             // PhoneNumberCustomer
             // 
             this.PhoneNumberCustomer.HeaderText = "SĐT";
             this.PhoneNumberCustomer.Name = "PhoneNumberCustomer";
+            this.PhoneNumberCustomer.ReadOnly = true;
             // 
             // SexCustomer
             // 
             this.SexCustomer.HeaderText = "Phái";
             this.SexCustomer.Name = "SexCustomer";
+            this.SexCustomer.ReadOnly = true;
             // 
             // IdDistributeCustomer
             // 
             this.IdDistributeCustomer.HeaderText = "Mã CN";
             this.IdDistributeCustomer.Name = "IdDistributeCustomer";
+            this.IdDistributeCustomer.ReadOnly = true;
             // 
             // label9
             // 
@@ -145,6 +158,7 @@
             // 
             // gbCustomerMonitor
             // 
+            this.gbCustomerMonitor.Controls.Add(this.cbDistributeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnCancelCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnChangeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnDeleteCustomer);
@@ -162,7 +176,6 @@
             this.gbCustomerMonitor.Controls.Add(this.label13);
             this.gbCustomerMonitor.Controls.Add(this.tbFirstNameCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label12);
-            this.gbCustomerMonitor.Controls.Add(this.tbIdDistributeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label11);
             this.gbCustomerMonitor.Controls.Add(this.tbIdCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label10);
@@ -207,13 +220,15 @@
             this.btnAddCustomer.TabIndex = 17;
             this.btnAddCustomer.Text = "Thêm";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // rdbtnFemaleCustomer
             // 
             this.rdbtnFemaleCustomer.AutoSize = true;
+            this.rdbtnFemaleCustomer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtnFemaleCustomer.Location = new System.Drawing.Point(384, 205);
             this.rdbtnFemaleCustomer.Name = "rdbtnFemaleCustomer";
-            this.rdbtnFemaleCustomer.Size = new System.Drawing.Size(39, 17);
+            this.rdbtnFemaleCustomer.Size = new System.Drawing.Size(41, 19);
             this.rdbtnFemaleCustomer.TabIndex = 16;
             this.rdbtnFemaleCustomer.TabStop = true;
             this.rdbtnFemaleCustomer.Text = "Nữ";
@@ -222,9 +237,10 @@
             // rdbtnMaleCustomer
             // 
             this.rdbtnMaleCustomer.AutoSize = true;
+            this.rdbtnMaleCustomer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtnMaleCustomer.Location = new System.Drawing.Point(313, 205);
             this.rdbtnMaleCustomer.Name = "rdbtnMaleCustomer";
-            this.rdbtnMaleCustomer.Size = new System.Drawing.Size(47, 17);
+            this.rdbtnMaleCustomer.Size = new System.Drawing.Size(49, 19);
             this.rdbtnMaleCustomer.TabIndex = 15;
             this.rdbtnMaleCustomer.TabStop = true;
             this.rdbtnMaleCustomer.Text = "Nam";
@@ -327,13 +343,6 @@
             this.label12.TabIndex = 4;
             this.label12.Text = "Họ";
             // 
-            // tbIdDistributeCustomer
-            // 
-            this.tbIdDistributeCustomer.Location = new System.Drawing.Point(96, 204);
-            this.tbIdDistributeCustomer.Name = "tbIdDistributeCustomer";
-            this.tbIdDistributeCustomer.Size = new System.Drawing.Size(98, 20);
-            this.tbIdDistributeCustomer.TabIndex = 3;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -361,6 +370,15 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "CMND";
             // 
+            // cbDistributeCustomer
+            // 
+            this.cbDistributeCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDistributeCustomer.FormattingEnabled = true;
+            this.cbDistributeCustomer.Location = new System.Drawing.Point(109, 203);
+            this.cbDistributeCustomer.Name = "cbDistributeCustomer";
+            this.cbDistributeCustomer.Size = new System.Drawing.Size(121, 21);
+            this.cbDistributeCustomer.TabIndex = 21;
+            // 
             // UCCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,7 +390,7 @@
             this.Name = "UCCustomer";
             this.Size = new System.Drawing.Size(1217, 437);
             this.gbListCustomer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.gbCustomerMonitor.ResumeLayout(false);
             this.gbCustomerMonitor.PerformLayout();
             this.ResumeLayout(false);
@@ -383,7 +401,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbListCustomer;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateIdCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstNameCustomer;
@@ -411,9 +429,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tbFirstNameCustomer;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbIdDistributeCustomer;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbIdCustomer;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbDistributeCustomer;
     }
 }
