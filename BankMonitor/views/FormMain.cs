@@ -40,6 +40,8 @@ namespace BankMonitor
 
         private void bbtnpnStaff_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ucStaff.User = login.User;
+            if (ucStaff.checkLoad == 0) ucStaff.LoadData();
             if (ucStaff.Visible != true) HidePanels(this.Controls);
             ucStaff.Visible = !ucStaff.Visible;
 
@@ -104,6 +106,8 @@ namespace BankMonitor
 
                     // flag check load data to dgv
                     ucAccount.checkLoad = 0;
+                    ucStaff.checkLoad = 0;
+                    ucCustomer.checkLoad = 0;
                     // clear dgv accoun
                     ucAccount.clearData();
 

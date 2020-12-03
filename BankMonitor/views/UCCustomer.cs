@@ -19,7 +19,6 @@ namespace BankMonitor.views
     {
         User user;
         public int checkLoad = 0;
-        int flag = 0;
 
         public UCCustomer()
         {
@@ -69,7 +68,7 @@ namespace BankMonitor.views
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            if (isValid())
             {
                 using (var db = new NGANHANG())
                 {
@@ -81,11 +80,13 @@ namespace BankMonitor.views
                         string gender;
                         if (rdbtnMaleCustomer.Checked)
                         {
-                           gender = "NAM";
-                        } else gender = "NỮ";
+                            gender = "NAM";
+                        }
+                        else gender = "NỮ";
 
                         db.Database.ExecuteSqlCommand("themKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] { tbIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, gender, dtpDateIdCustomer.Text, cbDistributeCustomer.Text, tbPhoneNumberCustomer.Text });
                         dgvCustomer.Rows.Add(tbIdCustomer.Text, dtpDateIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, tbPhoneNumberCustomer.Text, gender, cbDistributeCustomer.Text);
+                        btnCancelCustomer.PerformClick();
                         MessageBox.Show("Thêm thành công!");
                     }
                     catch (SqlException ex)
@@ -104,7 +105,6 @@ namespace BankMonitor.views
             {
                 if (dgvCustomer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
-                    flag = 0;
                     dgvCustomer.CurrentRow.Selected = true;
                     tbIdCustomer.Text = dgvCustomer.Rows[e.RowIndex].Cells[0].FormattedValue.ToString().Trim(' ');
                     dtpDateIdCustomer.Text = dgvCustomer.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' ');
@@ -125,114 +125,139 @@ namespace BankMonitor.views
             }
         }
 
-        private void tbFirstNameCustomer_Validating(object sender, CancelEventArgs e)
+        public bool isValid()
         {
+            Regex regex;
+            int flag = 1;
+
             if (string.IsNullOrEmpty(tbFirstNameCustomer.Text))
             {
-                flag = 0;
-                errorProvider.SetError(tbFirstNameCustomer,"Nhập họ!");
-            } else
-            {
-                flag = 1;
+                errorProvider.SetError(tbFirstNameCustomer, "Nhập họ!");
+                flag *= 0;
+            }
+            else
+            {      
                 errorProvider.SetError(tbFirstNameCustomer, null);
             }
+
+            if (string.IsNullOrEmpty(tbLastNameCustomer.Text))
+            {
+                flag *= 0;
+                errorProvider.SetError(tbLastNameCustomer, "Nhập tên!");
+            }
+            else
+            {        
+                errorProvider.SetError(tbLastNameCustomer, null);
+            }
+
+            //
+            if (string.IsNullOrEmpty(tbAddressCustomer.Text))
+            {
+                flag *= 0;
+                errorProvider.SetError(tbAddressCustomer, "Nhập địa chỉ!");
+            }
+            else
+            {         
+                errorProvider.SetError(tbAddressCustomer, null);
+            }
+
+            //
+            regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbIdCustomer.Text))
+            {
+                flag *= 0;
+                errorProvider.SetError(tbIdCustomer, "Nhập số CMND!");
+            }
+            else if (!regex.IsMatch(tbIdCustomer.Text))
+            {
+                flag *= 0;
+                errorProvider.SetError(tbIdCustomer, "CMND/CCCD sai cú pháp!");
+            }
+            else if (tbIdCustomer.Text.Length != 9 && tbIdCustomer.Text.Length != 12)
+            {
+                flag *= 0;
+                errorProvider.SetError(tbIdCustomer, "Độ dài CMND không đúng!");
+            }
+            else
+            {      
+                errorProvider.SetError(tbIdCustomer, null);
+            }
+            //
+
+
+            regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbPhoneNumberCustomer.Text))
+            {
+            
+                flag *= 0;
+                errorProvider.SetError(tbPhoneNumberCustomer, "Nhập số số điện thoại!");
+            }
+            else if (!regex.IsMatch(tbPhoneNumberCustomer.Text))
+            {
+            
+                flag *= 0;
+                errorProvider.SetError(tbPhoneNumberCustomer, "Số điện thoại sai cú pháp!");
+            }
+            else if (tbPhoneNumberCustomer.Text.Length != 10)
+            {
+                flag *= 0;
+                errorProvider.SetError(tbPhoneNumberCustomer, "Độ dài không đúng!");
+            }
+            else
+            {   
+                errorProvider.SetError(tbPhoneNumberCustomer, null);
+            }
+            //
+            if (!rdbtnMaleCustomer.Checked && !rdbtnFemaleCustomer.Checked)
+            {             
+                errorProvider.SetError(rdbtnMaleCustomer, "*");
+                errorProvider.SetError(rdbtnFemaleCustomer, "*");
+                flag *= 0;
+            }
+            else
+            {
+                errorProvider.SetError(rdbtnMaleCustomer, null);
+                errorProvider.SetError(rdbtnFemaleCustomer, null);
+            }
+
+            if (flag == 1) return true;
+
+            return false;
+        }
+            
+
+        private void tbFirstNameCustomer_Validating(object sender, CancelEventArgs e)
+        {
+          
         }
 
         private void tbLastNameCustomer_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbLastNameCustomer.Text))
-            {
-                flag = 0;
-                errorProvider.SetError(tbLastNameCustomer, "Nhập tên!");
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbLastNameCustomer, null);
-            }
+          
         }
 
         private void tbAddressCustomer_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbAddressCustomer.Text))
-            {
-                flag = 0;
-                errorProvider.SetError(tbAddressCustomer, "Nhập tên!");
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbAddressCustomer, null);
-            }
+         
         }
 
         private void tbIdCustomer_Validating(object sender, CancelEventArgs e)
         {
-            Regex regex = new Regex(@"^[0-9]*$");
-            if (string.IsNullOrEmpty(tbIdCustomer.Text))
-            {
-                errorProvider.SetError(tbIdCustomer, "Nhập số CMND!");
-                flag = 0;
-            }
-            else if (!regex.IsMatch(tbIdCustomer.Text))
-            {
-                errorProvider.SetError(tbIdCustomer, "CMND/CCCD sai cú pháp!");
-                flag = 0;
-            }
-            else if (tbIdCustomer.Text.Length != 9 && tbIdCustomer.Text.Length != 12)
-            {
-                errorProvider.SetError(tbIdCustomer, "Độ dài CMND không đúng!");
-                flag = 0;
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbIdCustomer, null);
-            }
+           
         }
 
         private void tbPhoneNumberCustomer_Validating(object sender, CancelEventArgs e)
         {
-            Regex regex = new Regex(@"^[0-9]*$");
-            if (string.IsNullOrEmpty(tbPhoneNumberCustomer.Text))
-            {
-                errorProvider.SetError(tbPhoneNumberCustomer, "Nhập số số điện thoại!");
-                flag = 0;
-            }
-            else if (!regex.IsMatch(tbPhoneNumberCustomer.Text))
-            {
-                errorProvider.SetError(tbIdCustomer, "Số điện thoại sai cú pháp!");
-                flag = 0;
-            }
-            else if (tbPhoneNumberCustomer.Text.Length != 10)
-            {
-                flag = 0;
-                errorProvider.SetError(tbPhoneNumberCustomer, "Độ dài không đúng!");
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbPhoneNumberCustomer, null);
-            }
         }
 
         private void rdbtnMaleCustomer_Validating(object sender, CancelEventArgs e)
         {
-            if (!rdbtnMaleCustomer.Checked && !rdbtnFemaleCustomer.Checked)
-            {
-                flag = 0;
-                errorProvider.SetError(rdbtnMaleCustomer, "");
-                errorProvider.SetError(rdbtnFemaleCustomer, "");
-            } else
-            {
-                flag = 1;
-                errorProvider.SetError(rdbtnMaleCustomer, null);
-            }
+           
         }
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            if (isValid())
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -280,7 +305,7 @@ namespace BankMonitor.views
 
         private void btnChangeCustomer_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            if (isValid())
             {
                 using (var db = new NGANHANG())
                 {
@@ -303,7 +328,8 @@ namespace BankMonitor.views
                                 khachhang.PHAI = "NAM";
                             } else khachhang.PHAI = "NỮ";
 
-                            db.SaveChanges();
+                            // db.SaveChanges();
+                            db.Database.ExecuteSqlCommand("capNhatThongTinKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] { tbIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, khachhang.PHAI, dtpDateIdCustomer.Text, cbDistributeCustomer.Text, tbPhoneNumberCustomer.Text });
 
                             dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[1].Value = khachhang.NGAYCAP;
                             dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[2].Value = khachhang.HO;

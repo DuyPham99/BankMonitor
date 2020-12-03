@@ -22,6 +22,11 @@ namespace BankMonitor.views
 
         }
 
+        public void LoadData()
+        {
+
+        }
+
         private void label3_Click(object sender, EventArgs e)
         {
 

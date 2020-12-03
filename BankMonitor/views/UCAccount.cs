@@ -20,8 +20,6 @@ namespace BankMonitor.views
     public partial class UCAccount : UserControl
     {
         User user;
-        // check validate
-        int flag = 0;
         //to prevent load duplicate datagridview
         public int checkLoad = 0;
         ConnectionDatabase conn;
@@ -109,7 +107,6 @@ namespace BankMonitor.views
             {
                 if (dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
-                    flag = 0;
                     dgvAccount.CurrentRow.Selected = true;
                     tbIdAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' ');
                     tbIdentityAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[2].FormattedValue.ToString().Trim(' ');
@@ -120,8 +117,103 @@ namespace BankMonitor.views
             } catch (Exception ex)
             {
 
+            }   
+        }
+
+        public bool isValid()
+        {
+            int flag = 1;
+            Regex regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbIdAccount.Text))
+            {
+                errorProvider.SetError(tbIdAccount, "Nhập số tài khoản!");
+                flag *= 0;               
             }
-          
+            else if (!regex.IsMatch(tbIdAccount.Text))
+            {
+                errorProvider.SetError(tbIdAccount, "Chỉ nhập số!");
+                flag *= 0;
+            }
+            else
+            {
+                errorProvider.SetError(tbIdAccount, null);
+            }
+
+            //
+            regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbIdentityAccount.Text))
+            {
+                errorProvider.SetError(tbIdentityAccount, "Nhập số CMND!");
+                flag *= 0;
+            }
+            else if (!regex.IsMatch(tbIdentityAccount.Text))
+            {
+                errorProvider.SetError(tbIdentityAccount, "CMND/CCCD sai cú pháp!");
+                flag *= 0;
+            }
+            else if (tbIdentityAccount.Text.Length != 9 && tbIdentityAccount.Text.Length != 12)
+            {
+                errorProvider.SetError(tbIdentityAccount, "Độ dài CMND không đúng!");
+                flag *= 0;
+            }
+            else
+            {
+                errorProvider.SetError(tbIdentityAccount, null);
+            }
+
+            //   Regex regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbAmountAccount.Text))
+            {
+                errorProvider.SetError(tbAmountAccount, "Nhập số số dư!");
+                flag *= 0;
+            }
+            else if ( tbAmountAccount.Text.Length < 0)
+            {
+                errorProvider.SetError(tbAmountAccount, "Số dư phải lớn hơn 0đ!");
+                flag *= 0;
+            } else if (!regex.IsMatch(tbAmountAccount.Text))
+            {
+                errorProvider.SetError(tbAmountAccount, "Số dư phải là số!");
+                flag *= 0;
+            }
+            else
+            {
+                errorProvider.SetError(tbAmountAccount, null);
+            }
+            //
+             regex = new Regex(@"^[0-9]*$");
+            if (string.IsNullOrEmpty(tbAmountAccount.Text))
+            {
+                errorProvider.SetError(tbAmountAccount, "Nhập số số dư!");
+                flag *= 0;
+            }
+            else if (tbAmountAccount.Text.Length < 0)
+            {
+                errorProvider.SetError(tbAmountAccount, "Số dư phải lớn hơn 0đ!");
+                flag *= 0;
+            }
+            else if (!regex.IsMatch(tbAmountAccount.Text))
+            {
+                errorProvider.SetError(tbAmountAccount, "Số dư phải là số!");
+                flag *= 0;
+            }
+            else
+            {
+                errorProvider.SetError(tbAmountAccount, null);
+            }
+            //
+            if (string.IsNullOrEmpty(cbDistributeAccount.Text))
+            {
+                errorProvider.SetError(cbDistributeAccount, "Chọn chi nhánh!");
+                flag *= 0;
+            } else
+            {
+                errorProvider.SetError(cbDistributeAccount, null);
+            }
+
+            if (flag == 0) return false;
+
+            return true;
         }
 
         private void btnCancelAccount_Click(object sender, EventArgs e)
@@ -136,7 +228,7 @@ namespace BankMonitor.views
 
         private void btnDeleteAccount_Click(object sender, EventArgs e)
         {          
-            if (ValidateChildren(ValidationConstraints.Enabled) &&  flag == 1)
+            if (isValid())
             {            
                  if(MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -166,73 +258,22 @@ namespace BankMonitor.views
 
         private void tbIdAccount_Validating(object sender, CancelEventArgs e)
         {       
-            Regex regex = new Regex(@"^[0-9]*$");
-            if (string.IsNullOrEmpty(tbIdAccount.Text))
-            {
-                errorProvider.SetError(tbIdAccount,"Nhập số tài khoản!");
-                flag = 0;
-            } else if (!regex.IsMatch(tbIdAccount.Text))
-            {
-                errorProvider.SetError(tbIdAccount, "Chỉ nhập số!");
-                flag = 0;
-            } else 
-            {
-                flag = 1;
-                errorProvider.SetError(tbIdAccount, null);
-            }
+          
         }
 
         private void tbIdentityAccount_Validating(object sender, CancelEventArgs e)
         {
-            Regex regex = new Regex(@"^[0-9]*$");
-            if (string.IsNullOrEmpty(tbIdentityAccount.Text))
-            {               
-                errorProvider.SetError(tbIdentityAccount, "Nhập số CMND!");
-                flag = 0;
-            }
-            else if (!regex.IsMatch(tbIdentityAccount.Text))
-            {
-                errorProvider.SetError(tbIdentityAccount, "CMND/CCCD sai cú pháp!");
-                flag = 0;
-            } else if (tbIdentityAccount.Text.Length != 9 && tbIdentityAccount.Text.Length != 12)
-            {
-                errorProvider.SetError(tbIdentityAccount, "Độ dài CMND không đúng!");
-                flag = 0;
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbIdentityAccount, null);
-            }
+         
         }
 
         private void tbAmountAccount_Validating(object sender, CancelEventArgs e)
         {
-            Regex regex = new Regex(@"^[0-9]*$");
-            if (string.IsNullOrEmpty(tbAmountAccount.Text))
-            {
-                errorProvider.SetError(tbAmountAccount, "Nhập số số dư!");
-                flag = 0;
-            }
-            else if ( tbAmountAccount.Text.Length < 0)
-            {
-                errorProvider.SetError(tbAmountAccount, "Số dư phải lớn hơn 0đ!");
-                flag = 0;
-            } else if (!regex.IsMatch(tbAmountAccount.Text))
-            {
-                errorProvider.SetError(tbAmountAccount, "Số dư phải là số!");
-                flag = 0;
-            }
-            else
-            {
-                flag = 1;
-                errorProvider.SetError(tbAmountAccount, null);
-            }
+         
         }
 
         private void btAddAccount_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            if (isValid())
             {
                 DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
                 var time = now.ToLocalTime().ToString();
@@ -270,7 +311,7 @@ namespace BankMonitor.views
 
         private void btnUpdateAccount_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && flag == 1)
+            if (isValid())
             {
                 using (var db = new NGANHANG())
                 {
