@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string> undoRedo_21 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string>();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbtnSignIn = new DevExpress.XtraBars.BarButtonItem();
             this.bbtnChangePassword = new DevExpress.XtraBars.BarButtonItem();
@@ -179,6 +180,7 @@
             this.bbtnRedo.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnRedo.ImageOptions.Image")));
             this.bbtnRedo.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbtnRedo.ImageOptions.LargeImage")));
             this.bbtnRedo.Name = "bbtnRedo";
+            this.bbtnRedo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnRedo_ItemClick);
             // 
             // bbtnpnStaff
             // 
@@ -306,7 +308,6 @@
             // 
             // ribbonPageGroup2
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.bbtnSave);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbtnUndo);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbtnRedo);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";

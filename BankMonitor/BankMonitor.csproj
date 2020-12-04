@@ -121,7 +121,10 @@
     <Compile Include="datasource\TaiKhoan.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\AddStaff.cs" />
     <Compile Include="model\ConnectionDatabase.cs" />
+    <Compile Include="model\ICommand.cs" />
+    <Compile Include="model\UndoRedo.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="views\FormChangePassword.cs">
       <SubType>Form</SubType>
@@ -199,6 +202,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

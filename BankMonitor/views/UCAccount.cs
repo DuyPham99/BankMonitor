@@ -108,6 +108,7 @@ namespace BankMonitor.views
                 if (dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
                     dgvAccount.CurrentRow.Selected = true;
+                    tbIdAccount.Enabled = false;
                     tbIdAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' ');
                     tbIdentityAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[2].FormattedValue.ToString().Trim(' ');
                     tbDateAccount.Text = dgvAccount.Rows[e.RowIndex].Cells[0].FormattedValue.ToString().Trim(' ');
@@ -219,6 +220,7 @@ namespace BankMonitor.views
         private void btnCancelAccount_Click(object sender, EventArgs e)
         {
             if (dgvAccount.SelectedRows.Count > 0) dgvAccount.CurrentRow.Selected = false;
+            tbIdAccount.Enabled = true;
             tbIdAccount.Clear();
             tbIdentityAccount.Clear();
             tbDateAccount.Clear();

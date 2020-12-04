@@ -18,6 +18,7 @@ namespace BankMonitor.views
     {
         User user;
         public int checkLoad = 0;
+        private UndoRedo<NhanVien, string> stack = new UndoRedo<NhanVien, string>();
 
         internal User User
         {
@@ -32,9 +33,22 @@ namespace BankMonitor.views
             }
         }
 
+        public UndoRedo<NhanVien, string> Stack
+        {
+            get
+            {
+                return stack;
+            }
+
+            set
+            {
+                stack = value;
+            }
+        }
+
         public UCStaff()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
 
         private void UCStaff_Load(object sender, EventArgs e)
@@ -178,6 +192,7 @@ namespace BankMonitor.views
                         MessageBox.Show("Mã nhân viên đã tồn tại!");
                     } else
                     {
+                       
                         if (rdbtnMale.Checked)
                         {
                             gender = "NAM";
@@ -186,9 +201,15 @@ namespace BankMonitor.views
                         {
                             gender = "NỮ";
                         }
+
+                        MessageBox.Show(gender);
                         db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
-
+                        // undo redo  
+                        NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
+                        MessageBox.Show(nhanvien.HO);
+                        stack.Add(new AddStaff(nhanvien, "ADD"));
+                        //
                         dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
                         tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text);
                         MessageBox.Show("Thêm thành công!");
@@ -200,6 +221,7 @@ namespace BankMonitor.views
         private void btnCancelStaff_Click(object sender, EventArgs e)
         {
             if (dgvStaff.SelectedRows.Count > 0) dgvStaff.CurrentRow.Selected = false;
+            tbIdStaff.Enabled = true;
             tbIdStaff.Clear();
             tbFirstNameStaff.Clear();
             tbLastNameStaff.Clear();
@@ -221,6 +243,7 @@ namespace BankMonitor.views
                 if (dgvStaff.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
                     dgvStaff.CurrentRow.Selected = true;
+                    tbIdStaff.Enabled = false;
                     tbIdStaff.Text = dgvStaff.Rows[e.RowIndex].Cells[0].FormattedValue.ToString().Trim(' ');
                     cbDistributeStaff.SelectedIndex = cbDistributeStaff.FindString(dgvStaff.Rows[e.RowIndex].Cells[1].FormattedValue.ToString().Trim(' '));
                     tbFirstNameStaff.Text = dgvStaff.Rows[e.RowIndex].Cells[2].FormattedValue.ToString().Trim(' ');
@@ -281,9 +304,9 @@ namespace BankMonitor.views
                     string gender;
 
                     var staff = db.NhanViens.Find(tbIdStaff.Text);
-                    if (staff != null)
+                    if (staff == null)
                     {
-                        MessageBox.Show("Mã nhân viên đã tồn tại!");
+                        MessageBox.Show("Mã nhân viên không tồn tại!");
                     }
                     else
                     {
@@ -295,15 +318,46 @@ namespace BankMonitor.views
                         {
                             gender = "NỮ";
                         }
-                        db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
-                    tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
+                        db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
+                    tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text, " "});
 
-                        dgvStaff.Rows.Add(tbIdStaff.Text, tbFirstNameStaff.Text,
-                        tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text);
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[1].Value = cbDistributeStaff.Text;
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[2].Value = tbFirstNameStaff.Text;
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[3].Value = tbLastNameStaff.Text;
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[4].Value = tbAddressStaff.Text;
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[5].Value = gender;
+                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[6].Value = tbPhoneNumberStaff.Text;
+
                         MessageBox.Show("Sửa thành công!");
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NhanVien nhanvien = new NhanVien();
+            //ur.unDo(new AddStaff(nhanvien,"a"));
+            AddStaff a = (AddStaff) stack.Undo.Pop();           
+            MessageBox.Show(a.getKey().HO);  
+        }
+
+        public void Add(NhanVien nv)
+        {
+            var db = new NGANHANG();
+            db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
+                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN});
+            dgvStaff.Rows.Add(nv.MANV, nv.MACN, nv.HO,
+                         nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT);
+        }
+
+        public void Delete(NhanVien nv)
+        {
+            var db = new NGANHANG();
+            db.Entry(nv).State = EntityState.Deleted;
+            db.SaveChanges();
+
+            this.LoadData();
         }
     }
 }

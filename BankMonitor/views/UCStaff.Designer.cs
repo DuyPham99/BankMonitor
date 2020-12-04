@@ -60,6 +60,7 @@
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -305,36 +306,43 @@
             // 
             this.IdpnStaff.HeaderText = "Mã NV";
             this.IdpnStaff.Name = "IdpnStaff";
+            this.IdpnStaff.ReadOnly = true;
             // 
             // IdDistribute
             // 
             this.IdDistribute.HeaderText = "Mã CN";
             this.IdDistribute.Name = "IdDistribute";
+            this.IdDistribute.ReadOnly = true;
             // 
             // firstName
             // 
             this.firstName.HeaderText = "Họ";
             this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
             // 
             // lastName
             // 
             this.lastName.HeaderText = "Tên";
             this.lastName.Name = "lastName";
+            this.lastName.ReadOnly = true;
             // 
             // address
             // 
             this.address.HeaderText = "Địa chỉ";
             this.address.Name = "address";
+            this.address.ReadOnly = true;
             // 
             // sex
             // 
             this.sex.HeaderText = "Phái";
             this.sex.Name = "sex";
+            this.sex.ReadOnly = true;
             // 
             // phoneNumber
             // 
             this.phoneNumber.HeaderText = "SĐT";
             this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -350,10 +358,21 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(179, 400);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UCStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -403,5 +422,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cbDistributeStaff;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using BankMonitor.datasource;
 using BankMonitor.views;
 using BankMonitor.model;
+using System.Data.Entity;
 
 namespace BankMonitor
 {
@@ -34,7 +35,7 @@ namespace BankMonitor
                     c.Visible = false;
                 }
                 // hide any panels this control may have
-                HidePanels(c.Controls);
+              //  HidePanels(c.Controls);
             }
         }
 
@@ -130,5 +131,56 @@ namespace BankMonitor
             frmChangePassword.Hide();
             frmChangePassword.Show();
         }
+
+        private void bbtnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //init stack
+                foreach (Control c in this.Controls)
+            {
+                if (c is UserControl && c.Visible == true)
+                {
+
+                    if (c.GetType().ToString().Contains("Staff"))
+                    {
+                        var stack = ucStaff.Stack.UNDO();
+
+                        if (stack.getAction() == "ADD")
+                        {
+                            ucStaff.Add(stack.getKey());
+                        }
+                        else if (stack.getAction() == "DELETE")
+                        {
+                            ucStaff.Delete(stack.getKey());
+                        }
+                    }
+                }
+
+            }
+        }
+
+        //private void bbtnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{       
+        //    // init stack
+        //    foreach (Control c in this.Controls)
+        //    {
+        //        if (c is UserControl && c.Visible == true)
+        //        {
+
+        //            if (c.GetType().ToString().Contains("Staff"))
+        //            {
+        //                var stack = ucStaff.Stack.UNDO();
+
+        //                if (stack.getAction() == "ADD")
+        //                {
+        //                    ucStaff.Add(stack.getKey());
+        //                } else if (stack.getAction() == "DELETE")
+        //                {
+        //                    ucStaff.Delete(stack.getKey());
+        //                }
+        //            }
+        //        }
+
+        //    }
+        //}
     }
 }
