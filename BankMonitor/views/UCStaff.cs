@@ -82,6 +82,11 @@ namespace BankMonitor.views
             }
         }
 
+        public void ClearData()
+        {
+            dgvStaff.Rows.Clear();
+            dgvStaff.Refresh();
+        }
         public bool isValid()
         {
             int flag = 1;
@@ -201,13 +206,10 @@ namespace BankMonitor.views
                         {
                             gender = "NỮ";
                         }
-
-                        MessageBox.Show(gender);
                         db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
                         // undo redo  
                         NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
-                        MessageBox.Show(nhanvien.HO);
                         stack.Add(new AddStaff(nhanvien, "ADD"));
                         //
                         dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
@@ -271,9 +273,16 @@ namespace BankMonitor.views
                 {
                     using (var db = new NGANHANG())
                     {
-                        var staff = db.NhanViens.Find(tbIdStaff.Text);
+                        NhanVien staff = db.NhanViens.Find(tbIdStaff.Text);
+                        NhanVien temp = new NhanVien();
+                        temp = (NhanVien) staff.Clone();
+
                         if (staff != null)
                         {
+                            // undo redo  
+                            
+                            stack.Delete(new AddStaff(temp, "DELETE"));
+
                             db.Entry(staff).State = EntityState.Deleted;
                             db.SaveChanges();
 
@@ -304,6 +313,11 @@ namespace BankMonitor.views
                     string gender;
 
                     var staff = db.NhanViens.Find(tbIdStaff.Text);
+
+                    //undo redo
+
+                    stack.Update(new AddStaff((NhanVien) staff.Clone(), "UPDATE"));
+
                     if (staff == null)
                     {
                         MessageBox.Show("Mã nhân viên không tồn tại!");
@@ -336,28 +350,108 @@ namespace BankMonitor.views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NhanVien nhanvien = new NhanVien();
-            //ur.unDo(new AddStaff(nhanvien,"a"));
-            AddStaff a = (AddStaff) stack.Undo.Pop();           
-            MessageBox.Show(a.getKey().HO);  
+            var value = stack.UNDO();
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                    Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                    Delete(value.getKey());
+            }
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    NhanVien temp = (NhanVien) db.NhanViens.Find(value.getKey().MANV).Clone();
+            //    stack.Redo.Push(new AddStaff(temp, "UPDATE"));
+
+            //    Update(value.getKey());
+            //}     
         }
 
         public void Add(NhanVien nv)
         {
             var db = new NGANHANG();
             db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
-                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN});
+                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN.Trim(' ')});
+
             dgvStaff.Rows.Add(nv.MANV, nv.MACN, nv.HO,
                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT);
         }
 
         public void Delete(NhanVien nv)
         {
-            var db = new NGANHANG();
-            db.Entry(nv).State = EntityState.Deleted;
-            db.SaveChanges();
+            try
+            {
+                var db = new NGANHANG();
+                var temp = db.NhanViens.Find(nv.MANV);
 
-            this.LoadData();
+                foreach (DataGridViewRow row in dgvStaff.Rows)
+                {
+                    if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), temp.MANV.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                    {
+                        dgvStaff.Rows.RemoveAt(row.Index);
+                        break;
+                    }
+                }
+
+                db.Entry(temp).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            catch 
+            {
+
+            }
+
+        }
+
+        public void Update(NhanVien nv)
+        {
+            var db = new NGANHANG();
+            db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] {nv.MANV, nv.HO,
+                    nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN, " "});
+
+            int index = -1;
+            foreach (DataGridViewRow row in dgvStaff.Rows)
+            {
+                if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), nv.MANV.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                {
+                    dgvStaff.Rows.RemoveAt(row.Index);
+                    index = row.Index;
+                    break;
+                }
+            }
+
+            dgvStaff.Rows[index].Cells[1].Value = nv.MACN;
+            dgvStaff.Rows[index].Cells[2].Value = nv.HO;
+            dgvStaff.Rows[index].Cells[3].Value = nv.TEN;
+            dgvStaff.Rows[index].Cells[4].Value = nv.DIACHI;
+            dgvStaff.Rows[index].Cells[5].Value = nv.PHAI;
+            dgvStaff.Rows[index].Cells[6].Value = nv.SODT;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var value = stack.REDO();
+
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+            //    stack.Update(new AddStaff(temp, "UPDATE"));
+
+            //    Update(value.getKey());
+            //}
         }
     }
 }

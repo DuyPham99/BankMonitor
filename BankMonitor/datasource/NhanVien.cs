@@ -36,5 +36,10 @@ namespace BankMonitor.datasource
         public virtual ICollection<GD_CHUYENTIEN> GD_CHUYENTIEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GD_GOIRUT> GD_GOIRUT { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

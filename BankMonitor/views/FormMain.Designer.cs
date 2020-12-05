@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string> undoRedo_21 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string>();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbtnSignIn = new DevExpress.XtraBars.BarButtonItem();
             this.bbtnChangePassword = new DevExpress.XtraBars.BarButtonItem();
@@ -67,6 +66,7 @@
             this.ucExchange = new BankMonitor.views.UCExchange();
             this.ucTransfer = new BankMonitor.views.UCTransfer();
             this.ucAccount = new BankMonitor.views.UCAccount();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,9 +96,10 @@
             this.barButtonItem6,
             this.barButtonItem7,
             this.barButtonItem8,
-            this.btnAccountMain});
+            this.btnAccountMain,
+            this.barButtonItem9});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 22;
+            this.ribbonControl1.MaxItemId = 23;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -308,6 +309,7 @@
             // 
             // ribbonPageGroup2
             // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem9);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbtnUndo);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbtnRedo);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
@@ -386,6 +388,12 @@
             this.ucAccount.Visible = false;
             this.ucAccount.Load += new System.EventHandler(this.ucAccount_Load);
             // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "Lưu";
+            this.barButtonItem9.Id = 22;
+            this.barButtonItem9.Name = "barButtonItem9";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,7 +453,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         private DevExpress.XtraBars.BarButtonItem btnAccountMain;
         private views.UCAccount ucAccount;
-       
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
     }
 }
 

@@ -44,6 +44,11 @@ namespace BankMonitor.model
             }
         }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
         public string getAction()
         {
             return this.v;

@@ -12,5 +12,6 @@ namespace BankMonitor.model
         string getAction();
         void setKey(K key);
         void setAction(string action);
+        object Clone();
     }
 }

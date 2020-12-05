@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using BankMonitor.model;
 
 namespace BankMonitor.model
@@ -82,24 +83,20 @@ namespace BankMonitor.model
             try
             {
                 var value = undo.Pop();
-                string temp = value.getAction();
+                ICommand<K, V> temp = (ICommand < K, V >)value.Clone();
                 switch (value.getAction())
                 {
                     case "ADD":
-                        value.setAction("DELETE");
-                        redo.Push(value);
+                        temp.setAction("DELETE");
+                        redo.Push(temp);
                         break;
                     case "DELETE":
-                        value.setAction("ADD");
-                        redo.Push(value);
+                        temp.setAction("ADD");
+                        redo.Push(temp);
                         break;
-                    //case "UPDATE":
-                    //    value.setAction("UPDATE");
-                    //    redo.Push(value);
-                    //    return data;
+                    case "UPDATE":
+                        return value;
                 }
-                value.setAction(temp);
-
                 return value;
             }
             catch (Exception ex)
@@ -111,24 +108,30 @@ namespace BankMonitor.model
 
         public ICommand<K, V> REDO()
         {
-            var value = redo.Pop();
-            var temp = value;
-            switch (value.getAction())
+            try
             {
-                case "ADD":
-                    value.setAction("DELETE");
-                    undo.Push(value);
-                    break;
-                case "DELETE":
-                    value.setAction("ADD");
-                    undo.Push(value);
-                    break;
-                //case "UPDATE":
-                //    data.setAction("UPDATE");
-                //    undo.Push(data);
-                //    return data;
+                var value = redo.Pop();
+                ICommand<K, V> temp = (ICommand<K, V>)value.Clone();
+                switch (value.getAction())
+                {
+                    case "ADD":
+                        temp.setAction("DELETE");
+                        undo.Push(temp);
+                        break;
+                    case "DELETE":
+                        temp.setAction("ADD");
+                        undo.Push(temp);
+                        break;
+                    case "UPDATE":
+                        return value;
+                }
+                return value;
             }
-            return temp;
+            catch (Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }
