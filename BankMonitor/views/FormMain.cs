@@ -124,7 +124,6 @@ namespace BankMonitor
         }
 
         FormChangePassword frmChangePassword = new FormChangePassword();
-
         private void bbtnChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmChangePassword.User = login.User;
@@ -132,55 +131,19 @@ namespace BankMonitor
             frmChangePassword.Show();
         }
 
-        private void bbtnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //init stack
-                foreach (Control c in this.Controls)
-            {
-                if (c is UserControl && c.Visible == true)
-                {
-
-                    if (c.GetType().ToString().Contains("Staff"))
-                    {
-                        var stack = ucStaff.Stack.UNDO();
-
-                        if (stack.getAction() == "ADD")
-                        {
-                            ucStaff.Add(stack.getKey());
-                        }
-                        else if (stack.getAction() == "DELETE")
-                        {
-                            ucStaff.Delete(stack.getKey());
-                        }
-                    }
-                }
-
-            }
+            MessageBox.Show("sdfsafs");
         }
 
-        //private void bbtnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        //{       
-        //    // init stack
-        //    foreach (Control c in this.Controls)
-        //    {
-        //        if (c is UserControl && c.Visible == true)
-        //        {
+        private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("sdfsafs");
+        }
 
-        //            if (c.GetType().ToString().Contains("Staff"))
-        //            {
-        //                var stack = ucStaff.Stack.UNDO();
-
-        //                if (stack.getAction() == "ADD")
-        //                {
-        //                    ucStaff.Add(stack.getKey());
-        //                } else if (stack.getAction() == "DELETE")
-        //                {
-        //                    ucStaff.Delete(stack.getKey());
-        //                }
-        //            }
-        //        }
-
-        //    }
-        //}
+        private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("ádsdas");
+        }
     }
 }
