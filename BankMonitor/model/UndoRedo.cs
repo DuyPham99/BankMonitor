@@ -129,7 +129,6 @@ namespace BankMonitor.model
             }
             catch (Exception ex)
             {
-
             }
             return null;
         }

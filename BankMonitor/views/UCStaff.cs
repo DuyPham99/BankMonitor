@@ -315,7 +315,6 @@ namespace BankMonitor.views
                     var staff = db.NhanViens.Find(tbIdStaff.Text);
 
                     //undo redo
-
                     stack.Update(new AddStaff((NhanVien) staff.Clone(), "UPDATE"));
 
                     if (staff == null)
@@ -345,6 +344,8 @@ namespace BankMonitor.views
                         MessageBox.Show("Sửa thành công!");
                     }
                 }
+
+                btnCancelStaff.PerformClick();
             }
         }
 
@@ -360,14 +361,15 @@ namespace BankMonitor.views
             {
                     Delete(value.getKey());
             }
-            //else
-            //{
-            //    var db = new NGANHANG();
-            //    NhanVien temp = (NhanVien) db.NhanViens.Find(value.getKey().MANV).Clone();
-            //    stack.Redo.Push(new AddStaff(temp, "UPDATE"));
+            else
+            {
+                var db = new NGANHANG();
+                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+                stack.Redo.Push(new AddStaff(temp, "UPDATE"));
 
-            //    Update(value.getKey());
-            //}     
+                Update(value.getKey());
+            }
+            btnCancelStaff.PerformClick();
         }
 
         public void Add(NhanVien nv)
@@ -412,23 +414,20 @@ namespace BankMonitor.views
             db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] {nv.MANV, nv.HO,
                     nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN, " "});
 
-            int index = -1;
+            
             foreach (DataGridViewRow row in dgvStaff.Rows)
             {
                 if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), nv.MANV.Trim(' '), StringComparison.OrdinalIgnoreCase))
-                {
-                    dgvStaff.Rows.RemoveAt(row.Index);
-                    index = row.Index;
+                { 
+                    dgvStaff.Rows[row.Index].Cells[1].Value = nv.MACN;
+                    dgvStaff.Rows[row.Index].Cells[2].Value = nv.HO;
+                    dgvStaff.Rows[row.Index].Cells[3].Value = nv.TEN;
+                    dgvStaff.Rows[row.Index].Cells[4].Value = nv.DIACHI;
+                    dgvStaff.Rows[row.Index].Cells[5].Value = nv.PHAI;
+                    dgvStaff.Rows[row.Index].Cells[6].Value = nv.SODT;
                     break;
                 }
             }
-
-            dgvStaff.Rows[index].Cells[1].Value = nv.MACN;
-            dgvStaff.Rows[index].Cells[2].Value = nv.HO;
-            dgvStaff.Rows[index].Cells[3].Value = nv.TEN;
-            dgvStaff.Rows[index].Cells[4].Value = nv.DIACHI;
-            dgvStaff.Rows[index].Cells[5].Value = nv.PHAI;
-            dgvStaff.Rows[index].Cells[6].Value = nv.SODT;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -444,14 +443,16 @@ namespace BankMonitor.views
             {
                 Delete(value.getKey());
             }
-            //else
-            //{
-            //    var db = new NGANHANG();
-            //    NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
-            //    stack.Update(new AddStaff(temp, "UPDATE"));
+            else
+            {
+                var db = new NGANHANG();
+                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+                stack.Update(new AddStaff(temp, "UPDATE"));
 
-            //    Update(value.getKey());
-            //}
+                Update(value.getKey());
+            }
+
+            btnCancelStaff.PerformClick();
         }
     }
 }
