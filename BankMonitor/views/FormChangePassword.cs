@@ -48,7 +48,7 @@ namespace BankMonitor.views
 
         private void FormChangePassword_Load(object sender, EventArgs e)
         {
-            tbAccount.Text = user.Username;
+           //tbAccount.Text = user.Username;
         }
 
         private void FormChangePassword_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)

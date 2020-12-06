@@ -205,7 +205,7 @@ namespace BankMonitor.views
                         else
                         {
                             gender = "NỮ";
-                        }
+                        }                     
                         db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
                         // undo redo  
@@ -375,7 +375,7 @@ namespace BankMonitor.views
         public void Add(NhanVien nv)
         {
             var db = new NGANHANG();
-            db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
+            db.Database.ExecuteSqlCommandAsync("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
                           nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN.Trim(' ')});
 
             dgvStaff.Rows.Add(nv.MANV, nv.MACN, nv.HO,
@@ -433,7 +433,7 @@ namespace BankMonitor.views
         private void button2_Click(object sender, EventArgs e)
         {
             var value = stack.REDO();
-
+            
             if (value == null) return;
             if (value.getAction() == "ADD")
             {

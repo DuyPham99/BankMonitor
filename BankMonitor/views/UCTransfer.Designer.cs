@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tb_IdStaffTransfer = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.bt_CancelTransfer = new System.Windows.Forms.Button();
             this.bt_SubmitTransfer = new System.Windows.Forms.Button();
             this.tb_DateTransfer = new System.Windows.Forms.TextBox();
@@ -43,21 +46,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewTransfer = new System.Windows.Forms.DataGridView();
-            this.DateTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountSendTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountReceiveTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Money = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.dgvTransfer = new System.Windows.Forms.DataGridView();
+            this.mAGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nGAYGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sOTKCHUYENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sOTIENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sOTKNHANDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mANVDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bds = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransfer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tb_IdStaffTransfer);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.bt_CancelTransfer);
             this.groupBox1.Controls.Add(this.bt_SubmitTransfer);
             this.groupBox1.Controls.Add(this.tb_DateTransfer);
@@ -77,9 +85,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // tb_IdStaffTransfer
+            // 
+            this.tb_IdStaffTransfer.Location = new System.Drawing.Point(115, 228);
+            this.tb_IdStaffTransfer.Name = "tb_IdStaffTransfer";
+            this.tb_IdStaffTransfer.Size = new System.Drawing.Size(343, 20);
+            this.tb_IdStaffTransfer.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(13, 229);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 19);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Mã NV";
+            // 
             // bt_CancelTransfer
             // 
-            this.bt_CancelTransfer.Location = new System.Drawing.Point(289, 248);
+            this.bt_CancelTransfer.Location = new System.Drawing.Point(289, 266);
             this.bt_CancelTransfer.Name = "bt_CancelTransfer";
             this.bt_CancelTransfer.Size = new System.Drawing.Size(75, 23);
             this.bt_CancelTransfer.TabIndex = 2;
@@ -88,26 +113,27 @@
             // 
             // bt_SubmitTransfer
             // 
-            this.bt_SubmitTransfer.Location = new System.Drawing.Point(151, 248);
+            this.bt_SubmitTransfer.Location = new System.Drawing.Point(151, 266);
             this.bt_SubmitTransfer.Name = "bt_SubmitTransfer";
             this.bt_SubmitTransfer.Size = new System.Drawing.Size(75, 23);
             this.bt_SubmitTransfer.TabIndex = 2;
             this.bt_SubmitTransfer.Text = "Chuyển tiền";
             this.bt_SubmitTransfer.UseVisualStyleBackColor = true;
+            this.bt_SubmitTransfer.Click += new System.EventHandler(this.bt_SubmitTransfer_Click);
             // 
             // tb_DateTransfer
             // 
-            this.tb_DateTransfer.Location = new System.Drawing.Point(340, 77);
+            this.tb_DateTransfer.Location = new System.Drawing.Point(340, 65);
             this.tb_DateTransfer.Name = "tb_DateTransfer";
             this.tb_DateTransfer.ReadOnly = true;
-            this.tb_DateTransfer.Size = new System.Drawing.Size(100, 20);
+            this.tb_DateTransfer.Size = new System.Drawing.Size(118, 20);
             this.tb_DateTransfer.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(260, 78);
+            this.label3.Location = new System.Drawing.Point(260, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 19);
             this.label3.TabIndex = 0;
@@ -115,16 +141,16 @@
             // 
             // tb_MoneyTransfer
             // 
-            this.tb_MoneyTransfer.Location = new System.Drawing.Point(115, 202);
+            this.tb_MoneyTransfer.Location = new System.Drawing.Point(115, 190);
             this.tb_MoneyTransfer.Name = "tb_MoneyTransfer";
-            this.tb_MoneyTransfer.Size = new System.Drawing.Size(325, 20);
+            this.tb_MoneyTransfer.Size = new System.Drawing.Size(343, 20);
             this.tb_MoneyTransfer.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(13, 203);
+            this.label6.Location = new System.Drawing.Point(13, 191);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 19);
             this.label6.TabIndex = 0;
@@ -132,16 +158,16 @@
             // 
             // tb_IDAccountReceiveTransfer
             // 
-            this.tb_IDAccountReceiveTransfer.Location = new System.Drawing.Point(115, 159);
+            this.tb_IDAccountReceiveTransfer.Location = new System.Drawing.Point(115, 147);
             this.tb_IDAccountReceiveTransfer.Name = "tb_IDAccountReceiveTransfer";
-            this.tb_IDAccountReceiveTransfer.Size = new System.Drawing.Size(325, 20);
+            this.tb_IDAccountReceiveTransfer.Size = new System.Drawing.Size(343, 20);
             this.tb_IDAccountReceiveTransfer.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(13, 160);
+            this.label5.Location = new System.Drawing.Point(13, 148);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 19);
             this.label5.TabIndex = 0;
@@ -149,16 +175,16 @@
             // 
             // tb_IDAccountSendTransfer
             // 
-            this.tb_IDAccountSendTransfer.Location = new System.Drawing.Point(115, 118);
+            this.tb_IDAccountSendTransfer.Location = new System.Drawing.Point(115, 106);
             this.tb_IDAccountSendTransfer.Name = "tb_IDAccountSendTransfer";
-            this.tb_IDAccountSendTransfer.Size = new System.Drawing.Size(325, 20);
+            this.tb_IDAccountSendTransfer.Size = new System.Drawing.Size(343, 20);
             this.tb_IDAccountSendTransfer.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(13, 119);
+            this.label4.Location = new System.Drawing.Point(13, 107);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 19);
             this.label4.TabIndex = 0;
@@ -166,7 +192,7 @@
             // 
             // tb_idTransfer
             // 
-            this.tb_idTransfer.Location = new System.Drawing.Point(115, 77);
+            this.tb_idTransfer.Location = new System.Drawing.Point(115, 65);
             this.tb_idTransfer.Name = "tb_idTransfer";
             this.tb_idTransfer.ReadOnly = true;
             this.tb_idTransfer.Size = new System.Drawing.Size(100, 20);
@@ -176,7 +202,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 78);
+            this.label2.Location = new System.Drawing.Point(13, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 19);
             this.label2.TabIndex = 0;
@@ -186,7 +212,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(190, 32);
+            this.label1.Location = new System.Drawing.Point(190, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 24);
             this.label1.TabIndex = 0;
@@ -194,52 +220,80 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridViewTransfer);
+            this.groupBox2.Controls.Add(this.dgvTransfer);
             this.groupBox2.Location = new System.Drawing.Point(630, 53);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(537, 301);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // dataGridViewTransfer
+            // dgvTransfer
             // 
-            this.dataGridViewTransfer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTransfer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DateTransfer,
-            this.IdTransfer,
-            this.AccountSendTransfer,
-            this.AccountReceiveTransfer,
-            this.Money});
-            this.dataGridViewTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTransfer.Location = new System.Drawing.Point(3, 16);
-            this.dataGridViewTransfer.Name = "dataGridViewTransfer";
-            this.dataGridViewTransfer.Size = new System.Drawing.Size(531, 282);
-            this.dataGridViewTransfer.TabIndex = 0;
+            this.dgvTransfer.AllowUserToResizeColumns = false;
+            this.dgvTransfer.AllowUserToResizeRows = false;
+            this.dgvTransfer.AutoGenerateColumns = false;
+            this.dgvTransfer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTransfer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mAGDDataGridViewTextBoxColumn,
+            this.nGAYGDDataGridViewTextBoxColumn,
+            this.sOTKCHUYENDataGridViewTextBoxColumn,
+            this.sOTIENDataGridViewTextBoxColumn,
+            this.sOTKNHANDataGridViewTextBoxColumn,
+            this.mANVDataGridViewTextBoxColumn});
+            this.dgvTransfer.DataSource = this.bds;
+            this.dgvTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTransfer.Location = new System.Drawing.Point(3, 16);
+            this.dgvTransfer.Name = "dgvTransfer";
+            this.dgvTransfer.Size = new System.Drawing.Size(531, 282);
+            this.dgvTransfer.TabIndex = 0;
+            this.dgvTransfer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTransfer_CellContentClick);
+            this.dgvTransfer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTransfer_CellContentClick);
             // 
-            // DateTransfer
+            // mAGDDataGridViewTextBoxColumn
             // 
-            this.DateTransfer.HeaderText = "Ngày GD";
-            this.DateTransfer.Name = "DateTransfer";
+            this.mAGDDataGridViewTextBoxColumn.DataPropertyName = "MAGD";
+            this.mAGDDataGridViewTextBoxColumn.HeaderText = "Mã GD";
+            this.mAGDDataGridViewTextBoxColumn.Name = "mAGDDataGridViewTextBoxColumn";
             // 
-            // IdTransfer
+            // nGAYGDDataGridViewTextBoxColumn
             // 
-            this.IdTransfer.HeaderText = "Mã GD";
-            this.IdTransfer.Name = "IdTransfer";
+            this.nGAYGDDataGridViewTextBoxColumn.DataPropertyName = "NGAYGD";
+            this.nGAYGDDataGridViewTextBoxColumn.HeaderText = "Ngày GD";
+            this.nGAYGDDataGridViewTextBoxColumn.Name = "nGAYGDDataGridViewTextBoxColumn";
             // 
-            // AccountSendTransfer
+            // sOTKCHUYENDataGridViewTextBoxColumn
             // 
-            this.AccountSendTransfer.HeaderText = "TK Chuyển";
-            this.AccountSendTransfer.Name = "AccountSendTransfer";
+            this.sOTKCHUYENDataGridViewTextBoxColumn.DataPropertyName = "SOTK_CHUYEN";
+            this.sOTKCHUYENDataGridViewTextBoxColumn.HeaderText = "Tài khoản chuyển";
+            this.sOTKCHUYENDataGridViewTextBoxColumn.Name = "sOTKCHUYENDataGridViewTextBoxColumn";
             // 
-            // AccountReceiveTransfer
+            // sOTIENDataGridViewTextBoxColumn
             // 
-            this.AccountReceiveTransfer.HeaderText = "TK Nhận";
-            this.AccountReceiveTransfer.Name = "AccountReceiveTransfer";
+            this.sOTIENDataGridViewTextBoxColumn.DataPropertyName = "SOTIEN";
+            this.sOTIENDataGridViewTextBoxColumn.HeaderText = "Số tiền";
+            this.sOTIENDataGridViewTextBoxColumn.Name = "sOTIENDataGridViewTextBoxColumn";
             // 
-            // Money
+            // sOTKNHANDataGridViewTextBoxColumn
             // 
-            this.Money.HeaderText = "Số tiền";
-            this.Money.Name = "Money";
+            this.sOTKNHANDataGridViewTextBoxColumn.DataPropertyName = "SOTK_NHAN";
+            this.sOTKNHANDataGridViewTextBoxColumn.HeaderText = "Tài khoản nhận";
+            this.sOTKNHANDataGridViewTextBoxColumn.Name = "sOTKNHANDataGridViewTextBoxColumn";
+            // 
+            // mANVDataGridViewTextBoxColumn
+            // 
+            this.mANVDataGridViewTextBoxColumn.DataPropertyName = "MANV";
+            this.mANVDataGridViewTextBoxColumn.HeaderText = "Mã NV";
+            this.mANVDataGridViewTextBoxColumn.Name = "mANVDataGridViewTextBoxColumn";
+            // 
+            // bds
+            // 
+            this.bds.DataSource = typeof(BankMonitor.datasource.GD_CHUYENTIEN);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
             // UCTransfer
             // 
@@ -249,10 +303,13 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "UCTransfer";
             this.Size = new System.Drawing.Size(1217, 437);
+            this.Load += new System.EventHandler(this.UCTransfer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransfer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransfer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,13 +331,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridViewTransfer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateTransfer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdTransfer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AccountSendTransfer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AccountReceiveTransfer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Money;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.DataGridView dgvTransfer;
+        private System.Windows.Forms.BindingSource bds;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mAGDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nGAYGDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sOTKCHUYENDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sOTIENDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sOTKNHANDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mANVDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox tb_IdStaffTransfer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

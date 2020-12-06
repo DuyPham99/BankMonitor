@@ -13,6 +13,7 @@ using BankMonitor.views;
 using System.Data.SqlClient;
 using System.Collections;
 using BankMonitor.datasource;
+using System.Data.Entity;
 
 namespace BankMonitor.views
 {
@@ -83,7 +84,7 @@ namespace BankMonitor.views
                 cb_IdDistribute.Focus();
             } else if (conn.Connect(user.Distribute) == 0)
             {
-                MessageBox.Show("Tài khoản không tồn tại!");
+                MessageBox.Show("Tài khoản, mật khẩu không đúng!");
             } else
             {
                 user.Username = tbAccountLogin.Text;
@@ -93,6 +94,8 @@ namespace BankMonitor.views
                 db.User = user;
                 db.ChangeDataSource();
 
+                db = new NGANHANG();
+                db.NhanViens.Load();
                 this.Visible = false;
             }
            
@@ -102,6 +105,7 @@ namespace BankMonitor.views
         {
             this.Visible = false;
         }
+
         private void Login_Load(object sender, EventArgs e)
         {
             conn.Mlogin = "sa";

@@ -58,12 +58,17 @@ namespace BankMonitor
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ucExchange.User = login.User;
+            if (ucExchange.checkLoad !=1) ucExchange.LoadData();
             if (ucExchange.Visible != true) HidePanels(this.Controls);
             ucExchange.Visible = !ucExchange.Visible;
         }
 
+
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ucTransfer.User = login.User;
+            ucTransfer.LoadData();
             if (ucTransfer.Visible != true) HidePanels(this.Controls);
             ucTransfer.Visible = !ucTransfer.Visible;
         }
@@ -133,7 +138,17 @@ namespace BankMonitor
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("sdfsafs");
+            try
+            {
+
+                NGANHANG db = new NGANHANG();
+                int test = db.Database.ExecuteSqlCommand("TEST @p0", "1");
+                MessageBox.Show(test.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }  
         }
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

@@ -244,6 +244,7 @@ namespace BankMonitor.views
                         MessageBox.Show("Tài khoản không tồn tại!");
                         return;
                     }
+
                     db.Entry(account).State = EntityState.Deleted;
                     db.SaveChanges();
 
@@ -345,6 +346,11 @@ namespace BankMonitor.views
         }
 
         private void tbIdAccount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbAmountAccount_TextChanged(object sender, EventArgs e)
         {
 
         }

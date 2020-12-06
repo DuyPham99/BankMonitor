@@ -158,6 +158,7 @@
             this.tbAmountAccount.Name = "tbAmountAccount";
             this.tbAmountAccount.Size = new System.Drawing.Size(325, 20);
             this.tbAmountAccount.TabIndex = 9;
+            this.tbAmountAccount.TextChanged += new System.EventHandler(this.tbAmountAccount_TextChanged);
             this.tbAmountAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbAmountAccount_Validating);
             // 
             // tbIdentityAccount
@@ -228,8 +229,6 @@
             // 
             // dgvAccount
             // 
-            this.dgvAccount.AllowUserToResizeColumns = false;
-            this.dgvAccount.AllowUserToResizeRows = false;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NGAYMO,
@@ -248,6 +247,7 @@
             // 
             // NGAYMO
             // 
+            this.NGAYMO.FillWeight = 21F;
             this.NGAYMO.HeaderText = "Ngày mở";
             this.NGAYMO.Name = "NGAYMO";
             this.NGAYMO.ReadOnly = true;
@@ -256,24 +256,28 @@
             // 
             // SOTK
             // 
+            this.SOTK.FillWeight = 62.19413F;
             this.SOTK.HeaderText = "Số TK";
             this.SOTK.Name = "SOTK";
             this.SOTK.ReadOnly = true;
             // 
             // CMND
             // 
+            this.CMND.FillWeight = 101.6581F;
             this.CMND.HeaderText = "CMND";
             this.CMND.Name = "CMND";
             this.CMND.ReadOnly = true;
             // 
             // SODU
             // 
+            this.SODU.FillWeight = 139.4646F;
             this.SODU.HeaderText = "Số dư";
             this.SODU.Name = "SODU";
             this.SODU.ReadOnly = true;
             // 
             // MACN
             // 
+            this.MACN.FillWeight = 175.6832F;
             this.MACN.HeaderText = "Mã CN";
             this.MACN.Name = "MACN";
             this.MACN.ReadOnly = true;
