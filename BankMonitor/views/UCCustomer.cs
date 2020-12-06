@@ -61,7 +61,7 @@ namespace BankMonitor.views
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -74,9 +74,6 @@ namespace BankMonitor.views
                 {
                     try
                     {
-                        //db.TaiKhoans.Add(account);
-                        //db.SaveChanges();          
-                        // add account
                         string gender;
                         if (rdbtnMaleCustomer.Checked)
                         {
@@ -91,7 +88,9 @@ namespace BankMonitor.views
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show("CMND đã tồn tại!");
+                       if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                       else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                       else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
@@ -120,7 +119,7 @@ namespace BankMonitor.views
                     cbDistributeCustomer.SelectedIndex = cbDistributeCustomer.FindString(dgvCustomer.Rows[e.RowIndex].Cells[7].FormattedValue.ToString().Trim(' '));
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -270,7 +269,7 @@ namespace BankMonitor.views
 
                     if (check==null)
                     {
-                        MessageBox.Show("Khách hàng không tồn tại!");
+                        MessageBox.Show("Khách hàng không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     db.Entry(customer).State = EntityState.Deleted;
@@ -344,15 +343,14 @@ namespace BankMonitor.views
                             MessageBox.Show("Cập nhật thành công!");
                         } else
                         {
-                            MessageBox.Show("CMND không tồn tại!");
-
+                            MessageBox.Show("CMND đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
                     }
                     catch (SqlException ex)
                     {
-                        // MessageBox.Show("Số tài khoản đã tồn tại!");
-                        MessageBox.Show("Cập nhật thất bại!");
+                        if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

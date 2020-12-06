@@ -20,7 +20,6 @@ namespace BankMonitor.views
         public FormChangePassword()
         {
             InitializeComponent();
-            
         }
 
         internal User User
@@ -48,13 +47,18 @@ namespace BankMonitor.views
 
         private void FormChangePassword_Load(object sender, EventArgs e)
         {
-           //tbAccount.Text = user.Username;
+          
         }
 
         private void FormChangePassword_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Visible = false;
             e.Cancel = true;
+        }
+
+        public void LoadData()
+        {
+            tbAccount.Text = user.Username;
         }
 
         private void btnCancelChangepassword_Click(object sender, EventArgs e)

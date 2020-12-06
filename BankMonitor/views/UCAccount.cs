@@ -23,6 +23,7 @@ namespace BankMonitor.views
         //to prevent load duplicate datagridview
         public int checkLoad = 0;
         ConnectionDatabase conn;
+        private UndoRedo<TaiKhoan, string> stack = new UndoRedo<TaiKhoan, string>();
 
         internal User User
         {
@@ -47,6 +48,19 @@ namespace BankMonitor.views
             set
             {
                 conn = value;
+            }
+        }
+
+        public UndoRedo<TaiKhoan, string> Stack
+        {
+            get
+            {
+                return stack;
+            }
+
+            set
+            {
+                stack = value;
             }
         }
 
@@ -84,7 +98,7 @@ namespace BankMonitor.views
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -241,9 +255,11 @@ namespace BankMonitor.views
                     var check = db.TaiKhoans.Find(tbIdAccount.Text);
                     if (check == null)
                     {
-                        MessageBox.Show("Tài khoản không tồn tại!");
+                        MessageBox.Show("Tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    //undo redo
+                    stack.Delete(new AddAccount((TaiKhoan) check.Clone(), "DELETE"));
 
                     db.Entry(account).State = EntityState.Deleted;
                     db.SaveChanges();
@@ -295,16 +311,20 @@ namespace BankMonitor.views
                             rowguid = Guid.NewGuid()
                     };
 
-                        //db.TaiKhoans.Add(account);
-                        //db.SaveChanges();          
-                        // add account
+
                         db.Database.ExecuteSqlCommand("themTaiKhoan @p0, @p1, @p2, @p3", parameters: new[] {tbIdAccount.Text, tbIdentityAccount.Text, cbDistributeAccount.Text, tbAmountAccount.Text});
+
+                        //undo redo
+                        TaiKhoan tk = db.TaiKhoans.Find(tbIdAccount.Text);
+                        stack.Add(new AddAccount(tk, "ADD"));
+
                         dgvAccount.Rows.Add(account.NGAYMOTK, account.SOTK, account.CMND, account.SODU.ToString("G29"), account.MACN);
                         MessageBox.Show("Thêm thành công!");
                     } catch (SqlException ex)
                     {
-                        // MessageBox.Show("Số tài khoản đã tồn tại!");
-                        MessageBox.Show(ex.Message);
+                        if (ex.Errors[0].Message == "-1") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số dư không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     
                 }
@@ -325,6 +345,7 @@ namespace BankMonitor.views
 
                         if (account != null)
                         {
+                            stack.Update(new AddAccount((TaiKhoan) account.Clone(), "UPDATE"));
                             account.MACN = cbDistributeAccount.Text;
                             account.CMND = tbIdentityAccount.Text;
                             account.SODU = decimal.Parse(tbAmountAccount.Text);
@@ -334,12 +355,14 @@ namespace BankMonitor.views
                             dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
                             dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
                             MessageBox.Show("Cập nhật thành công!");
-                        } else MessageBox.Show("Số tài khoản đã tồn tại!");
+                        } else
+                        {
+                            MessageBox.Show("Tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     catch (SqlException ex)
                     {
-                        // MessageBox.Show("Số tài khoản đã tồn tại!");
-                        MessageBox.Show(ex.Message);
+                         MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }               
             }
@@ -354,7 +377,84 @@ namespace BankMonitor.views
         {
 
         }
+
+        public void Add(TaiKhoan tk)
+        {
+            var db = new NGANHANG();
+
+            db.Database.ExecuteSqlCommand("themTaiKhoan @p0, @p1, @p2, @p3", parameters: new[] { tk.SOTK, tk.CMND, tk.MACN, tk.SODU.ToString()});
+            dgvAccount.Rows.Add(tk.NGAYMOTK, tk.SOTK, tk.CMND, tk.SODU.ToString("G29"), tk.MACN);
+        }
+
+        public void Delete(TaiKhoan tk)
+        {
+            try
+            {
+                var db = new NGANHANG();
+                var temp = db.TaiKhoans.Find(tk.SOTK);
+
+                foreach (DataGridViewRow row in dgvAccount.Rows)
+                {
+                    if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), temp.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                    {
+                        dgvAccount.Rows.RemoveAt(row.Index);
+                        break;
+                    }
+                }
+                db.Entry(temp).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        public void Update(TaiKhoan tk)
+        {
+            var db = new NGANHANG();
+            var account = db.TaiKhoans.Find(tk.SOTK);
+
+            account = (TaiKhoan) tk.Clone();
+
+            db.SaveChanges();
+
+
+            foreach (DataGridViewRow row in dgvAccount.Rows)
+            {
+                if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), tk.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                {
+                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
+                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
+                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
+                    break;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var value = stack.UNDO();
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            else
+            {
+                var db = new NGANHANG();
+                TaiKhoan temp = (TaiKhoan)db.NhanViens.Find(value.getKey().SOTK).Clone();
+                stack.Redo.Push(new AddAccount(temp, "UPDATE"));
+
+                Update(value.getKey());
+            }
+
+            btnCancelAccount.PerformClick();
+        }
     }
-
-
 }

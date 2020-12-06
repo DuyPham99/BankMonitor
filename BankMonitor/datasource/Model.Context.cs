@@ -80,5 +80,7 @@ namespace BankMonitor.datasource
                 user = value;
             }
         }
+
+
     }
 }

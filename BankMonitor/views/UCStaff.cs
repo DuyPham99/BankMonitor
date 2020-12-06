@@ -11,6 +11,7 @@ using BankMonitor.datasource;
 using BankMonitor.model;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace BankMonitor.views
 {
@@ -187,36 +188,48 @@ namespace BankMonitor.views
         {
             if (isValid())
             {
-                using (var db = new NGANHANG())
+                try
                 {
-                    string gender;
+                    using (var db = new NGANHANG())
+                    {
+                        string gender;
 
-                    var staff = db.NhanViens.Find(tbIdStaff.Text);
-                    if (staff != null)
-                    {
-                        MessageBox.Show("Mã nhân viên đã tồn tại!");
-                    } else
-                    {
-                       
-                        if (rdbtnMale.Checked)
+                        var staff = db.NhanViens.Find(tbIdStaff.Text);
+                        if (staff != null)
                         {
-                            gender = "NAM";
+                           // MessageBox.Show("Mã nhân viên đã tồn tại!");
+                            MessageBox.Show("Mã nhân viên đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
-                            gender = "NỮ";
-                        }                     
-                        db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
+                            if (rdbtnMale.Checked)
+                            {
+                                gender = "NAM";
+                            }
+                            else
+                            {
+                                gender = "NỮ";
+                            }
+                            db.Database.ExecuteSqlCommand("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
-                        // undo redo  
-                        NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
-                        stack.Add(new AddStaff(nhanvien, "ADD"));
-                        //
-                        dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
-                        tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text);
-                        MessageBox.Show("Thêm thành công!");
-                    }        
+                            // undo redo  
+                            NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
+                            stack.Add(new AddStaff(nhanvien, "ADD"));
+                            //
+                            dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
+                            tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text);
+                            MessageBox.Show("Thêm thành công!");
+                        }
+                    }
                 }
+                catch (SqlException ex)
+                {
+                    if (ex.Errors[0].Message == "-1") MessageBox.Show("Mã nhân viên đã tồn tại!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái là nam hoặc nữ!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else if (ex.Errors[0].Message == "-3") MessageBox.Show("Mã chi nhánh không tồn tại", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else MessageBox.Show(ex.Message, "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
 
@@ -296,7 +309,7 @@ namespace BankMonitor.views
                         }
                         else
                         {
-                            MessageBox.Show("Mã nhân viên không tồn tại!");
+                            MessageBox.Show("Mã nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }          
@@ -306,47 +319,79 @@ namespace BankMonitor.views
 
         private void btnChangeStaff_Click(object sender, EventArgs e)
         {
-            if (isValid())
+            try
             {
-                using (var db = new NGANHANG())
+                if (isValid())
                 {
-                    string gender;
-
-                    var staff = db.NhanViens.Find(tbIdStaff.Text);
-
-                    //undo redo
-                    stack.Update(new AddStaff((NhanVien) staff.Clone(), "UPDATE"));
-
-                    if (staff == null)
+                    using (var db = new NGANHANG())
                     {
-                        MessageBox.Show("Mã nhân viên không tồn tại!");
-                    }
-                    else
-                    {
-                        if (rdbtnMale.Checked)
+                        string gender;
+
+                        var staff = db.NhanViens.Find(tbIdStaff.Text);
+
+                        //undo redo
+                        stack.Update(new AddStaff((NhanVien)staff.Clone(), "UPDATE"));
+
+                        if (staff == null)
                         {
-                            gender = "NAM";
+                            MessageBox.Show("Mã nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
-                            gender = "NỮ";
-                        }
-                        db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
+                            if (rdbtnMale.Checked)
+                            {
+                                gender = "NAM";
+                            }
+                            else
+                            {
+                                gender = "NỮ";
+                            }
+                            db.Database.ExecuteSqlCommand("capNhatNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] {tbIdStaff.Text, tbFirstNameStaff.Text,
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text, " "});
 
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[1].Value = cbDistributeStaff.Text;
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[2].Value = tbFirstNameStaff.Text;
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[3].Value = tbLastNameStaff.Text;
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[4].Value = tbAddressStaff.Text;
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[5].Value = gender;
-                        dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[6].Value = tbPhoneNumberStaff.Text;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[1].Value = cbDistributeStaff.Text;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[2].Value = tbFirstNameStaff.Text;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[3].Value = tbLastNameStaff.Text;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[4].Value = tbAddressStaff.Text;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[5].Value = gender;
+                            dgvStaff.Rows[dgvStaff.SelectedRows[0].Index].Cells[6].Value = tbPhoneNumberStaff.Text;
 
-                        MessageBox.Show("Sửa thành công!");
+                            MessageBox.Show("Sửa thành công!");
+                        }
                     }
-                }
 
-                btnCancelStaff.PerformClick();
-            }
+                    btnCancelStaff.PerformClick();
+                }
+            } catch (SqlException ex)
+            {
+                switch (ex.Errors[0].Message)
+                {
+                    case "-1":
+                        MessageBox.Show("Mã nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-2":
+                        MessageBox.Show("Nhân viên đã bị xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-3":
+                        MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-4":
+                        MessageBox.Show("Cần tạo mã nhân viên mới tại chi nhanh chuyển đến!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-5":
+                        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-6":
+                        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case "-7":
+                        MessageBox.Show("Mã chi nhánh không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    default:
+                        MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }         
         }
 
         private void button1_Click(object sender, EventArgs e)

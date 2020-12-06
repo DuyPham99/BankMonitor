@@ -34,8 +34,6 @@ namespace BankMonitor
                 {
                     c.Visible = false;
                 }
-                // hide any panels this control may have
-              //  HidePanels(c.Controls);
             }
         }
 
@@ -81,9 +79,9 @@ namespace BankMonitor
        
         private void bbtnSignIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //FormLogin login = new FormLogin();
+            HidePanels(this.Controls);
             login.Hide();       
-            login.Show();           
+            login.ShowDialog();           
         }
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -132,8 +130,9 @@ namespace BankMonitor
         private void bbtnChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmChangePassword.User = login.User;
+            frmChangePassword.LoadData();
             frmChangePassword.Hide();
-            frmChangePassword.Show();
+            frmChangePassword.ShowDialog();
         }
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
