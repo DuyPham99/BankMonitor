@@ -119,6 +119,12 @@ namespace BankMonitor.views
             return true;                
         }
 
+        public void clearData()
+        {
+            this.dgvTransfer.Rows.Clear();
+            this.dgvTransfer.Refresh();
+        }
+
         private void bt_SubmitTransfer_Click(object sender, EventArgs e)
         {
             try

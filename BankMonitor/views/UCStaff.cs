@@ -83,7 +83,7 @@ namespace BankMonitor.views
             }
         }
 
-        public void ClearData()
+        public void clearData()
         {
             dgvStaff.Rows.Clear();
             dgvStaff.Refresh();

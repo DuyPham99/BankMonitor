@@ -60,6 +60,12 @@ namespace BankMonitor.views
             }
         }
 
+        public void clearData()
+        {
+            this.dgvExchange.Rows.Clear();
+            this.dgvExchange.Refresh();
+        }
+
         bool isValid()
         {
             int flag = 1;

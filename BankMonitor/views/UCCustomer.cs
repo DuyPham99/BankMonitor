@@ -224,7 +224,12 @@ namespace BankMonitor.views
 
             return false;
         }
-            
+           
+        public void clearData()
+        {
+            this.dgvCustomer.Rows.Clear();
+            this.dgvCustomer.Refresh();
+        }
 
         private void tbFirstNameCustomer_Validating(object sender, CancelEventArgs e)
         {

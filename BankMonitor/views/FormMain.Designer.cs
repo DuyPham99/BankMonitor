@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string> undoRedo_21 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string>();
+            BankMonitor.model.UndoRedo<BankMonitor.datasource.TaiKhoan, string> undoRedo_22 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.TaiKhoan, string>();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbtnSignIn = new DevExpress.XtraBars.BarButtonItem();
             this.bbtnChangePassword = new DevExpress.XtraBars.BarButtonItem();
@@ -60,8 +62,8 @@
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -123,7 +125,7 @@
             // 
             // bbtnChangePassword
             // 
-            this.bbtnChangePassword.Caption = "Đổi mật khẩu";
+            this.bbtnChangePassword.Caption = "Tạo đăng nhập";
             this.bbtnChangePassword.Id = 2;
             this.bbtnChangePassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnChangePassword.ImageOptions.Image")));
             this.bbtnChangePassword.Name = "bbtnChangePassword";
@@ -344,14 +346,6 @@
             this.ribbonPage2.Name = "ribbonPage2";
             this.ribbonPage2.Text = "Quản lý";
             // 
-            // ribbonPageGroup6
-            // 
-            this.ribbonPageGroup6.ItemLinks.Add(this.bbtnpnStaff);
-            this.ribbonPageGroup6.ItemLinks.Add(this.bbtnCustomer);
-            this.ribbonPageGroup6.ItemLinks.Add(this.btnAccountMain);
-            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
-            this.ribbonPageGroup6.Text = "Quản lý";
-            // 
             // ribbonPageGroup2
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem10);
@@ -359,6 +353,14 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem12);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Thao tác";
+            // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.bbtnpnStaff);
+            this.ribbonPageGroup6.ItemLinks.Add(this.bbtnCustomer);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnAccountMain);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "Quản lý";
             // 
             // ribbonPage3
             // 
@@ -385,6 +387,9 @@
             this.ucStaff.Location = new System.Drawing.Point(0, 158);
             this.ucStaff.Name = "ucStaff";
             this.ucStaff.Size = new System.Drawing.Size(1220, 475);
+            undoRedo_21.Redo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.NhanVien, string>>)(resources.GetObject("undoRedo_21.Redo")));
+            undoRedo_21.Undo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.NhanVien, string>>)(resources.GetObject("undoRedo_21.Undo")));
+            this.ucStaff.Stack = undoRedo_21;
             this.ucStaff.TabIndex = 3;
             this.ucStaff.Visible = false;
             // 
@@ -421,6 +426,9 @@
             this.ucAccount.Location = new System.Drawing.Point(0, 158);
             this.ucAccount.Name = "ucAccount";
             this.ucAccount.Size = new System.Drawing.Size(1220, 475);
+            undoRedo_22.Redo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.TaiKhoan, string>>)(resources.GetObject("undoRedo_22.Redo")));
+            undoRedo_22.Undo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.TaiKhoan, string>>)(resources.GetObject("undoRedo_22.Undo")));
+            this.ucAccount.Stack = undoRedo_22;
             this.ucAccount.TabIndex = 11;
             this.ucAccount.Visible = false;
             this.ucAccount.Load += new System.EventHandler(this.ucAccount_Load);

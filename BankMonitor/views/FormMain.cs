@@ -112,8 +112,13 @@ namespace BankMonitor
                     ucAccount.checkLoad = 0;
                     ucStaff.checkLoad = 0;
                     ucCustomer.checkLoad = 0;
+
                     // clear dgv accoun
                     ucAccount.clearData();
+                    ucCustomer.clearData();
+                    ucStaff.clearData();
+                    ucExchange.clearData();
+                    ucTransfer.clearData();
 
                     MessageBox.Show("Đã đăng xuất!"); 
                 }
