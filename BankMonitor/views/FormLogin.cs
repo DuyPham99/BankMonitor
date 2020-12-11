@@ -21,7 +21,7 @@ namespace BankMonitor.views
     {
         ConnectionDatabase conn = new ConnectionDatabase();
         User user = new User();
-
+        int checkLoad = 0;
         internal User User
         {
             get
@@ -108,6 +108,7 @@ namespace BankMonitor.views
 
         private void Login_Load(object sender, EventArgs e)
         {
+            if (checkLoad == 1) return;
             conn.Mlogin = "sa";
             conn.Password = "123";
             conn.Connect(@"PC-DOM\MSSQLSERVER3");
@@ -118,6 +119,7 @@ namespace BankMonitor.views
                 {
                     cb_IdDistribute.Items.Add(rd.GetString(2).Remove(0, 9));
                 }
+                this.checkLoad = 1;
             }
             finally
             {

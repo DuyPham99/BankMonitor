@@ -131,7 +131,7 @@ namespace BankMonitor
 
         }
 
-        FormChangePassword frmChangePassword = new FormChangePassword();
+        FormCreateLogin frmChangePassword = new FormCreateLogin();
         private void bbtnChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmChangePassword.User = login.User;

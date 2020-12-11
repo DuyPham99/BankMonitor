@@ -140,11 +140,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="views\FormChangePassword.cs">
+    <Compile Include="views\FormCreateLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="views\FormChangePassword.Designer.cs">
-      <DependentUpon>FormChangePassword.cs</DependentUpon>
+    <Compile Include="views\FormCreateLogin.Designer.cs">
+      <DependentUpon>FormCreateLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="views\FormLoading.cs">
       <SubType>Form</SubType>
@@ -202,8 +202,8 @@
     <Compile Include="views\UCStaff.Designer.cs">
       <DependentUpon>UCStaff.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="views\FormChangePassword.resx">
-      <DependentUpon>FormChangePassword.cs</DependentUpon>
+    <EmbeddedResource Include="views\FormCreateLogin.resx">
+      <DependentUpon>FormCreateLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FormLoading.resx">
       <DependentUpon>FormLoading.cs</DependentUpon>

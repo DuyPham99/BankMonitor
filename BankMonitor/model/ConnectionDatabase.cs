@@ -146,24 +146,24 @@ namespace BankMonitor.model
         }
         public SqlDataReader ExecProcParams(String nameProc, Hashtable listParam)
         {
-            SqlDataReader rdr = null;
-            //conn.Open();
-            SqlCommand cmd = new SqlCommand(nameProc, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            // add params
-            /*
-            foreach(KeyValuePair<String, object> item in listParam)
-            {
-                cmd.Parameters.Add(new SqlParameter(item.Key, item.Value));
-            }*/
-            ICollection key = listParam.Keys;
-            foreach (string k in key)
-            {
-                cmd.Parameters.Add(new SqlParameter(k, listParam[k]));
-            }
-            Console.Write(nameProc);
-            rdr = cmd.ExecuteReader();
-            return rdr;
+                SqlDataReader rdr = null;
+                //conn.Open();
+                SqlCommand cmd = new SqlCommand(nameProc, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                // add params
+                /*
+                foreach(KeyValuePair<String, object> item in listParam)
+                {
+                    cmd.Parameters.Add(new SqlParameter(item.Key, item.Value));
+                }*/
+                ICollection key = listParam.Keys;
+                foreach (string k in key)
+                {
+                    cmd.Parameters.Add(new SqlParameter(k, listParam[k]));
+                }
+                Console.Write(nameProc);
+                rdr = cmd.ExecuteReader();
+                return rdr;    
         }
 
         public void Close()

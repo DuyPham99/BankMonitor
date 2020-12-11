@@ -1,6 +1,6 @@
 ﻿namespace BankMonitor.views
 {
-    partial class FormChangePassword
+    partial class FormCreateLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChangePassword));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateLogin));
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbRole = new System.Windows.Forms.ComboBox();
+            this.lbRole = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.tbRetypePassword = new System.Windows.Forms.TextBox();
-            this.tbNewPassword = new System.Windows.Forms.TextBox();
-            this.tbOldPassword = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.tbAccount = new System.Windows.Forms.TextBox();
             this.btnSaveChangePassword = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancelChangepassword = new DevExpress.XtraEditors.SimpleButton();
@@ -50,27 +52,27 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 96);
+            this.label2.Location = new System.Drawing.Point(13, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 19);
+            this.label2.Size = new System.Drawing.Size(67, 19);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Mật khẩu hiện tại";
+            this.label2.Text = "Mật khẩu";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 141);
+            this.label3.Location = new System.Drawing.Point(11, 175);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 19);
+            this.label3.Size = new System.Drawing.Size(32, 19);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Mật khẩu mới";
+            this.label3.Text = "Tên";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 188);
+            this.label4.Location = new System.Drawing.Point(11, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 19);
             this.label4.TabIndex = 3;
@@ -88,60 +90,82 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbRole);
+            this.groupBox1.Controls.Add(this.lbRole);
+            this.groupBox1.Controls.Add(this.tbName);
             this.groupBox1.Controls.Add(this.tbRetypePassword);
-            this.groupBox1.Controls.Add(this.tbNewPassword);
-            this.groupBox1.Controls.Add(this.tbOldPassword);
+            this.groupBox1.Controls.Add(this.tbPassword);
             this.groupBox1.Controls.Add(this.tbAccount);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(6, 7);
+            this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(365, 237);
+            this.groupBox1.Size = new System.Drawing.Size(365, 259);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin tài khoản";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // cbRole
+            // 
+            this.cbRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRole.FormattingEnabled = true;
+            this.cbRole.Location = new System.Drawing.Point(141, 216);
+            this.cbRole.Name = "cbRole";
+            this.cbRole.Size = new System.Drawing.Size(206, 27);
+            this.cbRole.TabIndex = 11;
+            // 
+            // lbRole
+            // 
+            this.lbRole.AutoSize = true;
+            this.lbRole.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRole.Location = new System.Drawing.Point(6, 219);
+            this.lbRole.Name = "lbRole";
+            this.lbRole.Size = new System.Drawing.Size(49, 19);
+            this.lbRole.TabIndex = 10;
+            this.lbRole.Text = "Quyền";
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(141, 172);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(205, 26);
+            this.tbName.TabIndex = 9;
+            // 
             // tbRetypePassword
             // 
-            this.tbRetypePassword.Location = new System.Drawing.Point(143, 187);
+            this.tbRetypePassword.Location = new System.Drawing.Point(141, 128);
             this.tbRetypePassword.Name = "tbRetypePassword";
-            this.tbRetypePassword.Size = new System.Drawing.Size(202, 26);
+            this.tbRetypePassword.Size = new System.Drawing.Size(206, 26);
             this.tbRetypePassword.TabIndex = 8;
+            this.tbRetypePassword.UseSystemPasswordChar = true;
             this.tbRetypePassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbRetypePassword_Validating);
             // 
-            // tbNewPassword
+            // tbPassword
             // 
-            this.tbNewPassword.Location = new System.Drawing.Point(143, 139);
-            this.tbNewPassword.Name = "tbNewPassword";
-            this.tbNewPassword.Size = new System.Drawing.Size(202, 26);
-            this.tbNewPassword.TabIndex = 7;
-            this.tbNewPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbNewPassword_Validating);
-            // 
-            // tbOldPassword
-            // 
-            this.tbOldPassword.Location = new System.Drawing.Point(143, 93);
-            this.tbOldPassword.Name = "tbOldPassword";
-            this.tbOldPassword.Size = new System.Drawing.Size(202, 26);
-            this.tbOldPassword.TabIndex = 6;
-            this.tbOldPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.tbOldPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbOldPassword_Validating);
+            this.tbPassword.Location = new System.Drawing.Point(144, 83);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(202, 26);
+            this.tbPassword.TabIndex = 6;
+            this.tbPassword.UseSystemPasswordChar = true;
+            this.tbPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
             // 
             // tbAccount
             // 
             this.tbAccount.Location = new System.Drawing.Point(144, 41);
             this.tbAccount.Name = "tbAccount";
-            this.tbAccount.ReadOnly = true;
             this.tbAccount.Size = new System.Drawing.Size(202, 26);
             this.tbAccount.TabIndex = 5;
+            this.tbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.tbAccount_Validating);
             // 
             // btnSaveChangePassword
             // 
             this.btnSaveChangePassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChangePassword.ImageOptions.Image")));
-            this.btnSaveChangePassword.Location = new System.Drawing.Point(22, 255);
+            this.btnSaveChangePassword.Location = new System.Drawing.Point(38, 289);
             this.btnSaveChangePassword.Name = "btnSaveChangePassword";
             this.btnSaveChangePassword.Size = new System.Drawing.Size(80, 23);
             this.btnSaveChangePassword.TabIndex = 6;
@@ -151,7 +175,7 @@
             // btnCancelChangepassword
             // 
             this.btnCancelChangepassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelChangepassword.ImageOptions.Image")));
-            this.btnCancelChangepassword.Location = new System.Drawing.Point(268, 255);
+            this.btnCancelChangepassword.Location = new System.Drawing.Point(286, 289);
             this.btnCancelChangepassword.Name = "btnCancelChangepassword";
             this.btnCancelChangepassword.Size = new System.Drawing.Size(82, 23);
             this.btnCancelChangepassword.TabIndex = 7;
@@ -163,17 +187,17 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
-            // FormChangePassword
+            // FormCreateLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 284);
+            this.ClientSize = new System.Drawing.Size(410, 330);
             this.Controls.Add(this.btnCancelChangepassword);
             this.Controls.Add(this.btnSaveChangePassword);
             this.Controls.Add(this.groupBox1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
-            this.Name = "FormChangePassword";
-            this.Text = "Đổi mật khẩu";
+            this.Name = "FormCreateLogin";
+            this.Text = "Tạo tài khoản đăng nhập";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormChangePassword_FormClosing);
             this.Load += new System.EventHandler(this.FormChangePassword_Load);
             this.groupBox1.ResumeLayout(false);
@@ -190,11 +214,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tbRetypePassword;
-        private System.Windows.Forms.TextBox tbNewPassword;
-        private System.Windows.Forms.TextBox tbOldPassword;
+        private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.TextBox tbAccount;
         private DevExpress.XtraEditors.SimpleButton btnSaveChangePassword;
         private DevExpress.XtraEditors.SimpleButton btnCancelChangepassword;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.ComboBox cbRole;
+        private System.Windows.Forms.Label lbRole;
     }
 }
