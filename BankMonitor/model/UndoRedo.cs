@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BankMonitor.datasource;
 using BankMonitor.model;
 
 namespace BankMonitor.model
@@ -41,7 +42,6 @@ namespace BankMonitor.model
 
         public UndoRedo()
         {
-            Reset();
         }
 
         public void Reset()

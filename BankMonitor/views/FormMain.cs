@@ -142,17 +142,7 @@ namespace BankMonitor
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            try
-            {
 
-                NGANHANG db = new NGANHANG();
-                int test = db.Database.ExecuteSqlCommand("TEST @p0", "1");
-                MessageBox.Show(test.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }  
         }
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

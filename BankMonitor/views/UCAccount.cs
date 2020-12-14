@@ -112,6 +112,7 @@ namespace BankMonitor.views
 
         private void UCAccount_Load(object sender, EventArgs e)
         {
+            stack.Reset();
         }
 
         private void dgvAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -357,7 +358,7 @@ namespace BankMonitor.views
                             MessageBox.Show("Cập nhật thành công!");
                         } else
                         {
-                            MessageBox.Show("Tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (SqlException ex)
@@ -395,7 +396,7 @@ namespace BankMonitor.views
 
                 foreach (DataGridViewRow row in dgvAccount.Rows)
                 {
-                    if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), temp.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(row.Cells[1].Value.ToString().Trim(' '), temp.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
                     {
                         dgvAccount.Rows.RemoveAt(row.Index);
                         break;
@@ -417,17 +418,16 @@ namespace BankMonitor.views
             var account = db.TaiKhoans.Find(tk.SOTK);
 
             account = (TaiKhoan) tk.Clone();
-
             db.SaveChanges();
 
 
             foreach (DataGridViewRow row in dgvAccount.Rows)
             {
-                if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), tk.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(row.Cells[1].Value.ToString().Trim(' '), tk.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
                 {
-                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
-                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
-                    dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
+                    dgvAccount.Rows[row.Index].Cells[2].Value = account.CMND;
+                    dgvAccount.Rows[row.Index].Cells[4].Value = account.MACN;
+                    dgvAccount.Rows[row.Index].Cells[3].Value = account.SODU.ToString("G29");
                     break;
                 }
             }
@@ -448,8 +448,31 @@ namespace BankMonitor.views
             else
             {
                 var db = new NGANHANG();
-                TaiKhoan temp = (TaiKhoan)db.NhanViens.Find(value.getKey().SOTK).Clone();
+                TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
                 stack.Redo.Push(new AddAccount(temp, "UPDATE"));
+                Update(value.getKey());
+            }
+            btnCancelAccount.PerformClick();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var value = stack.REDO();
+
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            else
+            {
+                var db = new NGANHANG();
+                TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
+                stack.Update(new AddAccount(temp, "UPDATE"));
 
                 Update(value.getKey());
             }
@@ -457,4 +480,5 @@ namespace BankMonitor.views
             btnCancelAccount.PerformClick();
         }
     }
+    
 }

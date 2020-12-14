@@ -21,6 +21,7 @@ namespace BankMonitor.views
         public int checkLoad = 0;
         private UndoRedo<NhanVien, string> stack = new UndoRedo<NhanVien, string>();
 
+
         internal User User
         {
             get
@@ -49,12 +50,12 @@ namespace BankMonitor.views
 
         public UCStaff()
         {
-            InitializeComponent();        
+            InitializeComponent();
         }
 
         private void UCStaff_Load(object sender, EventArgs e)
         {
-
+            stack.Reset();
         }
 
         public void LoadData() {
@@ -214,7 +215,9 @@ namespace BankMonitor.views
                     tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text, cbDistributeStaff.Text});
                             // undo redo  
                             NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
+                            MessageBox.Show("dsfd");
                             stack.Add(new AddStaff(nhanvien, "ADD"));
+                            
                             //
                             dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
                             tbLastNameStaff.Text, tbAddressStaff.Text, gender, tbPhoneNumberStaff.Text);
@@ -289,13 +292,12 @@ namespace BankMonitor.views
                         NhanVien staff = db.NhanViens.Find(tbIdStaff.Text);
                         NhanVien temp = new NhanVien();
                         temp = (NhanVien) staff.Clone();
-
                         if (staff != null)
                         {
                             // undo redo  
                             
                             stack.Delete(new AddStaff(temp, "DELETE"));
-
+                          
                             db.Entry(staff).State = EntityState.Deleted;
                             db.SaveChanges();
 

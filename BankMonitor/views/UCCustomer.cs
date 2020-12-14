@@ -19,6 +19,7 @@ namespace BankMonitor.views
     {
         User user;
         public int checkLoad = 0;
+        private UndoRedo<KhachHang, string> stack = new UndoRedo<KhachHang, string>();
 
         public UCCustomer()
         {
@@ -83,7 +84,10 @@ namespace BankMonitor.views
 
                         db.Database.ExecuteSqlCommand("themKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] { tbIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, gender, dtpDateIdCustomer.Text, cbDistributeCustomer.Text, tbPhoneNumberCustomer.Text });
                         dgvCustomer.Rows.Add(tbIdCustomer.Text, dtpDateIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, tbPhoneNumberCustomer.Text, gender, cbDistributeCustomer.Text);
-                        btnCancelCustomer.PerformClick();
+                        //undo redo
+                        var kh = db.KhachHangs.Find(tbIdCustomer.Text);
+                        stack.Add(new AddCustomer(kh,"ADD"));
+                        btnCancelCustomer.PerformClick();        
                         MessageBox.Show("Thêm thành công!");
                     }
                     catch (SqlException ex)
@@ -277,6 +281,9 @@ namespace BankMonitor.views
                         MessageBox.Show("Khách hàng không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    //undo redo
+                    stack.Delete(new AddCustomer(check, "DELETE"));
+
                     db.Entry(customer).State = EntityState.Deleted;
                     db.SaveChanges();
 
@@ -321,6 +328,7 @@ namespace BankMonitor.views
                         var khachhang = db.KhachHangs.Find(tbIdCustomer.Text);
                         if (khachhang != null)
                         {
+                            stack.Update(new AddCustomer((KhachHang) khachhang.Clone(), "UPDATE"));
                             khachhang.HO = tbFirstNameCustomer.Text;
                             khachhang.TEN = tbLastNameCustomer.Text;
                             khachhang.DIACHI = tbAddressCustomer.Text;
@@ -337,7 +345,7 @@ namespace BankMonitor.views
                             // db.SaveChanges();
                             db.Database.ExecuteSqlCommand("capNhatThongTinKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] { tbIdCustomer.Text, tbFirstNameCustomer.Text, tbLastNameCustomer.Text, tbAddressCustomer.Text, khachhang.PHAI, dtpDateIdCustomer.Text, cbDistributeCustomer.Text, tbPhoneNumberCustomer.Text });
 
-                            dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[1].Value = khachhang.NGAYCAP;
+                            dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[1].Value = khachhang.NGAYCAP.ToShortDateString();
                             dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[2].Value = khachhang.HO;
                             dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[3].Value = khachhang.TEN;
                             dgvCustomer.Rows[dgvCustomer.SelectedRows[0].Index].Cells[4].Value = khachhang.DIACHI;
@@ -359,6 +367,104 @@ namespace BankMonitor.views
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var value = stack.UNDO();
+
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            else
+            {
+                var db = new NGANHANG();
+                KhachHang temp = (KhachHang)db.KhachHangs.Find(value.getKey().CMND).Clone();
+                stack.Redo.Push(new AddCustomer(temp, "UPDATE"));
+                Update(value.getKey());
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var value = stack.REDO();
+
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            else
+            {
+                var db = new NGANHANG();
+                KhachHang temp = (KhachHang)db.KhachHangs.Find(value.getKey().CMND).Clone();
+                stack.Update(new AddCustomer(temp, "UPDATE"));
+                Update(value.getKey());
+            }
+
+            btnCancelCustomer.PerformClick();
+        }
+
+        public void Add(KhachHang nv)
+        {
+            var db = new NGANHANG();
+            db.Database.ExecuteSqlCommand("themKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7", parameters: new[] { nv.CMND, nv.HO, nv.TEN, nv.DIACHI, nv.PHAI, nv.NGAYCAP.ToShortDateString(), nv.MACN, nv.SODT});
+            dgvCustomer.Rows.Add(nv.CMND, nv.NGAYCAP.ToShortDateString(), nv.HO, nv.TEN, nv.DIACHI, nv.SODT, nv.PHAI, nv.MACN);
+        }
+
+        public void Delete(KhachHang nv)
+        {
+                var db = new NGANHANG();
+                var temp = db.KhachHangs.Find(nv.CMND);
+
+                foreach (DataGridViewRow row in dgvCustomer.Rows)
+                {
+                    if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), temp.CMND.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                    {
+                        dgvCustomer.Rows.RemoveAt(row.Index);
+                        break;
+                    }
+                }
+                db.Entry(temp).State = EntityState.Deleted;
+                db.SaveChanges();
+            
+        }
+
+        public void Update(KhachHang nv)
+        {
+            var db = new NGANHANG();
+            db.Database.ExecuteSqlCommand("capNhatThongTinKhachHang @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
+                parameters: new[] { nv.CMND, nv.HO, nv.TEN, nv.DIACHI, nv.PHAI, nv.NGAYCAP.ToShortDateString(), nv.MACN, nv.SODT });
+
+            foreach (DataGridViewRow row in dgvCustomer.Rows)
+            {
+                if (string.Equals(row.Cells[0].Value.ToString().Trim(' '), nv.CMND.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                {
+                    dgvCustomer.Rows[row.Index].Cells[1].Value = nv.NGAYCAP.ToShortDateString();
+                    dgvCustomer.Rows[row.Index].Cells[2].Value = nv.HO;
+                    dgvCustomer.Rows[row.Index].Cells[3].Value = nv.TEN;
+                    dgvCustomer.Rows[row.Index].Cells[4].Value = nv.DIACHI;
+                    dgvCustomer.Rows[row.Index].Cells[5].Value = nv.SODT;
+                    dgvCustomer.Rows[row.Index].Cells[6].Value = nv.PHAI;
+                    dgvCustomer.Rows[row.Index].Cells[7].Value = nv.SODT;
+                    break;
+                }
+            }
+        }
+
+        private void UCCustomer_Load(object sender, EventArgs e)
+        {
+            stack.Reset();
         }
     }
 }
