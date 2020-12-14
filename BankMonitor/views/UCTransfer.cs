@@ -138,9 +138,10 @@ namespace BankMonitor.views
             }
             catch (SqlException ex)
             {
-                if (ex.Errors[0].Message == "-1") MessageBox.Show("Số dư trong tài khoản không đủ", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản nhận không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if (ex.Errors[0].Message == "-3") MessageBox.Show("Số tài khoản gửi không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //if (ex.Errors[0].Message == "-1") MessageBox.Show("Số dư trong tài khoản không đủ", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản nhận không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //else if (ex.Errors[0].Message == "-3") MessageBox.Show("Số tài khoản gửi không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

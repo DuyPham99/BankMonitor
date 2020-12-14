@@ -187,11 +187,12 @@ namespace BankMonitor.views
                     MessageBox.Show("Thêm thành công!");
                 } catch (SqlException ex)
                 {
-                    if (ex.Errors[0].Message == "-1") MessageBox.Show("Số tiền phải lớn hơn 100.000!", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (ex.Errors[0].Message == "-3") MessageBox.Show("Số dư không đủ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (ex.Errors[0].Message == "-4") MessageBox.Show("Số tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //if (ex.Errors[0].Message == "-1") MessageBox.Show("Số tiền phải lớn hơn 100.000!", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else if (ex.Errors[0].Message == "-3") MessageBox.Show("Số dư không đủ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else if (ex.Errors[0].Message == "-4") MessageBox.Show("Số tài khoản không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }                  
             }
         }

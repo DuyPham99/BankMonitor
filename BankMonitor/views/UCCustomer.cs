@@ -92,9 +92,10 @@ namespace BankMonitor.views
                     }
                     catch (SqlException ex)
                     {
-                       if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                       else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                       else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
@@ -361,9 +362,10 @@ namespace BankMonitor.views
                     }
                     catch (SqlException ex)
                     {
-                        if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //if (ex.Errors[0].Message == "-1") MessageBox.Show("CMND đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

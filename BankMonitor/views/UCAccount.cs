@@ -323,9 +323,10 @@ namespace BankMonitor.views
                         MessageBox.Show("Thêm thành công!");
                     } catch (SqlException ex)
                     {
-                        if (ex.Errors[0].Message == "-1") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số dư không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //if (ex.Errors[0].Message == "-1") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số tài khoản đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Số dư không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     
                 }
@@ -354,7 +355,7 @@ namespace BankMonitor.views
 
                             dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value = account.CMND;
                             dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value = account.MACN;
-                            dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU;
+                            dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value = account.SODU.ToString("G29");
                             MessageBox.Show("Cập nhật thành công!");
                         } else
                         {
@@ -414,21 +415,25 @@ namespace BankMonitor.views
 
         public void Update(TaiKhoan tk)
         {
-            var db = new NGANHANG();
-            var account = db.TaiKhoans.Find(tk.SOTK);
-
-            account = (TaiKhoan) tk.Clone();
-            db.SaveChanges();
-
-
-            foreach (DataGridViewRow row in dgvAccount.Rows)
+            using (var db = new NGANHANG())
             {
-                if (string.Equals(row.Cells[1].Value.ToString().Trim(' '), tk.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                var account = db.TaiKhoans.Find(tk.SOTK);
+                //account = (TaiKhoan)tk.Clone();
+                account.CMND = tk.CMND; 
+                account.SODU = tk.SODU;
+                account.MACN = tk.MACN;
+                
+                db.SaveChanges();
+
+                foreach (DataGridViewRow row in dgvAccount.Rows)
                 {
-                    dgvAccount.Rows[row.Index].Cells[2].Value = account.CMND;
-                    dgvAccount.Rows[row.Index].Cells[4].Value = account.MACN;
-                    dgvAccount.Rows[row.Index].Cells[3].Value = account.SODU.ToString("G29");
-                    break;
+                    if (string.Equals(row.Cells[1].Value.ToString().Trim(' '), tk.SOTK.Trim(' '), StringComparison.OrdinalIgnoreCase))
+                    {
+                        dgvAccount.Rows[row.Index].Cells[2].Value = account.CMND;
+                        dgvAccount.Rows[row.Index].Cells[4].Value = account.MACN;
+                        dgvAccount.Rows[row.Index].Cells[3].Value = account.SODU.ToString("G29");
+                        break;
+                    }
                 }
             }
         }

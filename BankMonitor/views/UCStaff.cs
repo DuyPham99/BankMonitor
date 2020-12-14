@@ -67,7 +67,7 @@ namespace BankMonitor.views
                     var data = from d in db.NhanViens select d;
                     foreach (var x in data.ToList())
                     {
-                        if (!x.MANV.ToString().Equals(" "))
+                        if (!x.MANV.ToString().Equals(" ") && x.TrangThaiXoa!=1)
                             dgvStaff.Rows.Add(x.MANV, x.MACN, x.HO, x.TEN, x.DIACHI, x.PHAI, x.SODT);
                     }
 
@@ -227,10 +227,11 @@ namespace BankMonitor.views
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Errors[0].Message == "-1") MessageBox.Show("Mã nhân viên đã tồn tại!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái là nam hoặc nữ!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (ex.Errors[0].Message == "-3") MessageBox.Show("Mã chi nhánh không tồn tại", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else MessageBox.Show(ex.Message, "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //if (ex.Errors[0].Message == "-1") MessageBox.Show("Mã nhân viên đã tồn tại!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else if (ex.Errors[0].Message == "-2") MessageBox.Show("Phái là nam hoặc nữ!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else if (ex.Errors[0].Message == "-3") MessageBox.Show("Mã chi nhánh không tồn tại", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //else MessageBox.Show(ex.Message, "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -295,10 +296,9 @@ namespace BankMonitor.views
                         if (staff != null)
                         {
                             // undo redo  
-                            
                             stack.Delete(new AddStaff(temp, "DELETE"));
-                          
-                            db.Entry(staff).State = EntityState.Deleted;
+
+                            staff.TrangThaiXoa = 1;
                             db.SaveChanges();
 
                             // remove select
@@ -366,33 +366,34 @@ namespace BankMonitor.views
                 }
             } catch (SqlException ex)
             {
-                switch (ex.Errors[0].Message)
-                {
-                    case "-1":
-                        MessageBox.Show("Mã nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-2":
-                        MessageBox.Show("Nhân viên đã bị xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-3":
-                        MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-4":
-                        MessageBox.Show("Cần tạo mã nhân viên mới tại chi nhanh chuyển đến!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-5":
-                        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-6":
-                        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case "-7":
-                        MessageBox.Show("Mã chi nhánh không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    default:
-                        MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                //switch (ex.Errors[0].Message)
+                //{
+                //    case "-1":
+                //        MessageBox.Show("Mã nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-2":
+                //        MessageBox.Show("Nhân viên đã bị xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-3":
+                //        MessageBox.Show("Phái phải là Nam hoặc Nữ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-4":
+                //        MessageBox.Show("Cần tạo mã nhân viên mới tại chi nhanh chuyển đến!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-5":
+                //        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-6":
+                //        MessageBox.Show("Mã nhân viên bên chi nhánh mới đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    case "-7":
+                //        MessageBox.Show("Mã chi nhánh không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //    default:
+                //        MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        break;
+                //}
+                MessageBox.Show(ex.Errors[0].Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }         
         }
 
@@ -404,8 +405,12 @@ namespace BankMonitor.views
         public void Add(NhanVien nv)
         {
             var db = new NGANHANG();
-            db.Database.ExecuteSqlCommandAsync("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
-                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN.Trim(' ')});
+            //db.Database.ExecuteSqlCommandAsync("themNhanVien @p0, @p1, @p2, @p3, @p4, @p5, @p6", parameters: new[] {nv.MANV, nv.HO,
+            //              nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT, nv.MACN.Trim(' ')});
+
+            var staff = db.NhanViens.Find(nv.MANV);
+            staff.TrangThaiXoa = 0;
+            db.SaveChanges();
 
             dgvStaff.Rows.Add(nv.MANV, nv.MACN, nv.HO,
                          nv.TEN, nv.DIACHI, nv.PHAI, nv.SODT);
@@ -427,7 +432,8 @@ namespace BankMonitor.views
                     }
                 }
 
-                db.Entry(temp).State = EntityState.Deleted;
+                //db.Entry(temp).State = EntityState.Deleted;
+                temp.TrangThaiXoa = 1;
                 db.SaveChanges();
             }
             catch 
