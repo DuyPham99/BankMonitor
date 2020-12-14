@@ -398,25 +398,7 @@ namespace BankMonitor.views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var value = stack.UNDO();
-            if (value == null) return;
-            if (value.getAction() == "ADD")
-            {
-                    Add(value.getKey());
-            }
-            else if (value.getAction() == "DELETE")
-            {
-                    Delete(value.getKey());
-            }
-            else
-            {
-                var db = new NGANHANG();
-                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
-                stack.Redo.Push(new AddStaff(temp, "UPDATE"));
-
-                Update(value.getKey());
-            }
-            btnCancelStaff.PerformClick();
+         
         }
 
         public void Add(NhanVien nv)
@@ -479,8 +461,36 @@ namespace BankMonitor.views
 
         private void button2_Click(object sender, EventArgs e)
         {
+    
+        }
+
+        public void Undo()
+        {
+            var value = stack.UNDO();
+            if (value == null) return;
+            if (value.getAction() == "ADD")
+            {
+                Add(value.getKey());
+            }
+            else if (value.getAction() == "DELETE")
+            {
+                Delete(value.getKey());
+            }
+            else
+            {
+                var db = new NGANHANG();
+                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+                stack.Redo.Push(new AddStaff(temp, "UPDATE"));
+
+                Update(value.getKey());
+            }
+            btnCancelStaff.PerformClick();
+        }
+
+        public void Redo()
+        {
             var value = stack.REDO();
-            
+
             if (value == null) return;
             if (value.getAction() == "ADD")
             {

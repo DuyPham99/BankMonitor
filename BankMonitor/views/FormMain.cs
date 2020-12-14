@@ -39,6 +39,7 @@ namespace BankMonitor
 
         private void bbtnpnStaff_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
             ucStaff.User = login.User;
             if (ucStaff.checkLoad == 0) ucStaff.LoadData();
             if (ucStaff.Visible != true) HidePanels(this.Controls);
@@ -47,6 +48,7 @@ namespace BankMonitor
         }
         private void bbtnCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
             ucCustomer.User = login.User;
             if (ucCustomer.checkLoad != 1) ucCustomer.LoadData();
             if (ucCustomer.Visible != true) HidePanels(this.Controls);
@@ -56,6 +58,7 @@ namespace BankMonitor
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
             ucExchange.User = login.User;
             if (ucExchange.checkLoad !=1) ucExchange.LoadData();
             if (ucExchange.Visible != true) HidePanels(this.Controls);
@@ -65,6 +68,7 @@ namespace BankMonitor
 
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
             ucTransfer.User = login.User;
             ucTransfer.LoadData();
             if (ucTransfer.Visible != true) HidePanels(this.Controls);
@@ -86,6 +90,7 @@ namespace BankMonitor
 
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
             ucAccount.User = login.User;
             ucAccount.Conn = login.Conn;
             if (ucAccount.checkLoad != 1) ucAccount.LoadData();
@@ -127,8 +132,7 @@ namespace BankMonitor
         }
 
         private void ucAccount_Load(object sender, EventArgs e)
-        {
-
+        {          
         }
 
         FormCreateLogin frmChangePassword = new FormCreateLogin();
@@ -147,12 +151,56 @@ namespace BankMonitor
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("sdfsafs");
+            foreach (Control c in this.Controls)
+            {
+                if (c is UserControl)
+                {
+                    if (c.Visible == true)
+                    {
+                        if (c.GetType() == typeof(UCAccount))
+                        {
+                            ucAccount.Undo();
+                            break;
+                        } else if (c.GetType() == typeof(UCCustomer))
+                        {
+                            ucCustomer.Undo();
+                            break;
+                        } else if (c.GetType() == typeof(UCStaff))
+                        {
+                            ucStaff.Undo();
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("ádsdas");
+            foreach (Control c in this.Controls)
+            {
+                if (c is UserControl)
+                {
+                    if (c.Visible == true)
+                    {
+                        if (c.GetType() == typeof(UCAccount))
+                        {
+                            ucAccount.Redo();
+                            break;
+                        }
+                        else if (c.GetType() == typeof(UCCustomer))
+                        {
+                            ucCustomer.Redo();
+                            break;
+                        }
+                        else if (c.GetType() == typeof(UCStaff))
+                        {
+                            ucStaff.Redo();
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

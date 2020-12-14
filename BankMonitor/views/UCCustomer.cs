@@ -371,6 +371,16 @@ namespace BankMonitor.views
 
         private void button1_Click(object sender, EventArgs e)
         {
+          
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+      
+        }
+
+        public void Undo()
+        {
             var value = stack.UNDO();
 
             if (value == null) return;
@@ -391,7 +401,7 @@ namespace BankMonitor.views
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void Redo()
         {
             var value = stack.REDO();
 
