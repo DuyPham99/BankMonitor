@@ -96,7 +96,6 @@ namespace BankMonitor
             if (ucAccount.checkLoad != 1) ucAccount.LoadData();
             if (ucAccount.Visible != true) HidePanels(this.Controls);
             ucAccount.Visible = !ucAccount.Visible;
- 
         }
 
         private void bbtnSignOut_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -201,6 +200,32 @@ namespace BankMonitor
                     }
                 }
             }
+        }
+
+        private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
+ 
+            if (ucExchangeReport.Visible != true) HidePanels(this.Controls);
+            ucExchangeReport.Visible = !ucExchangeReport.Visible;
+        }
+
+        private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
+            ucAccountReport.User = login.User;
+            ucAccountReport.LoadData();
+            if (ucAccountReport.Visible != true) HidePanels(this.Controls);
+            ucAccountReport.Visible = !ucAccountReport.Visible;
+        }
+
+        private void barButtonItem15_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (string.IsNullOrEmpty(login.User.Username)) return;
+            ucCustomerReport1.User = login.User;
+            ucCustomerReport1.LoadData();
+            if (ucCustomerReport1.Visible != true) HidePanels(this.Controls);
+            ucCustomerReport1.Visible = !ucCustomerReport1.Visible;
         }
     }
 }

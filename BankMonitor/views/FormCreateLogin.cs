@@ -221,5 +221,10 @@ namespace BankMonitor.views
         {
 
         }
+
+        private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

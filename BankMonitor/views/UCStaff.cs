@@ -19,7 +19,7 @@ namespace BankMonitor.views
     {
         User user;
         public int checkLoad = 0;
-        private UndoRedo<NhanVien, string> stack = new UndoRedo<NhanVien, string>();
+   //     private UndoRedo<NhanVien, string> stack = new UndoRedo<NhanVien, string>();
 
 
         internal User User
@@ -35,18 +35,18 @@ namespace BankMonitor.views
             }
         }
 
-        public UndoRedo<NhanVien, string> Stack
-        {
-            get
-            {
-                return stack;
-            }
+        //public UndoRedo<NhanVien, string> Stack
+        //{
+        //    get
+        //    {
+        //        return stack;
+        //    }
 
-            set
-            {
-                stack = value;
-            }
-        }
+        //    set
+        //    {
+        //        stack = value;
+        //    }
+        //}
 
         public UCStaff()
         {
@@ -55,7 +55,7 @@ namespace BankMonitor.views
 
         private void UCStaff_Load(object sender, EventArgs e)
         {
-            stack.Reset();
+  //          stack.Reset();
         }
 
         public void LoadData() {
@@ -216,7 +216,7 @@ namespace BankMonitor.views
                             // undo redo  
                             NhanVien nhanvien = db.NhanViens.Find(tbIdStaff.Text);
                             MessageBox.Show("dsfd");
-                            stack.Add(new AddStaff(nhanvien, "ADD"));
+ //                           stack.Add(new AddStaff(nhanvien, "ADD"));
                             
                             //
                             dgvStaff.Rows.Add(tbIdStaff.Text, cbDistributeStaff.Text, tbFirstNameStaff.Text,
@@ -296,9 +296,7 @@ namespace BankMonitor.views
                         if (staff != null)
                         {
                             // undo redo  
-                            stack.Delete(new AddStaff(temp, "DELETE"));
-
-                            staff.TrangThaiXoa = 1;
+  //                          staff.TrangThaiXoa = 1;
                             db.SaveChanges();
 
                             // remove select
@@ -332,7 +330,7 @@ namespace BankMonitor.views
                         var staff = db.NhanViens.Find(tbIdStaff.Text);
 
                         //undo redo
-                        stack.Update(new AddStaff((NhanVien)staff.Clone(), "UPDATE"));
+    //                    stack.Update(new AddStaff((NhanVien)staff.Clone(), "UPDATE"));
 
                         if (staff == null)
                         {
@@ -472,50 +470,50 @@ namespace BankMonitor.views
 
         public void Undo()
         {
-            var value = stack.UNDO();
-            if (value == null) return;
-            if (value.getAction() == "ADD")
-            {
-                Add(value.getKey());
-            }
-            else if (value.getAction() == "DELETE")
-            {
-                Delete(value.getKey());
-            }
-            else
-            {
-                var db = new NGANHANG();
-                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
-                stack.Redo.Push(new AddStaff(temp, "UPDATE"));
+            //var value = stack.UNDO();
+            //if (value == null) return;
+            //if (value.getAction() == "ADD")
+            //{
+            //    Add(value.getKey());
+            //}
+            //else if (value.getAction() == "DELETE")
+            //{
+            //    Delete(value.getKey());
+            //}
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+            //    stack.Redo.Push(new AddStaff(temp, "UPDATE"));
 
-                Update(value.getKey());
-            }
-            btnCancelStaff.PerformClick();
+            //    Update(value.getKey());
+            //}
+            //btnCancelStaff.PerformClick();
         }
 
         public void Redo()
         {
-            var value = stack.REDO();
+            //var value = stack.REDO();
 
-            if (value == null) return;
-            if (value.getAction() == "ADD")
-            {
-                Add(value.getKey());
-            }
-            else if (value.getAction() == "DELETE")
-            {
-                Delete(value.getKey());
-            }
-            else
-            {
-                var db = new NGANHANG();
-                NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
-                stack.Update(new AddStaff(temp, "UPDATE"));
+            //if (value == null) return;
+            //if (value.getAction() == "ADD")
+            //{
+            //    Add(value.getKey());
+            //}
+            //else if (value.getAction() == "DELETE")
+            //{
+            //    Delete(value.getKey());
+            //}
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    NhanVien temp = (NhanVien)db.NhanViens.Find(value.getKey().MANV).Clone();
+            //    stack.Update(new AddStaff(temp, "UPDATE"));
 
-                Update(value.getKey());
-            }
+            //    Update(value.getKey());
+            //}
 
-            btnCancelStaff.PerformClick();
+            //btnCancelStaff.PerformClick();
         }
     }
 }

@@ -170,6 +170,24 @@
     <Compile Include="views\UCAccount.Designer.cs">
       <DependentUpon>UCAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\UCAccountReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\UCAccountReport.Designer.cs">
+      <DependentUpon>UCAccountReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\UCCustomerReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\UCCustomerReport.Designer.cs">
+      <DependentUpon>UCCustomerReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\UCExchangeReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\UCExchangeReport.Designer.cs">
+      <DependentUpon>UCExchangeReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\UCTransfer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,6 +234,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\UCAccount.resx">
       <DependentUpon>UCAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\UCAccountReport.resx">
+      <DependentUpon>UCAccountReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\UCCustomerReport.resx">
+      <DependentUpon>UCCustomerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\UCExchangeReport.resx">
+      <DependentUpon>UCExchangeReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\UCTransfer.resx">
       <DependentUpon>UCTransfer.cs</DependentUpon>

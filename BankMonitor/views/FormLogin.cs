@@ -53,6 +53,25 @@ namespace BankMonitor.views
             InitializeComponent();
         }
 
+        public string getRole()
+        {
+            conn.Connect(user.Distribute);
+
+            Hashtable temp = new Hashtable();
+            temp.Add("loginName", user.Username);
+
+            SqlDataReader data = conn.ExecProcParams("getLoginInfo", temp);
+
+            if (data.Read())
+            {
+                string buff = data.GetString(2);
+                conn.Close();
+                return buff;
+            }
+
+            return null;
+        }
+
         //logout
         public void clearData()
         {
@@ -96,6 +115,8 @@ namespace BankMonitor.views
 
                 db = new NGANHANG();
                 db.NhanViens.Load();
+
+                user.Role = getRole();
                 this.Visible = false;
             }
            

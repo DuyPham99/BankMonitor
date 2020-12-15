@@ -23,7 +23,7 @@ namespace BankMonitor.views
         //to prevent load duplicate datagridview
         public int checkLoad = 0;
         ConnectionDatabase conn;
-        private UndoRedo<TaiKhoan, string> stack = new UndoRedo<TaiKhoan, string>();
+    //    private UndoRedo<TaiKhoan, string> stack = new UndoRedo<TaiKhoan, string>();
 
         internal User User
         {
@@ -51,18 +51,18 @@ namespace BankMonitor.views
             }
         }
 
-        public UndoRedo<TaiKhoan, string> Stack
-        {
-            get
-            {
-                return stack;
-            }
+        //public UndoRedo<TaiKhoan, string> Stack
+        //{
+        //    get
+        //    {
+        //        return stack;
+        //    }
 
-            set
-            {
-                stack = value;
-            }
-        }
+        //    set
+        //    {
+        //        stack = value;
+        //    }
+        //}
 
         public UCAccount()
         {
@@ -112,7 +112,7 @@ namespace BankMonitor.views
 
         private void UCAccount_Load(object sender, EventArgs e)
         {
-            stack.Reset();
+          //  stack.Reset();
         }
 
         private void dgvAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -260,7 +260,7 @@ namespace BankMonitor.views
                         return;
                     }
                     //undo redo
-                    stack.Delete(new AddAccount((TaiKhoan) check.Clone(), "DELETE"));
+             //       stack.Delete(new AddAccount((TaiKhoan) check.Clone(), "DELETE"));
 
                     db.Entry(account).State = EntityState.Deleted;
                     db.SaveChanges();
@@ -317,7 +317,7 @@ namespace BankMonitor.views
 
                         //undo redo
                         TaiKhoan tk = db.TaiKhoans.Find(tbIdAccount.Text);
-                        stack.Add(new AddAccount(tk, "ADD"));
+           //             stack.Add(new AddAccount(tk, "ADD"));
 
                         dgvAccount.Rows.Add(account.NGAYMOTK, account.SOTK, account.CMND, account.SODU.ToString("G29"), account.MACN);
                         MessageBox.Show("Thêm thành công!");
@@ -347,7 +347,7 @@ namespace BankMonitor.views
 
                         if (account != null)
                         {
-                            stack.Update(new AddAccount((TaiKhoan) account.Clone(), "UPDATE"));
+   //                         stack.Update(new AddAccount((TaiKhoan) account.Clone(), "UPDATE"));
                             account.MACN = cbDistributeAccount.Text;
                             account.CMND = tbIdentityAccount.Text;
                             account.SODU = decimal.Parse(tbAmountAccount.Text);
@@ -450,49 +450,49 @@ namespace BankMonitor.views
 
         public void Undo()
         {
-            var value = stack.UNDO();
-            if (value == null) return;
-            if (value.getAction() == "ADD")
-            {
-                Add(value.getKey());
-            }
-            else if (value.getAction() == "DELETE")
-            {
-                Delete(value.getKey());
-            }
-            else
-            {
-                var db = new NGANHANG();
-                TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
-                stack.Redo.Push(new AddAccount(temp, "UPDATE"));
-                Update(value.getKey());
-            }
-            btnCancelAccount.PerformClick();
+            //var value = stack.UNDO();
+            //if (value == null) return;
+            //if (value.getAction() == "ADD")
+            //{
+            //    Add(value.getKey());
+            //}
+            //else if (value.getAction() == "DELETE")
+            //{
+            //    Delete(value.getKey());
+            //}
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
+            //    stack.Redo.Push(new AddAccount(temp, "UPDATE"));
+            //    Update(value.getKey());
+            //}
+            //btnCancelAccount.PerformClick();
         }
 
         public void Redo()
         {
-            var value = stack.REDO();
+            //var value = stack.REDO();
 
-            if (value == null) return;
-            if (value.getAction() == "ADD")
-            {
-                Add(value.getKey());
-            }
-            else if (value.getAction() == "DELETE")
-            {
-                Delete(value.getKey());
-            }
-            else
-            {
-                var db = new NGANHANG();
-                TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
-                stack.Update(new AddAccount(temp, "UPDATE"));
+            //if (value == null) return;
+            //if (value.getAction() == "ADD")
+            //{
+            //    Add(value.getKey());
+            //}
+            //else if (value.getAction() == "DELETE")
+            //{
+            //    Delete(value.getKey());
+            //}
+            //else
+            //{
+            //    var db = new NGANHANG();
+            //    TaiKhoan temp = (TaiKhoan)db.TaiKhoans.Find(value.getKey().SOTK).Clone();
+            //    stack.Update(new AddAccount(temp, "UPDATE"));
 
-                Update(value.getKey());
-            }
+            //    Update(value.getKey());
+            //}
 
-            btnCancelAccount.PerformClick();
+            //btnCancelAccount.PerformClick();
         }
     }
     
