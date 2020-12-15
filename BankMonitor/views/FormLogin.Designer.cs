@@ -60,6 +60,7 @@
             // 
             this.tbPasswordLogin.Location = new System.Drawing.Point(118, 147);
             this.tbPasswordLogin.Name = "tbPasswordLogin";
+            this.tbPasswordLogin.PasswordChar = '*';
             this.tbPasswordLogin.Size = new System.Drawing.Size(289, 21);
             this.tbPasswordLogin.TabIndex = 2;
             // 
@@ -140,6 +141,7 @@
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogin_FormClosing);
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

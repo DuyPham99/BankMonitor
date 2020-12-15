@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbListCustomer = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.IdCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateIdCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstNameCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +41,7 @@
             this.IdDistributeCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label9 = new System.Windows.Forms.Label();
             this.gbCustomerMonitor = new System.Windows.Forms.GroupBox();
+            this.cbDistributeCustomer = new System.Windows.Forms.ComboBox();
             this.btnCancelCustomer = new System.Windows.Forms.Button();
             this.btnChangeCustomer = new System.Windows.Forms.Button();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
@@ -57,28 +59,31 @@
             this.label13 = new System.Windows.Forms.Label();
             this.tbFirstNameCustomer = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbIdDistributeCustomer = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbIdCustomer = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbListCustomer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.gbCustomerMonitor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // gbListCustomer
             // 
-            this.gbListCustomer.Controls.Add(this.dataGridView2);
-            this.gbListCustomer.Location = new System.Drawing.Point(599, 115);
+            this.gbListCustomer.Controls.Add(this.dgvCustomer);
+            this.gbListCustomer.Location = new System.Drawing.Point(588, 82);
             this.gbListCustomer.Name = "gbListCustomer";
             this.gbListCustomer.Size = new System.Drawing.Size(595, 314);
             this.gbListCustomer.TabIndex = 5;
             this.gbListCustomer.TabStop = false;
             // 
-            // dataGridView2
+            // dgvCustomer
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCustomer.AllowUserToResizeColumns = false;
+            this.dgvCustomer.AllowUserToResizeRows = false;
+            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCustomer,
             this.DateIdCustomer,
             this.FirstNameCustomer,
@@ -87,64 +92,76 @@
             this.PhoneNumberCustomer,
             this.SexCustomer,
             this.IdDistributeCustomer});
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(589, 295);
-            this.dataGridView2.TabIndex = 0;
+            this.dgvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCustomer.Location = new System.Drawing.Point(3, 16);
+            this.dgvCustomer.Name = "dgvCustomer";
+            this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.Size = new System.Drawing.Size(589, 295);
+            this.dgvCustomer.TabIndex = 0;
+            this.dgvCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_CellContentClick);
+            this.dgvCustomer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_CellContentClick);
             // 
             // IdCustomer
             // 
             this.IdCustomer.HeaderText = "CMND";
             this.IdCustomer.Name = "IdCustomer";
+            this.IdCustomer.ReadOnly = true;
             // 
             // DateIdCustomer
             // 
             this.DateIdCustomer.HeaderText = "Ngày cấp";
             this.DateIdCustomer.Name = "DateIdCustomer";
+            this.DateIdCustomer.ReadOnly = true;
             // 
             // FirstNameCustomer
             // 
             this.FirstNameCustomer.HeaderText = "Họ";
             this.FirstNameCustomer.Name = "FirstNameCustomer";
+            this.FirstNameCustomer.ReadOnly = true;
             // 
             // LastNameCustomer
             // 
             this.LastNameCustomer.HeaderText = "Tên";
             this.LastNameCustomer.Name = "LastNameCustomer";
+            this.LastNameCustomer.ReadOnly = true;
             // 
             // AddressCustomer
             // 
             this.AddressCustomer.HeaderText = "Địa chỉ";
             this.AddressCustomer.Name = "AddressCustomer";
+            this.AddressCustomer.ReadOnly = true;
             // 
             // PhoneNumberCustomer
             // 
             this.PhoneNumberCustomer.HeaderText = "SĐT";
             this.PhoneNumberCustomer.Name = "PhoneNumberCustomer";
+            this.PhoneNumberCustomer.ReadOnly = true;
             // 
             // SexCustomer
             // 
             this.SexCustomer.HeaderText = "Phái";
             this.SexCustomer.Name = "SexCustomer";
+            this.SexCustomer.ReadOnly = true;
             // 
             // IdDistributeCustomer
             // 
             this.IdDistributeCustomer.HeaderText = "Mã CN";
             this.IdDistributeCustomer.Name = "IdDistributeCustomer";
+            this.IdDistributeCustomer.ReadOnly = true;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(213, 95);
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(194, 65);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(230, 22);
+            this.label9.Size = new System.Drawing.Size(256, 24);
             this.label9.TabIndex = 7;
             this.label9.Text = "QUẢN LÝ KHÁCH HÀNG";
             // 
             // gbCustomerMonitor
             // 
+            this.gbCustomerMonitor.Controls.Add(this.cbDistributeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnCancelCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnChangeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.btnDeleteCustomer);
@@ -162,15 +179,23 @@
             this.gbCustomerMonitor.Controls.Add(this.label13);
             this.gbCustomerMonitor.Controls.Add(this.tbFirstNameCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label12);
-            this.gbCustomerMonitor.Controls.Add(this.tbIdDistributeCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label11);
             this.gbCustomerMonitor.Controls.Add(this.tbIdCustomer);
             this.gbCustomerMonitor.Controls.Add(this.label10);
-            this.gbCustomerMonitor.Location = new System.Drawing.Point(64, 125);
+            this.gbCustomerMonitor.Location = new System.Drawing.Point(53, 92);
             this.gbCustomerMonitor.Name = "gbCustomerMonitor";
             this.gbCustomerMonitor.Size = new System.Drawing.Size(500, 301);
             this.gbCustomerMonitor.TabIndex = 6;
             this.gbCustomerMonitor.TabStop = false;
+            // 
+            // cbDistributeCustomer
+            // 
+            this.cbDistributeCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDistributeCustomer.FormattingEnabled = true;
+            this.cbDistributeCustomer.Location = new System.Drawing.Point(109, 203);
+            this.cbDistributeCustomer.Name = "cbDistributeCustomer";
+            this.cbDistributeCustomer.Size = new System.Drawing.Size(121, 21);
+            this.cbDistributeCustomer.TabIndex = 21;
             // 
             // btnCancelCustomer
             // 
@@ -180,6 +205,7 @@
             this.btnCancelCustomer.TabIndex = 20;
             this.btnCancelCustomer.Text = "Hủy bỏ";
             this.btnCancelCustomer.UseVisualStyleBackColor = true;
+            this.btnCancelCustomer.Click += new System.EventHandler(this.btnCancelCustomer_Click);
             // 
             // btnChangeCustomer
             // 
@@ -189,6 +215,7 @@
             this.btnChangeCustomer.TabIndex = 19;
             this.btnChangeCustomer.Text = "Sửa";
             this.btnChangeCustomer.UseVisualStyleBackColor = true;
+            this.btnChangeCustomer.Click += new System.EventHandler(this.btnChangeCustomer_Click);
             // 
             // btnDeleteCustomer
             // 
@@ -198,6 +225,7 @@
             this.btnDeleteCustomer.TabIndex = 18;
             this.btnDeleteCustomer.Text = "Xóa";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // btnAddCustomer
             // 
@@ -207,13 +235,15 @@
             this.btnAddCustomer.TabIndex = 17;
             this.btnAddCustomer.Text = "Thêm";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // rdbtnFemaleCustomer
             // 
             this.rdbtnFemaleCustomer.AutoSize = true;
+            this.rdbtnFemaleCustomer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtnFemaleCustomer.Location = new System.Drawing.Point(384, 205);
             this.rdbtnFemaleCustomer.Name = "rdbtnFemaleCustomer";
-            this.rdbtnFemaleCustomer.Size = new System.Drawing.Size(39, 17);
+            this.rdbtnFemaleCustomer.Size = new System.Drawing.Size(41, 19);
             this.rdbtnFemaleCustomer.TabIndex = 16;
             this.rdbtnFemaleCustomer.TabStop = true;
             this.rdbtnFemaleCustomer.Text = "Nữ";
@@ -222,13 +252,15 @@
             // rdbtnMaleCustomer
             // 
             this.rdbtnMaleCustomer.AutoSize = true;
+            this.rdbtnMaleCustomer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtnMaleCustomer.Location = new System.Drawing.Point(313, 205);
             this.rdbtnMaleCustomer.Name = "rdbtnMaleCustomer";
-            this.rdbtnMaleCustomer.Size = new System.Drawing.Size(47, 17);
+            this.rdbtnMaleCustomer.Size = new System.Drawing.Size(49, 19);
             this.rdbtnMaleCustomer.TabIndex = 15;
             this.rdbtnMaleCustomer.TabStop = true;
             this.rdbtnMaleCustomer.Text = "Nam";
             this.rdbtnMaleCustomer.UseVisualStyleBackColor = true;
+            this.rdbtnMaleCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.rdbtnMaleCustomer_Validating);
             // 
             // label17
             // 
@@ -246,6 +278,7 @@
             this.tbPhoneNumberCustomer.Name = "tbPhoneNumberCustomer";
             this.tbPhoneNumberCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbPhoneNumberCustomer.TabIndex = 13;
+            this.tbPhoneNumberCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbPhoneNumberCustomer_Validating);
             // 
             // label16
             // 
@@ -270,6 +303,7 @@
             // dtpDateIdCustomer
             // 
             this.dtpDateIdCustomer.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.dtpDateIdCustomer.CustomFormat = "dd-MM-yyyy";
             this.dtpDateIdCustomer.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDateIdCustomer.Location = new System.Drawing.Point(321, 122);
             this.dtpDateIdCustomer.Name = "dtpDateIdCustomer";
@@ -282,6 +316,7 @@
             this.tbAddressCustomer.Name = "tbAddressCustomer";
             this.tbAddressCustomer.Size = new System.Drawing.Size(323, 20);
             this.tbAddressCustomer.TabIndex = 9;
+            this.tbAddressCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbAddressCustomer_Validating);
             // 
             // label14
             // 
@@ -299,6 +334,7 @@
             this.tbLastNameCustomer.Name = "tbLastNameCustomer";
             this.tbLastNameCustomer.Size = new System.Drawing.Size(100, 20);
             this.tbLastNameCustomer.TabIndex = 7;
+            this.tbLastNameCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbLastNameCustomer_Validating);
             // 
             // label13
             // 
@@ -316,6 +352,7 @@
             this.tbFirstNameCustomer.Name = "tbFirstNameCustomer";
             this.tbFirstNameCustomer.Size = new System.Drawing.Size(155, 20);
             this.tbFirstNameCustomer.TabIndex = 5;
+            this.tbFirstNameCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstNameCustomer_Validating);
             // 
             // label12
             // 
@@ -326,13 +363,6 @@
             this.label12.Size = new System.Drawing.Size(28, 19);
             this.label12.TabIndex = 4;
             this.label12.Text = "Họ";
-            // 
-            // tbIdDistributeCustomer
-            // 
-            this.tbIdDistributeCustomer.Location = new System.Drawing.Point(96, 204);
-            this.tbIdDistributeCustomer.Name = "tbIdDistributeCustomer";
-            this.tbIdDistributeCustomer.Size = new System.Drawing.Size(98, 20);
-            this.tbIdDistributeCustomer.TabIndex = 3;
             // 
             // label11
             // 
@@ -350,6 +380,7 @@
             this.tbIdCustomer.Name = "tbIdCustomer";
             this.tbIdCustomer.Size = new System.Drawing.Size(151, 20);
             this.tbIdCustomer.TabIndex = 1;
+            this.tbIdCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.tbIdCustomer_Validating);
             // 
             // label10
             // 
@@ -361,6 +392,11 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "CMND";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // UCCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,10 +407,12 @@
             this.Controls.Add(this.gbListCustomer);
             this.Name = "UCCustomer";
             this.Size = new System.Drawing.Size(1217, 437);
+            this.Load += new System.EventHandler(this.UCCustomer_Load);
             this.gbListCustomer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.gbCustomerMonitor.ResumeLayout(false);
             this.gbCustomerMonitor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,7 +421,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbListCustomer;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateIdCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstNameCustomer;
@@ -411,9 +449,10 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tbFirstNameCustomer;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbIdDistributeCustomer;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbIdCustomer;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbDistributeCustomer;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

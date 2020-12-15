@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NGANHANGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChiNhanh">
+          <Key>
+            <PropertyRef Name="MACN" />
+          </Key>
+          <Property Name="MACN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENCN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoDT" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GD_CHUYENTIEN">
+          <Key>
+            <PropertyRef Name="MAGD" />
+          </Key>
+          <Property Name="MAGD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SOTK_CHUYEN" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="NGAYGD" Type="datetime" Nullable="false" />
+          <Property Name="SOTIEN" Type="money" Nullable="false" />
+          <Property Name="SOTK_NHAN" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="MANV" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GD_GOIRUT">
+          <Key>
+            <PropertyRef Name="MAGD" />
+          </Key>
+          <Property Name="MAGD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SOTK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="LOAIGD" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="NGAYGD" Type="datetime" Nullable="false" />
+          <Property Name="SOTIEN" Type="money" Nullable="false" />
+          <Property Name="MANV" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="CMND" />
+          </Key>
+          <Property Name="CMND" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="HO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PHAI" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NGAYCAP" Type="date" Nullable="false" />
+          <Property Name="SODT" Type="nvarchar" MaxLength="15" />
+          <Property Name="MACN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="HO" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PHAI" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="SODT" Type="nvarchar" MaxLength="15" />
+          <Property Name="MACN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TrangThaiXoa" Type="int" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="SOTK" />
+          </Key>
+          <Property Name="SOTK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="CMND" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SODU" Type="money" Nullable="false" />
+          <Property Name="MACN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NGAYMOTK" Type="datetime" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GD_CHUYENTIEN_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GD_CHUYENTIEN" Type="Self.GD_CHUYENTIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="GD_CHUYENTIEN">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD_GOIRUT_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GD_GOIRUT" Type="Self.GD_GOIRUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="GD_GOIRUT">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhachHang_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoan_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoan_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="CMND" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="CMND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="getAllBranches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="NGANHANGModelStoreContainer">
+          <EntitySet Name="ChiNhanh" EntityType="Self.ChiNhanh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GD_CHUYENTIEN" EntityType="Self.GD_CHUYENTIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GD_GOIRUT" EntityType="Self.GD_GOIRUT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GD_CHUYENTIEN_NhanVien" Association="Self.FK_GD_CHUYENTIEN_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GD_CHUYENTIEN" EntitySet="GD_CHUYENTIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD_GOIRUT_NhanVien" Association="Self.FK_GD_GOIRUT_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="GD_GOIRUT" EntitySet="GD_GOIRUT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhachHang_ChiNhanh" Association="Self.FK_KhachHang_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ChiNhanh" Association="Self.FK_NhanVien_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoan_ChiNhanh" Association="Self.FK_TaiKhoan_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoan_KhachHang" Association="Self.FK_TaiKhoan_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NGANHANGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChiNhanh">
+          <Key>
+            <PropertyRef Name="MACN" />
+          </Key>
+          <Property Name="MACN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TENCN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoDT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KhachHang_ChiNhanh" FromRole="ChiNhanh" ToRole="KhachHang" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK_NhanVien_ChiNhanh" FromRole="ChiNhanh" ToRole="NhanVien" />
+          <NavigationProperty Name="TaiKhoans" Relationship="Self.FK_TaiKhoan_ChiNhanh" FromRole="ChiNhanh" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="GD_CHUYENTIEN">
+          <Key>
+            <PropertyRef Name="MAGD" />
+          </Key>
+          <Property Name="MAGD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SOTK_CHUYEN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NGAYGD" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SOTIEN" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SOTK_NHAN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_GD_CHUYENTIEN_NhanVien" FromRole="GD_CHUYENTIEN" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="GD_GOIRUT">
+          <Key>
+            <PropertyRef Name="MAGD" />
+          </Key>
+          <Property Name="MAGD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SOTK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LOAIGD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NGAYGD" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SOTIEN" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_GD_GOIRUT_NhanVien" FromRole="GD_GOIRUT" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="CMND" />
+          </Key>
+          <Property Name="CMND" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHAI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NGAYCAP" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SODT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MACN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_KhachHang_ChiNhanh" FromRole="KhachHang" ToRole="ChiNhanh" />
+          <NavigationProperty Name="TaiKhoans" Relationship="Self.FK_TaiKhoan_KhachHang" FromRole="KhachHang" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HO" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHAI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SODT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MACN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TrangThaiXoa" Type="Int32" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_NhanVien_ChiNhanh" FromRole="NhanVien" ToRole="ChiNhanh" />
+          <NavigationProperty Name="GD_CHUYENTIEN" Relationship="Self.FK_GD_CHUYENTIEN_NhanVien" FromRole="NhanVien" ToRole="GD_CHUYENTIEN" />
+          <NavigationProperty Name="GD_GOIRUT" Relationship="Self.FK_GD_GOIRUT_NhanVien" FromRole="NhanVien" ToRole="GD_GOIRUT" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="SOTK" />
+          </Key>
+          <Property Name="SOTK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CMND" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SODU" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MACN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NGAYMOTK" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_TaiKhoan_ChiNhanh" FromRole="TaiKhoan" ToRole="ChiNhanh" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_TaiKhoan_KhachHang" FromRole="TaiKhoan" ToRole="KhachHang" />
+        </EntityType>
+        <Association Name="FK_KhachHang_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoan_ChiNhanh">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MACN" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="MACN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD_CHUYENTIEN_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GD_CHUYENTIEN" Type="Self.GD_CHUYENTIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="GD_CHUYENTIEN">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD_GOIRUT_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="GD_GOIRUT" Type="Self.GD_GOIRUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="GD_GOIRUT">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoan_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="CMND" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="CMND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NGANHANG" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChiNhanhs" EntityType="Self.ChiNhanh" />
+          <EntitySet Name="GD_CHUYENTIEN" EntityType="Self.GD_CHUYENTIEN" />
+          <EntitySet Name="GD_GOIRUT" EntityType="Self.GD_GOIRUT" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <AssociationSet Name="FK_KhachHang_ChiNhanh" Association="Self.FK_KhachHang_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ChiNhanh" Association="Self.FK_NhanVien_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoan_ChiNhanh" Association="Self.FK_TaiKhoan_ChiNhanh">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD_CHUYENTIEN_NhanVien" Association="Self.FK_GD_CHUYENTIEN_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="GD_CHUYENTIEN" EntitySet="GD_CHUYENTIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD_GOIRUT_NhanVien" Association="Self.FK_GD_GOIRUT_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="GD_GOIRUT" EntitySet="GD_GOIRUT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoan_KhachHang" Association="Self.FK_TaiKhoan_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <FunctionImport Name="getAllBranches" EntitySet="ChiNhanhs" ReturnType="Collection(NGANHANGModel.ChiNhanh)" />
+        </EntityContainer>
+        <ComplexType Name="getAllBranches_Result">
+          <Property Type="String" Name="publisher" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="publisher_db" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="retention" Nullable="true" />
+          <Property Type="Byte" Name="publication_type" Nullable="true" />
+          <Property Type="Guid" Name="pubid" Nullable="false" />
+          <Property Type="Guid" Name="designmasterid" Nullable="true" />
+          <Property Type="Guid" Name="parentid" Nullable="true" />
+          <Property Type="Byte" Name="sync_mode" Nullable="true" />
+          <Property Type="Int32" Name="allow_push" Nullable="true" />
+          <Property Type="Int32" Name="allow_pull" Nullable="true" />
+          <Property Type="Int32" Name="allow_anonymous" Nullable="true" />
+          <Property Type="Int32" Name="centralized_conflicts" Nullable="true" />
+          <Property Type="Byte" Name="status" Nullable="true" />
+          <Property Type="Byte" Name="snapshot_ready" Nullable="true" />
+          <Property Type="Boolean" Name="enabled_for_internet" Nullable="false" />
+          <Property Type="Boolean" Name="dynamic_filters" Nullable="false" />
+          <Property Type="Boolean" Name="snapshot_in_defaultfolder" Nullable="false" />
+          <Property Type="String" Name="alt_snapshot_folder" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="pre_snapshot_script" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="post_snapshot_script" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="compress_snapshot" Nullable="false" />
+          <Property Type="String" Name="ftp_address" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ftp_port" Nullable="false" />
+          <Property Type="String" Name="ftp_subdirectory" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ftp_login" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ftp_password" Nullable="true" MaxLength="524" />
+          <Property Type="Int32" Name="conflict_retention" Nullable="true" />
+          <Property Type="Int32" Name="keep_before_values" Nullable="true" />
+          <Property Type="Boolean" Name="allow_subscription_copy" Nullable="true" />
+          <Property Type="Boolean" Name="allow_synctoalternate" Nullable="true" />
+          <Property Type="String" Name="validate_subscriber_info" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ad_guidname" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="backward_comp_level" Nullable="false" />
+          <Property Type="Int32" Name="max_concurrent_merge" Nullable="false" />
+          <Property Type="Int32" Name="max_concurrent_dynamic_snapshots" Nullable="false" />
+          <Property Type="Int16" Name="use_partition_groups" Nullable="true" />
+          <Property Type="String" Name="dynamic_filters_function_list" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="partition_id_eval_proc" Nullable="true" MaxLength="128" />
+          <Property Type="Int16" Name="publication_number" Nullable="false" />
+          <Property Type="Int32" Name="replicate_ddl" Nullable="false" />
+          <Property Type="Boolean" Name="allow_subscriber_initiated_snapshot" Nullable="false" />
+          <Property Type="String" Name="distributor" Nullable="true" MaxLength="128" />
+          <Property Type="Binary" Name="snapshot_jobid" Nullable="true" MaxLength="16" />
+          <Property Type="Boolean" Name="allow_web_synchronization" Nullable="true" />
+          <Property Type="String" Name="web_synchronization_url" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="allow_partition_realignment" Nullable="true" />
+          <Property Type="Byte" Name="retention_period_unit" Nullable="false" />
+          <Property Type="Int32" Name="decentralized_conflicts" Nullable="true" />
+          <Property Type="Int32" Name="generation_leveling_threshold" Nullable="true" />
+          <Property Type="Boolean" Name="automatic_reinitialization_policy" Nullable="false" />
+          <Property Type="String" Name="subscriber_server" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="db_name" Nullable="true" MaxLength="128" />
+          <Property Type="Guid" Name="pubid1" Nullable="true" />
+          <Property Type="Int32" Name="datasource_type" Nullable="true" />
+          <Property Type="Guid" Name="subid" Nullable="true" />
+          <Property Type="Binary" Name="replnickname" Nullable="true" MaxLength="6" />
+          <Property Type="Guid" Name="replicastate" Nullable="true" />
+          <Property Type="Byte" Name="status1" Nullable="true" />
+          <Property Type="Int32" Name="subscriber_type" Nullable="true" />
+          <Property Type="Int32" Name="subscription_type" Nullable="true" />
+          <Property Type="Byte" Name="sync_type" Nullable="true" />
+          <Property Type="String" Name="description1" Nullable="true" MaxLength="255" />
+          <Property Type="Single" Name="priority" Nullable="true" />
+          <Property Type="Int64" Name="recgen" Nullable="true" />
+          <Property Type="Guid" Name="recguid" Nullable="true" />
+          <Property Type="Int64" Name="sentgen" Nullable="true" />
+          <Property Type="Guid" Name="sentguid" Nullable="true" />
+          <Property Type="Int32" Name="schemaversion" Nullable="true" />
+          <Property Type="Guid" Name="schemaguid" Nullable="true" />
+          <Property Type="DateTime" Name="last_validated" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="attempted_validate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="last_sync_date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="last_sync_status" Nullable="true" />
+          <Property Type="String" Name="last_sync_summary" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="metadatacleanuptime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="partition_id" Nullable="true" />
+          <Property Type="Boolean" Name="cleanedup_unsent_changes" Nullable="true" />
+          <Property Type="Int32" Name="replica_version" Nullable="true" />
+          <Property Type="Int32" Name="supportability_mode" Nullable="true" />
+          <Property Type="String" Name="application_name" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="subscriber_number" Nullable="true" />
+          <Property Type="DateTime" Name="last_makegeneration_datetime" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="last_local_sentgen" Nullable="true" />
+          <Property Type="Guid" Name="last_local_recguid" Nullable="true" />
+          <Property Type="Int64" Name="last_local_recgen" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NGANHANGModelStoreContainer" CdmEntityContainer="NGANHANG">
+          <EntitySetMapping Name="ChiNhanhs">
+            <EntityTypeMapping TypeName="NGANHANGModel.ChiNhanh">
+              <MappingFragment StoreEntitySet="ChiNhanh">
+                <ScalarProperty Name="MACN" ColumnName="MACN" />
+                <ScalarProperty Name="TENCN" ColumnName="TENCN" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GD_CHUYENTIEN">
+            <EntityTypeMapping TypeName="NGANHANGModel.GD_CHUYENTIEN">
+              <MappingFragment StoreEntitySet="GD_CHUYENTIEN">
+                <ScalarProperty Name="MAGD" ColumnName="MAGD" />
+                <ScalarProperty Name="SOTK_CHUYEN" ColumnName="SOTK_CHUYEN" />
+                <ScalarProperty Name="NGAYGD" ColumnName="NGAYGD" />
+                <ScalarProperty Name="SOTIEN" ColumnName="SOTIEN" />
+                <ScalarProperty Name="SOTK_NHAN" ColumnName="SOTK_NHAN" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GD_GOIRUT">
+            <EntityTypeMapping TypeName="NGANHANGModel.GD_GOIRUT">
+              <MappingFragment StoreEntitySet="GD_GOIRUT">
+                <ScalarProperty Name="MAGD" ColumnName="MAGD" />
+                <ScalarProperty Name="SOTK" ColumnName="SOTK" />
+                <ScalarProperty Name="LOAIGD" ColumnName="LOAIGD" />
+                <ScalarProperty Name="NGAYGD" ColumnName="NGAYGD" />
+                <ScalarProperty Name="SOTIEN" ColumnName="SOTIEN" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="NGANHANGModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="HO" ColumnName="HO" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="PHAI" ColumnName="PHAI" />
+                <ScalarProperty Name="NGAYCAP" ColumnName="NGAYCAP" />
+                <ScalarProperty Name="SODT" ColumnName="SODT" />
+                <ScalarProperty Name="MACN" ColumnName="MACN" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="NGANHANGModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="HO" ColumnName="HO" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="PHAI" ColumnName="PHAI" />
+                <ScalarProperty Name="SODT" ColumnName="SODT" />
+                <ScalarProperty Name="MACN" ColumnName="MACN" />
+                <ScalarProperty Name="TrangThaiXoa" ColumnName="TrangThaiXoa" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="NGANHANGModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="SOTK" ColumnName="SOTK" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="SODU" ColumnName="SODU" />
+                <ScalarProperty Name="MACN" ColumnName="MACN" />
+                <ScalarProperty Name="NGAYMOTK" ColumnName="NGAYMOTK" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getAllBranches" FunctionName="NGANHANGModel.Store.getAllBranches">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

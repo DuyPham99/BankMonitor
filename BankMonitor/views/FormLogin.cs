@@ -12,40 +12,66 @@ using BankMonitor.model;
 using BankMonitor.views;
 using System.Data.SqlClient;
 using System.Collections;
+using BankMonitor.datasource;
+using System.Data.Entity;
 
 namespace BankMonitor.views
 {
     public partial class FormLogin : DevExpress.XtraEditors.XtraForm
     {
         ConnectionDatabase conn = new ConnectionDatabase();
-        // FormMessage message = new FormMessage();
-       
+        User user = new User();
+        int checkLoad = 0;
+        internal User User
+        {
+            get
+            {
+                return user;
+            }
+
+            set
+            {
+                user = value;
+            }
+        }
+
+        internal ConnectionDatabase Conn
+        {
+            get
+            {
+                return conn;
+            }
+
+            set
+            {
+                conn = value;
+            }
+        }
+
         public FormLogin()
         {
             InitializeComponent();
-
         }
-        public void AlertMessage(String message)
+
+        //logout
+        public void clearData()
         {
-            new FormMessage(message).Visible = true;
-
+            this.tbAccountLogin.Text = "";
+            this.tbPasswordLogin.Text = "";
+            this.cb_IdDistribute.SelectedIndex = -1;              
         }
-
-        public int validateAccount(String username, String password)
-        {
-            conn.Connect("3");
-            Hashtable listParams = new Hashtable();
-            listParams.Add("@loginName", username);  
-            SqlDataReader rd = conn.ExecProcParams("getLoginInfo", listParams);
-            if (rd.Read()) return 1;
-            return 0;
-        }
-        
+            
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            conn.Mlogin =  tbAccountLogin.Text;
+            conn.Password = tbPasswordLogin.Text;   
+          
+            if (cb_IdDistribute.Text == "BENTHANH")
+            {
+               user.Distribute = @"PC-DOM\MSSQLSERVER1";
+            } else user.Distribute = @"PC-DOM\MSSQLSERVER2";
             if (tbAccountLogin.Text == "")
             {
-                //AlertMessage("Không được để trống tài khoản!");
                 MessageBox.Show("Không được để trống tài khoản!");
                 tbAccountLogin.Focus();
             } else
@@ -56,33 +82,55 @@ namespace BankMonitor.views
             } else if (cb_IdDistribute.Text == "") {
                 MessageBox.Show("Hãy chọn chi nhánh!");
                 cb_IdDistribute.Focus();
-            } else if (validateAccount(tbAccountLogin.Text, tbPasswordLogin.Text) == 0)
+            } else if (conn.Connect(user.Distribute) == 0)
             {
-                MessageBox.Show("Tài khoản không tồn tại!");
-            } else 
-            this.Visible = false;
+                MessageBox.Show("Tài khoản, mật khẩu không đúng!");
+            } else
+            {
+                user.Username = tbAccountLogin.Text;
+                user.Password = tbPasswordLogin.Text;
+                var db = new NGANHANG();
+                MessageBox.Show("Đăng nhập thành công!");
+                db.User = user;
+                db.ChangeDataSource();
+
+                db = new NGANHANG();
+                db.NhanViens.Load();
+                this.Visible = false;
+            }
+           
         }
 
         private void btnCancelLogin_Click(object sender, EventArgs e)
         {
             this.Visible = false;
         }
+
         private void Login_Load(object sender, EventArgs e)
         {
-            conn.Connect("3");
+            if (checkLoad == 1) return;
+            conn.Mlogin = "sa";
+            conn.Password = "123";
+            conn.Connect(@"PC-DOM\MSSQLSERVER3");
             try
             {
                 SqlDataReader rd = conn.ExecProc("getAllBranches");
                 while (rd.Read())
                 {
-                    cb_IdDistribute.Items.Add(rd.GetString(2).Remove(0,9));
+                    cb_IdDistribute.Items.Add(rd.GetString(2).Remove(0, 9));
                 }
+                this.checkLoad = 1;
             }
             finally
             {
-                ConnectionDatabase.conn.Close();
-            }
-     
+              conn.Close();
+            }         
+        }
+
+        private void FormLogin_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visible = false;
+            e.Cancel = true;
         }
     }
 }

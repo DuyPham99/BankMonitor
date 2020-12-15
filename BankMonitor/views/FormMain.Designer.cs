@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string> undoRedo_21 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.NhanVien, string>();
+            BankMonitor.model.UndoRedo<BankMonitor.datasource.TaiKhoan, string> undoRedo_22 = new BankMonitor.model.UndoRedo<BankMonitor.datasource.TaiKhoan, string>();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbtnSignIn = new DevExpress.XtraBars.BarButtonItem();
             this.bbtnChangePassword = new DevExpress.XtraBars.BarButtonItem();
@@ -50,7 +52,11 @@
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAccountMain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -95,9 +101,13 @@
             this.barButtonItem6,
             this.barButtonItem7,
             this.barButtonItem8,
-            this.barButtonItem9});
+            this.btnAccountMain,
+            this.barButtonItem9,
+            this.barButtonItem10,
+            this.barButtonItem11,
+            this.barButtonItem12});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 22;
+            this.ribbonControl1.MaxItemId = 27;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -115,10 +125,11 @@
             // 
             // bbtnChangePassword
             // 
-            this.bbtnChangePassword.Caption = "Đổi mật khẩu";
+            this.bbtnChangePassword.Caption = "Tạo đăng nhập";
             this.bbtnChangePassword.Id = 2;
             this.bbtnChangePassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnChangePassword.ImageOptions.Image")));
             this.bbtnChangePassword.Name = "bbtnChangePassword";
+            this.bbtnChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnChangePassword_ItemClick);
             // 
             // bbtnSignOut
             // 
@@ -126,6 +137,7 @@
             this.bbtnSignOut.Id = 3;
             this.bbtnSignOut.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbtnSignOut.ImageOptions.Image")));
             this.bbtnSignOut.Name = "bbtnSignOut";
+            this.bbtnSignOut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbtnSignOut_ItemClick);
             // 
             // bbtnAdmin
             // 
@@ -254,14 +266,46 @@
             this.barButtonItem8.Id = 20;
             this.barButtonItem8.Name = "barButtonItem8";
             // 
+            // btnAccountMain
+            // 
+            this.btnAccountMain.Caption = "Tài khoản";
+            this.btnAccountMain.Id = 21;
+            this.btnAccountMain.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountMain.ImageOptions.Image")));
+            this.btnAccountMain.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAccountMain.ImageOptions.LargeImage")));
+            this.btnAccountMain.Name = "btnAccountMain";
+            this.btnAccountMain.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
             // barButtonItem9
             // 
-            this.barButtonItem9.Caption = "Tài khoản";
-            this.barButtonItem9.Id = 21;
-            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
-            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.barButtonItem9.Id = 26;
             this.barButtonItem9.Name = "barButtonItem9";
-            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
+            // barButtonItem10
+            // 
+            this.barButtonItem10.Caption = "Lưu";
+            this.barButtonItem10.Id = 23;
+            this.barButtonItem10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem10.ImageOptions.Image")));
+            this.barButtonItem10.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem10.ImageOptions.LargeImage")));
+            this.barButtonItem10.Name = "barButtonItem10";
+            this.barButtonItem10.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem10_ItemClick);
+            // 
+            // barButtonItem11
+            // 
+            this.barButtonItem11.Caption = "Undo";
+            this.barButtonItem11.Id = 24;
+            this.barButtonItem11.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem11.ImageOptions.Image")));
+            this.barButtonItem11.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem11.ImageOptions.LargeImage")));
+            this.barButtonItem11.Name = "barButtonItem11";
+            this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
+            // 
+            // barButtonItem12
+            // 
+            this.barButtonItem12.Caption = "Redo";
+            this.barButtonItem12.Id = 25;
+            this.barButtonItem12.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem12.ImageOptions.Image")));
+            this.barButtonItem12.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem12.ImageOptions.LargeImage")));
+            this.barButtonItem12.Name = "barButtonItem12";
+            this.barButtonItem12.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem12_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -304,9 +348,9 @@
             // 
             // ribbonPageGroup2
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.bbtnSave);
-            this.ribbonPageGroup2.ItemLinks.Add(this.bbtnUndo);
-            this.ribbonPageGroup2.ItemLinks.Add(this.bbtnRedo);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem10);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem11);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem12);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Thao tác";
             // 
@@ -314,7 +358,7 @@
             // 
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnpnStaff);
             this.ribbonPageGroup6.ItemLinks.Add(this.bbtnCustomer);
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem9);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnAccountMain);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "Quản lý";
             // 
@@ -343,6 +387,9 @@
             this.ucStaff.Location = new System.Drawing.Point(0, 158);
             this.ucStaff.Name = "ucStaff";
             this.ucStaff.Size = new System.Drawing.Size(1220, 475);
+            undoRedo_21.Redo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.NhanVien, string>>)(resources.GetObject("undoRedo_21.Redo")));
+            undoRedo_21.Undo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.NhanVien, string>>)(resources.GetObject("undoRedo_21.Undo")));
+            this.ucStaff.Stack = undoRedo_21;
             this.ucStaff.TabIndex = 3;
             this.ucStaff.Visible = false;
             // 
@@ -356,19 +403,18 @@
             this.ucCustomer.Size = new System.Drawing.Size(1220, 475);
             this.ucCustomer.TabIndex = 5;
             this.ucCustomer.Visible = false;
-            this.ucCustomer.Load += new System.EventHandler(this.ucCustomer_Load);
             // 
             // ucExchange
             // 
-            this.ucExchange.Location = new System.Drawing.Point(-13, 141);
+            this.ucExchange.Location = new System.Drawing.Point(-13, 158);
             this.ucExchange.Name = "ucExchange";
-            this.ucExchange.Size = new System.Drawing.Size(1233, 374);
+            this.ucExchange.Size = new System.Drawing.Size(1233, 421);
             this.ucExchange.TabIndex = 7;
             this.ucExchange.Visible = false;
             // 
             // ucTransfer
             // 
-            this.ucTransfer.Location = new System.Drawing.Point(-9, 173);
+            this.ucTransfer.Location = new System.Drawing.Point(0, 184);
             this.ucTransfer.Name = "ucTransfer";
             this.ucTransfer.Size = new System.Drawing.Size(1217, 437);
             this.ucTransfer.TabIndex = 9;
@@ -376,11 +422,16 @@
             // 
             // ucAccount
             // 
-            this.ucAccount.Location = new System.Drawing.Point(0, 190);
+            this.ucAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucAccount.Location = new System.Drawing.Point(0, 158);
             this.ucAccount.Name = "ucAccount";
             this.ucAccount.Size = new System.Drawing.Size(1220, 475);
+            undoRedo_22.Redo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.TaiKhoan, string>>)(resources.GetObject("undoRedo_22.Redo")));
+            undoRedo_22.Undo = ((System.Collections.Generic.Stack<BankMonitor.model.ICommand<BankMonitor.datasource.TaiKhoan, string>>)(resources.GetObject("undoRedo_22.Undo")));
+            this.ucAccount.Stack = undoRedo_22;
             this.ucAccount.TabIndex = 11;
             this.ucAccount.Visible = false;
+            this.ucAccount.Load += new System.EventHandler(this.ucAccount_Load);
             // 
             // Form1
             // 
@@ -417,7 +468,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.BarButtonItem bbtnSave;
@@ -439,8 +489,13 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem btnAccountMain;
         private views.UCAccount ucAccount;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem11;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem12;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     }
 }
 
